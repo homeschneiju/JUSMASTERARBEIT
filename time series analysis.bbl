@@ -1,0 +1,43 @@
+\begin{thebibliography}{}
+
+\bibitem[Adhikari, 2015]{Adhikari.2015}
+Adhikari, R. (2015).
+\newblock A neural network based linear ensemble framework for time series
+  forecasting.
+\newblock {\em Neurocomputing}, 157:231--242.
+
+\bibitem[Andreoni and Postorino, 2006]{Andreoni.2006}
+Andreoni, A. and Postorino, M.~N. (2006).
+\newblock A multivariate arima model to forecast air transport demand.
+
+\bibitem[Arlt et~al., 2017]{Arlt.2017}
+Arlt, J., Trcka, P., and Arltov{\'a}, M. (2017).
+\newblock The problem of the sarima model selection for the forecasting
+  purpose.
+\newblock {\em Statistika}, 97:25--32.
+
+\bibitem[Box and Jenkins, 1976]{Box.1976}
+Box, G. E.~P. and Jenkins, G.~M. (1976).
+\newblock {\em Time series analysis: Forecasting and control}.
+\newblock Holden-Day series in time series analysis. Holden-Day, San Francisco,
+  Calif., rev. ed. edition.
+
+\bibitem[Hunt, 2003]{Hunt.2003}
+Hunt, {\"U}. (2003).
+\newblock Forecasting of railway freight volume: Approach of estonian railway
+  to arise efficiency.
+\newblock {\em Transport}, 18.
+
+\bibitem[Khandelwal et~al., 2015]{Khandelwal.2015}
+Khandelwal, I., Adhikari, R., and Verma, G. (2015).
+\newblock Time series forecasting using hybrid arima and ann models based on
+  dwt decomposition.
+\newblock {\em Procedia Computer Science}, 48:173--179.
+
+\bibitem[Zhao et~al., 2018]{Zhao.07022018}
+Zhao, J., Cai, J., and Zheng, W. (07022018).
+\newblock Research on railway freight volume prediction based on arima model.
+\newblock In Wang, X., Zhang, Y., Yang, D., and You, Z., editors, {\em CICTP
+  2018}, pages 428--437, Reston, VA. {American Society of Civil Engineers}.
+
+\end{thebibliography}
