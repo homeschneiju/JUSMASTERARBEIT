@@ -6,11 +6,21 @@ Adhikari, R. (2015).
   forecasting.
 \newblock {\em Neurocomputing}, 157:231--242.
 
-\bibitem[Andreoni and Postorino, 2006]{Andreoni.2006b}
-Andreoni, A. and Postorino, M.~N. (2006).
+\bibitem[Andreoni and Postorino, 2006a]{Andreoni.2006}
+Andreoni, A. and Postorino, M.~N. (2006a).
+\newblock A multivariate arima model to forecast air transport demand.
+
+\bibitem[Andreoni and Postorino, 2006b]{Andreoni.2006b}
+Andreoni, A. and Postorino, M.~N. (2006b).
 \newblock Time series models to forecast air transport demand: A study about a
   regional airport.
 \newblock {\em IFAC Proceedings Volumes}, 39(12):101--106.
+
+\bibitem[Arlt et~al., 2017]{Arlt.2017}
+Arlt, J., Trcka, P., and Arltov{\'a}, M. (2017).
+\newblock The problem of the sarima model selection for the forecasting
+  purpose.
+\newblock {\em Statistika}, 97:25--32.
 
 \bibitem[Balkin, ]{Balkin.2000}
 Balkin, S.
@@ -21,6 +31,12 @@ Benkachcha, S., Benhra, J., and {El Hassani}, H. (2015).
 \newblock Seasonal time series forecasting models based on artificial neural
   network.
 \newblock {\em International Journal of Computer Applications}, 116(20):9--14.
+
+\bibitem[Box and Jenkins, 1976]{Box.1976}
+Box, G. E.~P. and Jenkins, G.~M. (1976).
+\newblock {\em Time series analysis: Forecasting and control}.
+\newblock Holden-Day series in time series analysis. Holden-Day, San Francisco,
+  Calif., rev. ed. edition.
 
 \bibitem[{Bundesministerium f{\"u}r Umwelt, Naturschutz und nukleare
   Sicherheit},
@@ -67,6 +83,12 @@ Gao, S., Zhang, Z., and Cao, C. (2011).
 \newblock Road traffic freight volume forecast using support vector machine
   combining forecasting.
 \newblock {\em Journal of Software}, 6(9).
+
+\bibitem[Hunt, 2003]{Hunt.2003}
+Hunt, {\"U}. (2003).
+\newblock Forecasting of railway freight volume: Approach of estonian railway
+  to arise efficiency.
+\newblock {\em Transport}, 18.
 
 \bibitem[Intihar et~al., 2017]{Intihar.2017}
 Intihar, M., Kramberger, T., and Dragan, D. (2017).
@@ -120,6 +142,21 @@ Regan, A. and Garrido, R. (2001).
   future directions.
 \newblock {\em Travel Behaviour Research}.
 
+\bibitem[Rojas, 1996]{Rojas.1996}
+Rojas, R. (1996).
+\newblock {\em Neural Networks: A Systematic Introduction}.
+\newblock Springer, Berlin and Heidelberg.
+
+\bibitem[Rumelhart et~al., 1986]{Rumelhart.1986}
+Rumelhart, D.~E., Hinton, G.~E., and Williams, R.~J. (1986).
+\newblock Learning representations by back-propagating errors.
+\newblock {\em Nature}, 323(6088):533--536.
+
+\bibitem[Taghizadeh, ]{Taghizadeh.}
+Taghizadeh, E.
+\newblock Utilizing artificial neural networks to predict demand for
+  weather-sensitive products at retail stores.
+
 \bibitem[{Transport and Infrastructure Council},
   2016]{TransportandInfrastructureCouncil.2016}
 {Transport and Infrastructure Council} (2016).
@@ -139,9 +176,21 @@ Umweltbundesamt (2018a).
 Umweltbundesamt (2018b).
 \newblock Fahrleistungen, verkehrsaufwand und modal split.
 
+\bibitem[Vogel, 2015]{Vogel.2015}
+Vogel, J. (2015).
+\newblock {\em Prognose von Zeitreihen: Eine Einf{\"u}hrung f{\"u}r
+  Wirtschaftswissenschaftler}.
+\newblock {Springer Gabler}, Wiesbaden.
+
 \bibitem[Zhang et~al., 1998]{Zhang.1998}
-Zhang, G., {Eddy Patuwo}, B., and {Y. Hu}, M. (1998).
+Zhang, G., Patuwo, E.~B., and Hu, M.~Y. (1998).
 \newblock Forecasting with artificial neural networks.
 \newblock {\em International Journal of Forecasting}, 14(1):35--62.
+
+\bibitem[Zhao et~al., 2018]{Zhao.07022018}
+Zhao, J., Cai, J., and Zheng, W. (07022018).
+\newblock Research on railway freight volume prediction based on arima model.
+\newblock In Wang, X., Zhang, Y., Yang, D., and You, Z., editors, {\em CICTP
+  2018}, pages 428--437, Reston, VA. {American Society of Civil Engineers}.
 
 \end{thebibliography}
