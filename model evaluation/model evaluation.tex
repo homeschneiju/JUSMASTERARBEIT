@@ -1,0 +1,24 @@
+\documentclass[12pt,titlepage]{article}
+\usepackage{natbib}
+\begin{document}
+There is no absolute superiority of one statistical (or machine learning) method over another; it always depends on the specific problem they are fitted upon whether one method beats the other or vice versa \citep{Hastie.2017}. \\
+Various different measures have been introduced to assess said superiority, e.g. the Mean Squared Error:
+\begin{equation}
+MSE = \frac{1}{n}\sum_{i = 1}^{n}(y_{i}-\hat{f}(x_{i}))^2
+\end{equation}
+, where $n$ is the sample size, $y_{i}$ is the observed \textit{i}th target value and $\hat{f}(x_{i})$ is the estimated \textit{i}th target value. \\
+Furthermore, there is the Mean Average Error:
+
+Closely related, we have the Mean Average Percentage error:
+
+
+The less a method's predicted values differ from the observed values, the smaller the error.
+
+
+
+\bibliographystyle{apalike}
+\bibliography{timeseries}
+
+\end{document}
+
+%17REFERENCES Christopher  Chatfield  (2000),  Time-series  forecasting,  Chapman  &  Hall/CRC,  2000,  Boca  Raton, ch. 6, 8. Michael  P.  Clements  and  David  F.  Hendry  (1998),  Forecasting  Economic  Time  Series, Cambridge Univ. Press, ch. 3, 13. Ray  C.  Fair  (1986),  Handbook  of  Econometrics,  Vol.  III,  ed.  Z.  Griliches  and  M.D.  Intriligator, Elsevier Science Publishers BV, ch. 33. Schlittgen,  Rainer  (1995),  Zeitreihenanalyse,  Rainer  Schlittgen  u.  Bernd  H.  J.  Streitberg,  Oldenbourg. Zhuo  Chen  and  Yuhong  Yang  (2004),  Assessing  Forecast  Accuracy  Measures  Iowa  State  University. 
