@@ -1,0 +1,147 @@
+\begin{thebibliography}{}
+
+\bibitem[Adhikari, 2015]{Adhikari.2015}
+Adhikari, R. (2015).
+\newblock A neural network based linear ensemble framework for time series
+  forecasting.
+\newblock {\em Neurocomputing}, 157:231--242.
+
+\bibitem[Andreoni and Postorino, 2006]{Andreoni.2006b}
+Andreoni, A. and Postorino, M.~N. (2006).
+\newblock Time series models to forecast air transport demand: A study about a
+  regional airport.
+\newblock {\em IFAC Proceedings Volumes}, 39(12):101--106.
+
+\bibitem[Balkin, ]{Balkin.2000}
+Balkin, S.
+\newblock Using recurrent neural networks for time series forecasting.
+
+\bibitem[Benkachcha et~al., 2015]{S.2015}
+Benkachcha, S., Benhra, J., and {El Hassani}, H. (2015).
+\newblock Seasonal time series forecasting models based on artificial neural
+  network.
+\newblock {\em International Journal of Computer Applications}, 116(20):9--14.
+
+\bibitem[{Bundesministerium f{\"u}r Umwelt, Naturschutz und nukleare
+  Sicherheit},
+  2018]{BundesministeriumfurUmweltNaturschutzundnukleareSicherheit.2018}
+{Bundesministerium f{\"u}r Umwelt, Naturschutz und nukleare Sicherheit} (2018).
+\newblock Klimaschutzbericht 2018: zum aktionsprogramm klimaschutz 2020 der
+  bundesregierung: Referentenentwurf.
+
+\bibitem[{Bundesministerium f{\"u}r Verkehr und Infrastruktur}, 2014]{.bmvi}
+{Bundesministerium f{\"u}r Verkehr und Infrastruktur} (2014).
+\newblock Verkehrsverflechtungsprognose 2030.
+
+\bibitem[Chandrashekar and Sahin, 2014]{Chandrashekar.2014}
+Chandrashekar, G. and Sahin, F. (2014).
+\newblock A survey on feature selection methods.
+\newblock {\em Computers {\&} Electrical Engineering}, 40(1):16--28.
+
+\bibitem[de~Jong et~al., 2004]{JONG.2004}
+de~Jong, G., Gunn, H., and Walker, W. (2004).
+\newblock National and international freight transport models: An overview and
+  ideas for future development.
+\newblock {\em Transport Reviews}, 24(1):103--124.
+
+\bibitem[Dorffner, 1996]{Dorffner96neuralnetworks}
+Dorffner, G. (1996).
+\newblock Neural networks for time series processing.
+\newblock {\em Neural Network World}, 6:447--468.
+
+\bibitem[Feng et~al., 2018]{Feng.2018}
+Feng, F., Li, W., and Jiang, Q. (2018).
+\newblock Railway freight volume forecast using an ensemble model with
+  optimised deep belief network.
+\newblock {\em IET Intelligent Transport Systems}, 12(8):851--859.
+
+\bibitem[Fite et~al., 2002]{Fite.2002}
+Fite, J.~T., {Don Taylor}, G., Usher, J.~S., English, J.~R., and Roberts, J.~N.
+  (2002).
+\newblock Forecasting freight demand using economic indices.
+\newblock {\em International Journal of Physical Distribution {\&} Logistics
+  Management}, 32(4):299--308.
+
+\bibitem[Gao et~al., 2011]{Gao.2011}
+Gao, S., Zhang, Z., and Cao, C. (2011).
+\newblock Road traffic freight volume forecast using support vector machine
+  combining forecasting.
+\newblock {\em Journal of Software}, 6(9).
+
+\bibitem[Intihar et~al., 2017]{Intihar.2017}
+Intihar, M., Kramberger, T., and Dragan, D. (2017).
+\newblock Container throughput forecasting using dynamic factor analysis and
+  arimax model.
+\newblock {\em PROMET - Traffic{\&}Transportation}, 29(5):529--542.
+
+\bibitem[{Jo{\~a}o F. L. Oliveira} and {Teresa Bernarda Ludermir},
+  2014]{JoaoF.L.Oliveira.2014}
+{Jo{\~a}o F. L. Oliveira} and {Teresa Bernarda Ludermir} (2014).
+\newblock Iterative arima-multiple support vector regression models for long
+  term time series prediction.
+\newblock In {\em ESANN}.
+
+\bibitem[Karsoliya, 2012]{Karsoliya.2012}
+Karsoliya, S. (2012).
+\newblock Approximating number of hidden layer neurons in multiple hidden layer
+  bpnn architecture.
+\newblock 3:714--717.
+
+\bibitem[Khandelwal et~al., 2015]{Khandelwal.2015}
+Khandelwal, I., Adhikari, R., and Verma, G. (2015).
+\newblock Time series forecasting using hybrid arima and ann models based on
+  dwt decomposition.
+\newblock {\em Procedia Computer Science}, 48:173--179.
+
+\bibitem[Kourentzes et~al., 2014]{Kourentzes.2014}
+Kourentzes, N., Barrow, D.~K., and Crone, S.~F. (2014).
+\newblock Neural network ensemble operators for time series forecasting.
+\newblock {\em Expert Systems with Applications}, 41(9):4235--4244.
+
+\bibitem[Miller, 2018]{Miller.2018}
+Miller, J. (2018).
+\newblock Arima time series models for full truckload transportation prices.
+\newblock {\em Forecasting}, 1(1):121--134.
+
+\bibitem[Mircetic et~al., 2016]{Mircetic.2016}
+Mircetic, D., Nikolicic, S., Maslaric, M., Ralevic, N., and Debelic, B. (2016).
+\newblock Development of s-arima model for forecasting demand in a beverage
+  supply chain.
+\newblock {\em Open Engineering}, 6(1):14.
+
+\bibitem[Nakamura, 2005]{Nakamura.2005}
+Nakamura, E. (2005).
+\newblock Inflation forecasting using a neural network.
+\newblock {\em Economics Letters}, 86(3):373--378.
+
+\bibitem[Regan and Garrido, 2001]{Regan.2001}
+Regan, A. and Garrido, R. (2001).
+\newblock Modelling freight demand and shipper behaviour: state of the art,
+  future directions.
+\newblock {\em Travel Behaviour Research}.
+
+\bibitem[{Transport and Infrastructure Council},
+  2016]{TransportandInfrastructureCouncil.2016}
+{Transport and Infrastructure Council} (2016).
+\newblock Australian transport assessment and planning guidelines: T1 travel
+  demand modelling.
+
+\bibitem[Tsekeris and Tsekeris, 2011]{Tsekeris.2011}
+Tsekeris, T. and Tsekeris, C. (2011).
+\newblock Demand forecasting in transport: Overview and modeling advances.
+\newblock {\em Economic Research-Ekonomska Istra{\v{z}}ivanja}, 24(1):82--94.
+
+\bibitem[Umweltbundesamt, 2018a]{Umweltbundesamt.2018}
+Umweltbundesamt (2018a).
+\newblock Emissionen des verkehrs.
+
+\bibitem[Umweltbundesamt, 2018b]{.uba.2018}
+Umweltbundesamt (2018b).
+\newblock Fahrleistungen, verkehrsaufwand und modal split.
+
+\bibitem[Zhang et~al., 1998]{Zhang.1998}
+Zhang, G., {Eddy Patuwo}, B., and {Y. Hu}, M. (1998).
+\newblock Forecasting with artificial neural networks.
+\newblock {\em International Journal of Forecasting}, 14(1):35--62.
+
+\end{thebibliography}
