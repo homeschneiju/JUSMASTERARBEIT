@@ -6,13 +6,9 @@ Adhikari, R. (2015).
   forecasting.
 \newblock {\em Neurocomputing}, 157:231--242.
 
-\bibitem[Andreoni and Postorino, 2006a]{Andreoni.2006}
-Andreoni, A. and Postorino, M.~N. (2006a).
-\newblock A multivariate arima model to forecast air transport demand.
-
-\bibitem[Andreoni and Postorino, 2006b]{Andreoni.2006b}
-Andreoni, A. and Postorino, M.~N. (2006b).
-\newblock Time series models to forecast air transport demand: A study about a
+\bibitem[Andreoni and Postorino, 2006]{Andreoni.2006b}
+Andreoni, A. and Postorino, M.~N. (2006).
+\newblock Time meries models to forecast air transport demand: A study about a
   regional airport.
 \newblock {\em IFAC Proceedings Volumes}, 39(12):101--106.
 
@@ -22,11 +18,12 @@ Arlt, J., Trcka, P., and Arltov{\'a}, M. (2017).
   purpose.
 \newblock {\em Statistika}, 97:25--32.
 
-\bibitem[Balkin, ]{Balkin.2000}
-Balkin, S.
-\newblock Using recurrent neural networks for time series forecasting.
+\bibitem[Balkin, 1997]{Balkin.1997}
+Balkin, S. (1997).
+\newblock {\em Using Recurrent Neural Networks for Time Series Forecasting}.
+\newblock International Symposium on Forecasting. Barbados.
 
-\bibitem[Benkachcha et~al., 2015]{S.2015}
+\bibitem[Benkachcha et~al., 2015]{Benkachcha.2015}
 Benkachcha, S., Benhra, J., and {El Hassani}, H. (2015).
 \newblock Seasonal time series forecasting models based on artificial neural
   network.
@@ -107,7 +104,8 @@ Intihar, M., Kramberger, T., and Dragan, D. (2017).
 Karsoliya, S. (2012).
 \newblock Approximating number of hidden layer neurons in multiple hidden layer
   bpnn architecture.
-\newblock 3:714--717.
+\newblock {\em International Journal of Engineering Trends and Technology},
+  3:714--717.
 
 \bibitem[Khandelwal et~al., 2015]{Khandelwal.2015}
 Khandelwal, I., Adhikari, R., and Verma, G. (2015).
@@ -152,10 +150,11 @@ Rumelhart, D.~E., Hinton, G.~E., and Williams, R.~J. (1986).
 \newblock Learning representations by back-propagating errors.
 \newblock {\em Nature}, 323(6088):533--536.
 
-\bibitem[Taghizadeh, ]{Taghizadeh.}
-Taghizadeh, E.
-\newblock Utilizing artificial neural networks to predict demand for
-  weather-sensitive products at retail stores.
+\bibitem[Taghizadeh, 2017]{Taghizadeh.2017}
+Taghizadeh, E. (2017).
+\newblock {\em Utilizing Artificial Neural Networks to Predict Demand for
+  Weather-Sensitive Products at Retail Stores}.
+\newblock Detroit, Michigan, USA.
 
 \bibitem[{Transport and Infrastructure Council},
   2016]{TransportandInfrastructureCouncil.2016}

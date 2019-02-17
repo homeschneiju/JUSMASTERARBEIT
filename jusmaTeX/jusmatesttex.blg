@@ -1,8 +1,6 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: jusmatesttex.aux
 The style file: apalike.bst
-Database file #1: timeseries.bib
-Warning--empty booktitle in Andreoni.2006
-Warning--empty year in Balkin.2000
-Warning--empty journal in Karsoliya.2012
-Warning--empty year in Taghizadeh.
-(There were 4 warnings)
+Database file #1: jusmabib.bib
+Warning--empty publisher in Balkin.1997
+Warning--empty publisher in Taghizadeh.2017
+(There were 2 warnings)
