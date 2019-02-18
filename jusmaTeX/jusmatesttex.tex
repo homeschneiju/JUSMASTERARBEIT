@@ -144,12 +144,13 @@ If there is also a seasonal component - thus a SARIMA model is to be fitted - th
 
 
 The parameters p,q,P and Q may be identified using an Information Criterion suchs as BIC or AIC. (FORMEL falls nicht schon geschehen oder Referenz auf Formel)
-In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps: \\
-1. Visual identification of model parameter through ACF for MA- and PACF for AR-parameters.
+In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps, as described in \cite{Falk.2012}: \\
+1. \textbf{Order selection} of the AR and MA parameters \textit{p} and \textit{q}. This can be done via a visual identification of model parameter through ACF for MA- and PACF for AR-parameters, as mentioned above. \cite{Andreoni.2006b} provide a guideline for visual plot checks. Note that for ARMA models, simple plot checks are insufficient and commonly, \textit{p} and \textit{q} are chosen by minimizing an Information Criterion such as AIC or BIC. 
+2. \textbf{Estimation of parameters} of the AR and MA components of the model, by Ordinary Least Squares (OLS) or Maximum Likelihood Estimation (MLE). 
+3. \textbf{Model diagnostics}, or goodness of fit checks.
+4. \textbf{Forecasting.}
 
-HIER BOX-JENKINS METHODE NACH WÜRZBUEGRER BUCH \citep{Falk.2012}
-
-
+LJUNG BOX (autocorr of residuals) AND JARQUE BERA (NV) TESTS! The forecast intervals (confidence intervals for forecasts) for ARIMA models are based on assumptions that the residuals are uncorrelated and normally distributed. If either of these assumptions does not hold, then the forecast intervals may be incorrect wiki
 
 \section{Artificial Neural Networks}
 
