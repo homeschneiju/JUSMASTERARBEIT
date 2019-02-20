@@ -62,6 +62,12 @@ Dorffner, G. (1996).
 \newblock Neural networks for time series processing.
 \newblock {\em Neural Network World}, 6:447--468.
 
+\bibitem[Falk et~al., 2012]{Falk.2012}
+Falk, M., Marohn, F., Michel, R., Hofmann, D., Macke, M., Sprachmann, C., and
+  Englert, S. (2012).
+\newblock {\em A First Course on Time Series Analysis: Examples with SAS}.
+\newblock Epubli, Berlin.
+
 \bibitem[Feng et~al., 2018]{Feng.2018}
 Feng, F., Li, W., and Jiang, Q. (2018).
 \newblock Railway freight volume forecast using an ensemble model with
