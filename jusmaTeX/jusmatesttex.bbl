@@ -51,6 +51,13 @@ Chandrashekar, G. and Sahin, F. (2014).
 \newblock A survey on feature selection methods.
 \newblock {\em Computers {\&} Electrical Engineering}, 40(1):16--28.
 
+\bibitem[Cools et~al., 2009]{Cools.2009}
+Cools, M., Moons, E., and Wets, G. (2009).
+\newblock Investigating the variability in daily traffic counts through use of
+  arimax and sarimax models.
+\newblock {\em Transportation Research Record: Journal of the Transportation
+  Research Board}, 2136(1):57--66.
+
 \bibitem[de~Jong et~al., 2004]{JONG.2004}
 de~Jong, G., Gunn, H., and Walker, W. (2004).
 \newblock National and international freight transport models: An overview and
@@ -124,6 +131,12 @@ Kourentzes, N., Barrow, D.~K., and Crone, S.~F. (2014).
 \newblock Neural network ensemble operators for time series forecasting.
 \newblock {\em Expert Systems with Applications}, 41(9):4235--4244.
 
+\bibitem[Lee and Hamzah, 2010]{Lee.2010}
+Lee, M.~H. and Hamzah, N. (2010).
+\newblock Calendar variation model based on arimax for forecasting sales data
+  with ramadhan effect.
+\newblock {\em Proceedings of the Regional Conference on Statistical Sciences}.
+
 \bibitem[Miller, 2018]{Miller.2018}
 Miller, J. (2018).
 \newblock Arima time series models for full truckload transportation prices.
@@ -139,6 +152,11 @@ Mircetic, D., Nikolicic, S., Maslaric, M., Ralevic, N., and Debelic, B. (2016).
 Nakamura, E. (2005).
 \newblock Inflation forecasting using a neural network.
 \newblock {\em Economics Letters}, 86(3):373--378.
+
+\bibitem[Peter and Silvia, ]{peter2012arima}
+Peter, {\v{D}}. and Silvia, P.
+\newblock Arima vs. arimax--which approach is better to analyze and forecast
+  macroeconomic time series.
 
 \bibitem[Regan and Garrido, 2001]{Regan.2001}
 Regan, A. and Garrido, R. (2001).

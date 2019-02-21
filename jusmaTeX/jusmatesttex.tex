@@ -192,9 +192,19 @@ The objective in forecasting is to reduce the expected deviation of the estimate
 
 To forecast an \textit{AR(p)} model, for $t = 1$, i.e. the first point in time ahead that we have no observed values for, one can simply replace the parameters in equation NUMBER by the parameters obtained in step 2 and insert past values for $Y_{t-h}, \text{h = 1, 2, ...}$.  
 In \textit{MA(q)} models, reconsidering that the innovations are caused by white noise, it is impossible to forecast more than one step ahead, as for the next point in time ahead, we only know the values for $\epsilon_{t-1}$
+
+\subsection{AR(I)MAX}
  
-
-
+So far, only univariate time series processes, where $Y_{t}$ is solely predicted by its own past values, $Y_{t-\tau}, \tau = \text{ 1,2,...}$, have been considered. Naturally, the question arises whether it is possible to improve predictions based on further explanatory variables (denoted by $X$ or $X_{t}$ in the following). Common AR(I)MA models can be extended to so-called ARMAX models by adding lagged explanatory variables to the model \citep{Andreoni.2006b}:
+\begin{equation}
+	Y_{t} = \Phi_{\tau,1}Y_{t+\tau-1} + \Phi_{\tau,2}Y_{t+\tau-2} + ... + \Phi_{\tau,\tau - 1}Y_{t+1} + \Phi_{\tau,\tau}Y_{t} + \epsilon_{t+\tau} + \mu + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q} + \Delta X_{t-1} \text{for $\tau = 1, 2, ...$} 
+\end{equation}
+\\
+Unfortunately, literature on AR(I)MAX models is scarce.\\
+\cite{Intihar.2017} use ARIMAX to forecast container throughput with additional information of macro-economic indicators at the Port of Koper, whereas \cite{peter2012arima} forecast macroeconomic time series themselves with both ARIMA and ARIMAX models.\\
+\cite{Lee.2010} include Ramadan effect in their prediction of sales data. \\
+\cite{Anggraeni.2015} observed differences in the sales of muslim kids' clothing with Eid holidays every year and modeled this with an ARIMAX model. \\
+\cite{Cools.2009} compare ARIMAX to SARIMAX modeling in daily traffic counts. \\
 \section{Artificial Neural Networks}
 
 
