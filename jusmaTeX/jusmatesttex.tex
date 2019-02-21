@@ -185,11 +185,13 @@ These are mainly residual checks \citep{Arlt.2017}. After having fitted the ARIM
 $N$ is the sample size, $\tau$ the order of the lag, $m$ the number of lags considered, $\rho(\tau)$ the autocorrelation function at lag $\tau$, $n_{p}$ the number of parameters, $S$ the skewness and $K$ the curtosis of the time series. If both tests are statistically significant, then the assumption holds that the error term is a white noise process $\epsilon \sim  WN(0, \sigma_{\epsilon}^2)$ \citep{Intihar.2017}.\\
 
 \subsubsection{Forecasting}
-The objective in forecasting is to reduce the expected deviation of the estimated outcome $\hat{Y}_{t}$ from the actual outcome $Y_{t}$ of a time series:
+The objective in forecasting is to reduce the expected deviation of the estimated outcome $\hat{Y}_{t}$ from the actual outcome $Y_{t}$ of a time series \citep{Falk.2012}:
 \begin{equation}
 	E(Y_{t} - \hat{Y}_{t})
 \end{equation}
 
+To forecast an \textit{AR(p)} model, for $t = 1$, i.e. the first point in time ahead that we have no observed values for, one can simply replace the parameters in equation NUMBER by the parameters obtained in step 2 and insert past values for $Y_{t-h}, \text{h = 1, 2, ...}$.  
+In \textit{MA(q)} models, reconsidering that the innovations are caused by white noise, it is impossible to forecast more than one step ahead, as for the next point in time ahead, we only know the values for $\epsilon_{t-1}$
  
 
 
@@ -309,7 +311,6 @@ In their study on the influence of national, regional and local economic indices
 
 Albeit the growing number of available methods for variable selection, neither is there one gold standard that is generally useful, nor is there one method especially advisable for each kind of data \citep{Taghizadeh.2017}\\
 
-\\
 Generally, variable selection methods, also called feature selection methods in the context of Machine Learning, can be classified into \textit{Filter}, \textit{Wrapper} and \textit{Embedded methods}. 
 
 
