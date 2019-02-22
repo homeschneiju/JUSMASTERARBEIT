@@ -103,8 +103,9 @@ Tests for seasonal components include ??? and visual checks of the time series p
 \subsection{AR models}
 Autoregressive (AR) processes are processes where a value of a variable at \textit{t} depends on weighted previous values of the variable itself plus a white noise term $e \sim  WN(0, \sigma_{\epsilon}^2)$. An \textit{AR(p)} process of order \textit{p} has the form:
 \begin{equation}
-	Y_{t} = \phi_{1} y_{t-1} + \phi_{2} y_{t-2} + ... + \phi_{p} y_{t-p} +e_{t}
+	Y_{t} = C + \phi_{1} y_{t-1} + \phi_{2} y_{t-2} + ... + \phi_{p} y_{t-p} +e_{t}
 \end{equation}
+where $C$ is the intercept.\\
 The order \textit{p} of an AR process may be determined by a visual check of the plotted Partial Autocorrelation function (PACF). 
 The PACF and the corresponding empirical PACF are denoted in the following form:
 Considering a time series as a regression where $\tau$ denotes the lag:
@@ -125,7 +126,7 @@ $-1 < \pi(\tau) < 1$ \citep{Vogel.2015}. The empirical PACF can be determined by
 \subsection{MA models}
 Moving Average (MA) processes of order \textit{q} are denoted like this:
 \begin{equation}
-	Y_{t} = \mu + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q}
+	Y_{t} = \mu_{MA} + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q}
 \end{equation}
 This means the value of a target variable at \textit{t} depends on a white noise process and previous white noise weighted by $\phi$. $\epsilon$ in this context are called \textit{innovations}. Furthermore, $\mu$ may be 0 and MA-processes are stationary and causal \citep{Vogel.2015}.
 The order \textit{q} of an MA process may, equal to AR processes, be determined by a visual check of the Autocorrelation Function (ACF)'s plot (correlogram). The ACF and the empirical ACF are denoted as:
@@ -147,8 +148,9 @@ The parameters \textit{p}, \textit{d}, and \textit{q} respectively denote the or
 If there is also a seasonal component - thus a SARIMA model is to be fitted - there are additional parameters P, D, Q referring to the seasonal orders (or degrees) of AR, differencing and MA.\\
 
 \begin{equation}
-Y_{t} = \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e_{t} + \mu + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} 
+Y_{t} = + \mu_{ARMA} \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e_{t}  + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} 
 \end{equation}
+where $\mu_{ARMA}$ actually equals the intercept $C$ of the aforementioned $AR(p)$ model.
 
 \subsection{The Box-Jenkins program}
 In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps, as described in \cite{Falk.2012}: \\
@@ -195,12 +197,24 @@ The objective in forecasting is to reduce the expected deviation of the estimate
 	E(Y_{t} - \hat{Y}_{t})
 \end{equation}
 
-To forecast an \textit{AR(p)} model, for $t = 1$, i.e. the first point in time ahead that we have no observed values for, one can simply replace the parameters in equation NUMBER by the parameters obtained in step 2 and insert past values for $Y_{t-h}, \text{h = 1, 2, ...}$.  
-In \textit{MA(q)} models, reconsidering that the innovations are caused by white noise, it is impossible to forecast more than one step ahead, as for the next point in time ahead, we only know the values for $\epsilon_{t-1}$
+To forecast an \textit{AR(p)} model, for $t = 1$, i.e. the first point in time ahead that we have no observed values for, one can simply replace the parameters in equation NUMBER by the parameters obtained in step 2 and insert past values for $Y_{t-h}, \text{h = 1, 2, ...}$. For an $AR(2)$ process, the one step ahead forecast looks like this:
+\begin{equation}
+	\hat{Y}_{t+1} = C + \Phi_{1}Y_{t} + \Phi_{2}Y_{t-1}
+\end{equation}
+In \textit{MA(q)} models, reconsider that the innovations are caused by white noise, and for a forecast of $Y_{t+1}$, $\epsilon_{t+1}$ is directly part of the equation whose expected value is 0.  $\epsilon_{t-1}$, so the one step ahead forecast for an $MA(2)$ process looks like this:
+\begin{equation}
+\hat{Y}_{t+1} = \mu_{MA}  - \Theta_{1}\epsilon_{t}  - \Theta_{2}\epsilon_{t-1}
+\end{equation}
+But already with a two step ahead forecast, it is obvious that the $MA(2)$ process (as all $MA(q)$ processes) converges towards the mean $\mu$ the farther ahead the forecasting step:
+\begin{equation}
+\hat{Y}_{t+2} = \mu_{MA}  - \Theta_{1}\hat{\epsilon}_{t+1}  - \Theta_{2}\epsilon_{t} = \mu_{MA} - \Theta_{1} * 0 - \Theta_{2}\epsilon_{t}
+\end{equation}
+because $E(\epsilon_{t+1}) = 0$.
+In $ARMA(p.q)$ models, the farther ahead the forecast, the more $Y_{t+\tau}$ converges towards the expected value of the time series $E(Y_{t+\tau}) = \mu_{ARMA} \ for \ \tau = 0, 1, ...$.\\
 
 \subsection{AR(I)MAX}
  
-So far, only univariate time series processes, where $Y_{t}$ is solely predicted by its own past values, $Y_{t-\tau}, \tau = \text{ 1,2,...}$, have been considered. Naturally, the question arises whether it is possible to improve predictions based on further explanatory variables (denoted by $X$ or $X_{t}$ in the following). Common AR(I)MA models can be extended to so-called ARMAX models by adding lagged explanatory variables to the model \citep{Andreoni.2006b}:
+So far, only univariate time series processes, where $Y_{t}$ is solely predicted by its own past values, $Y_{t-\tau}, \tau = \text{ 1,2,...}$, have been considered. Naturally, the question arises whether it is possible to improve predictions based on further explanatory variables (denoted by $X$ or $X_{t}$ in the following). 
 %\begin{equation}
 %	Y_{t} = \Phi_{\tau,1}Y_{t+\tau-1} + \Phi_{\tau,2}Y_{t+\tau-2} + ... + \Phi_{\tau,\tau - 1}Y_{t+1} + \Phi_{\tau,\tau}Y_{t} + \epsilon_{t+\tau} + \mu + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q} + \Delta X_{t-1} \text{for $\tau = 1, 2, ...$} 
 %\end{equation}
@@ -212,9 +226,10 @@ Unfortunately, literature on AR(I)MAX models is scarce compared to literature on
 \cite{Anggraeni.2015} observed differences in the sales of muslim kids' clothing with Eid holidays every year and modeled this with an ARIMAX model. \\
 \cite{Cools.2009} compare ARIMAX to SARIMAX modeling in daily traffic counts. \\
 
+Common AR(I)MA models can be extended to so-called ARMAX models by adding lagged explanatory variables to the model \citep{Andreoni.2006b}:
 
 \begin{equation}
-Y_{t} = \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e{t} + \mu + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} + \gamma X_{t-1} 
+Y_{t} = \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e{t} + \mu_{ARMA} + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} + \gamma X_{t-1} 
 \end{equation}
 
 Equation NUMMER can be rewritten in terms of a transfer function model \citep{Durka.2012}:
