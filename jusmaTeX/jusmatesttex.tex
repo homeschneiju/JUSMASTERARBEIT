@@ -76,7 +76,7 @@ Apart from this, further parts of the four step model are not of interest, i.e. 
 
 As is evident, all of the papers mentioned above applied models to either measures similar to but not exactly weight or time series analysis in general. Several authors proposed hybrid models consisting of combined versions of the basic models to be compared further below. \\
 Regardless of the lack of literature exactly matching the target of this thesis, the combined information gained from all of these papers provides reasonable background to be supportive of it. Furthermore, this scarcity in literature proves the necessity of a primary approach to adress the objective of the use case at hand.\\
-Hence, it is important to first retrace the reasoning behind the choice of rather basic versions of ARIMAX, SVR and ANN models for the prediction of freight weight demand, which the following section is dedicated to.\\
+Hence, it is important to first retrace the reasoning behind the choice of rather basic versions of AR(I)MAX, SVR and ANN models for the prediction of freight weight demand, which the following section is dedicated to.\\
 
 \section{Time series}
 Forecasting of time series with (S)AR(I)MA models is a well-established concept that has been studied thoroughly for many decades and provides good forecasting accuracy \citep{Arlt.2017, Khandelwal.2015}.It has found application in many domains such as economy (MEHR QUELLEN), 
@@ -101,9 +101,9 @@ If there are recurrent fluctuations that ocurr yearly or otherwise periodically,
 Tests for seasonal components include ??? and visual checks of the time series plots.
 
 \subsection{AR models}
-Autoregressive (AR) processes are processes where a value of a variable at \textit{t} depends on weighted previous values of the variable itself plus a white noise term $\epsilon \sim  WN(0, \sigma_{\epsilon}^2)$. An \textit{AR(p)} process of order \textit{p} has the form:
+Autoregressive (AR) processes are processes where a value of a variable at \textit{t} depends on weighted previous values of the variable itself plus a white noise term $e \sim  WN(0, \sigma_{\epsilon}^2)$. An \textit{AR(p)} process of order \textit{p} has the form:
 \begin{equation}
-	Y_{t} = \phi_{1} y_{t-1} + \phi_{2} y_{t-2} + ... + \phi_{p} y_{t-p} +\epsilon_{t}
+	Y_{t} = \phi_{1} y_{t-1} + \phi_{2} y_{t-2} + ... + \phi_{p} y_{t-p} +e_{t}
 \end{equation}
 The order \textit{p} of an AR process may be determined by a visual check of the plotted Partial Autocorrelation function (PACF). 
 The PACF and the corresponding empirical PACF are denoted in the following form:
@@ -120,14 +120,14 @@ PACF: \pi(\tau):= \begin{cases}
 \end{cases}
 \end{equation}
 with 
-$-1 < \pi(\tau) < 1$ \citep{Vogel.2015}. The empirical PACF can be determind by using Yule-Walker equations or the Durbin-Levinson algorithm (for a detailed description see \citep{Vogel.2015}).
+$-1 < \pi(\tau) < 1$ \citep{Vogel.2015}. The empirical PACF can be determined by using Yule-Walker equations or the Durbin-Levinson algorithm (for a detailed description see \citep{Vogel.2015}).
 
 \subsection{MA models}
 Moving Average (MA) processes of order \textit{q} are denoted like this:
 \begin{equation}
 	Y_{t} = \mu + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q}
 \end{equation}
-This means the value of a target variable at \textit{t} depends on a white noise process and previous white noise weighted by $\phi$. $\epsilon$ in this context are called \textit{innovations}. Note that $\mu$ may be 0 and MA-processes are stationary and causal \citep{Vogel.2015}.
+This means the value of a target variable at \textit{t} depends on a white noise process and previous white noise weighted by $\phi$. $\epsilon$ in this context are called \textit{innovations}. Furthermore, $\mu$ may be 0 and MA-processes are stationary and causal \citep{Vogel.2015}.
 The order \textit{q} of an MA process may, equal to AR processes, be determined by a visual check of the Autocorrelation Function (ACF)'s plot (correlogram). The ACF and the empirical ACF are denoted as:
 \begin{equation}
 ACF:	\rho(\tau) := \frac{\gamma(\tau)}{\gamma(0)} = \frac{Cov(Y_{t},Y_{t+\tau})}{Var(Y_{t})}, \tau \end{equation}
@@ -135,6 +135,7 @@ ACF:	\rho(\tau) := \frac{\gamma(\tau)}{\gamma(0)} = \frac{Cov(Y_{t},Y_{t+\tau})}
 \begin{equation}
 empirical ACF: \hat{\rho}_(\tau) := \frac{\hat{\gamma}(\tau)}{\hat{\gamma}(0)} = \frac{\sum_{t = 1}^{n - \tau}(y_{t} - \bar{y})(y_{t + \tau}-\bar{y})}{\sum_{t = 1}^{n}(y_{t}-\bar{y})^2}
 \end{equation}
+
 A condition introduced by \cite{Box.1976} is the \textbf{invertibility} of the MA process into an AR($\infty$) process, which ensures that only one parametrization of an MA process can be identified for any ACF.
 
 However, the process underlying time series data may change over time - it is subject to uncertainty \citep{Adhikari.2015}. A time series model may be biased or overfitted as well as its parameters misspecified. \\
@@ -144,6 +145,10 @@ However, the process underlying time series data may change over time - it is su
 As the name suggests, AR(I)MA(p,d,q) - auto-regressive integrated moving average - models model time series data with an AR and an MA component, and trend in data through differencing (which is the "I-part"). \\
 The parameters \textit{p}, \textit{d}, and \textit{q} respectively denote the order of the AR component, the degree of differencing and the MA component \citep{Zhao.07022018}.
 If there is also a seasonal component - thus a SARIMA model is to be fitted - there are additional parameters P, D, Q referring to the seasonal orders (or degrees) of AR, differencing and MA.\\
+
+\begin{equation}
+Y_{t} = \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e_{t} + \mu + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} 
+\end{equation}
 
 \subsection{The Box-Jenkins program}
 In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps, as described in \cite{Falk.2012}: \\
@@ -182,7 +187,7 @@ These are mainly residual checks \citep{Arlt.2017}. After having fitted the ARIM
 \begin{equation}
 	JB = \frac{N - n_{p}}{6}*(S^2 + \frac{(K - 3)^2}{4})
 \end{equation}
-$N$ is the sample size, $\tau$ the order of the lag, $m$ the number of lags considered, $\rho(\tau)$ the autocorrelation function at lag $\tau$, $n_{p}$ the number of parameters, $S$ the skewness and $K$ the curtosis of the time series. If both tests are statistically significant, then the assumption holds that the error term is a white noise process $\epsilon \sim  WN(0, \sigma_{\epsilon}^2)$ \citep{Intihar.2017}.\\
+$N$ is the sample size, $\tau$ the order of the lag, $m$ the number of lags considered, $\rho(\tau)$ the autocorrelation function at lag $\tau$, $n_{p}$ the number of parameters, $S$ the skewness and $K$ the curtosis of the time series. If both tests are statistically significant, then the assumption holds that the error term is a white noise process $e \sim  WN(0, \sigma_{\epsilon}^2)$ \citep{Intihar.2017}.\\
 
 \subsubsection{Forecasting}
 The objective in forecasting is to reduce the expected deviation of the estimated outcome $\hat{Y}_{t}$ from the actual outcome $Y_{t}$ of a time series \citep{Falk.2012}:
@@ -196,15 +201,33 @@ In \textit{MA(q)} models, reconsidering that the innovations are caused by white
 \subsection{AR(I)MAX}
  
 So far, only univariate time series processes, where $Y_{t}$ is solely predicted by its own past values, $Y_{t-\tau}, \tau = \text{ 1,2,...}$, have been considered. Naturally, the question arises whether it is possible to improve predictions based on further explanatory variables (denoted by $X$ or $X_{t}$ in the following). Common AR(I)MA models can be extended to so-called ARMAX models by adding lagged explanatory variables to the model \citep{Andreoni.2006b}:
-\begin{equation}
-	Y_{t} = \Phi_{\tau,1}Y_{t+\tau-1} + \Phi_{\tau,2}Y_{t+\tau-2} + ... + \Phi_{\tau,\tau - 1}Y_{t+1} + \Phi_{\tau,\tau}Y_{t} + \epsilon_{t+\tau} + \mu + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q} + \Delta X_{t-1} \text{for $\tau = 1, 2, ...$} 
-\end{equation}
+%\begin{equation}
+%	Y_{t} = \Phi_{\tau,1}Y_{t+\tau-1} + \Phi_{\tau,2}Y_{t+\tau-2} + ... + \Phi_{\tau,\tau - 1}Y_{t+1} + \Phi_{\tau,\tau}Y_{t} + \epsilon_{t+\tau} + \mu + \epsilon_{t} - \phi_{1}\epsilon_{t-1} - \phi_{2}\epsilon_{t-2} - ... - +\phi_{q}\epsilon_{t-q} + \Delta X_{t-1} \text{for $\tau = 1, 2, ...$} 
+%\end{equation}
 \\
-Unfortunately, literature on AR(I)MAX models is scarce.\\
-\cite{Intihar.2017} use ARIMAX to forecast container throughput with additional information of macro-economic indicators at the Port of Koper, whereas \cite{peter2012arima} forecast macroeconomic time series themselves with both ARIMA and ARIMAX models.\\
+
+Unfortunately, literature on AR(I)MAX models is scarce compared to literature on classic univariate time series analysis.\\
+\cite{Intihar.2017} use ARIMAX to forecast container throughput with additional information of macro-economic indicators at the Port of Koper, whereas \cite{Durka.2012} forecast macroeconomic time series themselves with both ARIMA and ARIMAX models.\\
 \cite{Lee.2010} include Ramadan effect in their prediction of sales data. \\
 \cite{Anggraeni.2015} observed differences in the sales of muslim kids' clothing with Eid holidays every year and modeled this with an ARIMAX model. \\
 \cite{Cools.2009} compare ARIMAX to SARIMAX modeling in daily traffic counts. \\
+
+
+\begin{equation}
+Y_{t} = \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e{t} + \mu + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} + \gamma X_{t-1} 
+\end{equation}
+
+Equation NUMMER can be rewritten in terms of a transfer function model \citep{Durka.2012}:
+\begin{equation}
+y_{t} = C + v(B)X_{t} + e_{t}
+\end{equation}
+where $v(B)X_{t}$ is the transfer function with backshift operator \textit{B}:
+\begin{equation}
+	v(B)X_{t} = \sum_{j = 0}^{\infty} v_{j}B^{j}X_{t}
+\end{equation}
+
+AR(I)MAX models can be interpreted as regression problems, where one variable is explained by another; however, in time series, classical linear regression cannot be applied due to autocorrelated error terms \citep{Cools.2009}, such that the standard errors are underestimated QUELLE.
+
 
 \section{Artificial Neural Networks}
 

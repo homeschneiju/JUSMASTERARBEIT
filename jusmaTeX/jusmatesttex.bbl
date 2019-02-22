@@ -12,6 +12,12 @@ Andreoni, A. and Postorino, M.~N. (2006).
   regional airport.
 \newblock {\em IFAC Proceedings Volumes}, 39(12):101--106.
 
+\bibitem[Anggraeni et~al., 2015]{Anggraeni.2015}
+Anggraeni, W., Vinarti, R.~A., and Kurniawati, Y.~D. (2015).
+\newblock Performance comparisons between arima and arimax method in moslem
+  kids clothes demand forecasting: Case study.
+\newblock {\em Procedia Computer Science}, 72:630--637.
+
 \bibitem[Arlt et~al., 2017]{Arlt.2017}
 Arlt, J., Trcka, P., and Arltov{\'a}, M. (2017).
 \newblock The problem of the sarima model selection for the forecasting
@@ -68,6 +74,13 @@ de~Jong, G., Gunn, H., and Walker, W. (2004).
 Dorffner, G. (1996).
 \newblock Neural networks for time series processing.
 \newblock {\em Neural Network World}, 6:447--468.
+
+\bibitem[{\v{D}}urka and Pastorekov{\'a}, 2012]{Durka.2012}
+{\v{D}}urka, P. and Pastorekov{\'a}, S. (2012).
+\newblock Arima vs. arimax--which approach is better to analyze and forecast
+  macroeconomic time series.
+\newblock {\em Proceedings of 30th International Conference Mathematical
+  Methods in Economics}.
 
 \bibitem[Falk et~al., 2012]{Falk.2012}
 Falk, M., Marohn, F., Michel, R., Hofmann, D., Macke, M., Sprachmann, C., and
@@ -152,11 +165,6 @@ Mircetic, D., Nikolicic, S., Maslaric, M., Ralevic, N., and Debelic, B. (2016).
 Nakamura, E. (2005).
 \newblock Inflation forecasting using a neural network.
 \newblock {\em Economics Letters}, 86(3):373--378.
-
-\bibitem[Peter and Silvia, ]{peter2012arima}
-Peter, {\v{D}}. and Silvia, P.
-\newblock Arima vs. arimax--which approach is better to analyze and forecast
-  macroeconomic time series.
 
 \bibitem[Regan and Garrido, 2001]{Regan.2001}
 Regan, A. and Garrido, R. (2001).
