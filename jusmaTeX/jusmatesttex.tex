@@ -134,7 +134,7 @@ The order \textit{q} of an MA process may, equal to AR processes, be determined 
 ACF:	\rho(\tau) := \frac{\gamma(\tau)}{\gamma(0)} = \frac{Cov(Y_{t},Y_{t+\tau})}{Var(Y_{t})}, \tau \end{equation}
 
 \begin{equation}
-empirical ACF: \hat{\rho}_(\tau) := \frac{\hat{\gamma}(\tau)}{\hat{\gamma}(0)} = \frac{\sum_{t = 1}^{n - \tau}(y_{t} - \bar{y})(y_{t + \tau}-\bar{y})}{\sum_{t = 1}^{n}(y_{t}-\bar{y})^2}
+empirical \ ACF: \hat{\rho}_(\tau) := \frac{\hat{\gamma}(\tau)}{\hat{\gamma}(0)} = \frac{\sum_{t = 1}^{n - \tau}(y_{t} - \bar{y})(y_{t + \tau}-\bar{y})}{\sum_{t = 1}^{n}(y_{t}-\bar{y})^2}
 \end{equation}
 
 A condition introduced by \cite{Box.1976} is the \textbf{invertibility} of the MA process into an AR($\infty$) process, which ensures that only one parametrization of an MA process can be identified for any ACF.
@@ -155,7 +155,7 @@ where $\mu_{ARMA}$ actually equals the intercept $C$ of the aforementioned $AR(p
 \subsection{The Box-Jenkins program}
 In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps, as described in \cite{Falk.2012}: \\
 \subsubsection{Order selection}
-The orders \textit{p} and \textit{q} of the AR and MA have to be determined. This can be done via a visual identification through ACF for MA- and PACF for AR-orders, as mentioned above. \cite{Andreoni.2006b} provide a guideline for visual plot checks. \\
+The orders \textit{p} and \textit{q} of the AR and MA have to be determined. This can be done via a visual identification through ACF for MA- and PACF for AR-orders, as mentioned above. \\
 \cite{Vogel.2015} provides an overview for signs of AR, MA and ARMA processes in ACF and PACF plots: \\
 \\
 \textit{AR(p)} processes:\\
@@ -169,6 +169,8 @@ The orders \textit{p} and \textit{q} of the AR and MA have to be determined. Thi
 \textit{ARMA(p,q)} processes: \\
 - Both ACF and PACF fade with increasing lag $\tau$, possibly sinusoidally or alternatingly.\\
 
+
+\cite{Zhou.2006} recommend settling on an order of both $p$ and $q$ in a magnitude between 0 and 10, while $d$'s most sensible magnitude is between 0 and 2.\\
 For ARMA models, simple plot checks are insufficient and commonly, candidates for \textit{p} and \textit{q} are chosen by minimizing an Information Criterion such as AIC or BIC \citep{Falk.2012}. \\
 
 \subsubsection{Estimation of parameters}
@@ -247,8 +249,8 @@ AR(I)MAX models can be interpreted as regression problems, where one variable is
 \section{Artificial Neural Networks}
 
 
-Although seemingly new in the world of statistical tools, Artificial Neural Networks have been invented many decades ago and the enthusiasm for them HAS experienced several revivals throughout the years \citep{Gao.2011}. The idea stems from human brains \citep{Zhang.1998} and the way their neurons learn, store and process information together \citep{Balkin.1997}. Although this sounds like a very complex, ambitious venture, NNs are "simply a parameterized non-linear function that can be fitted to data for prediction purposes" \citep{Nakamura.2005}. The process, although very much data-driven \citep{Zhang.1998} and sensitive to the training data \citep{Adhikari.2015}, it is not non-parametric \citep{Dorffner96neuralnetworks}. \\
-can be fitted to data for prediction purposes" 	\citep{Nakamura.2005}. Nowadays, with the advance of fast and high-performance personal computers, basically anyone can fit a neural network to their data \citep{Gao.2011}.\\
+Although seemingly new in the world of statistical tools, Artificial Neural Networks have been invented many decades ago and the enthusiasm for them HAS experienced several revivals throughout the years \citep{Gao.2011}. The idea stems from human brains \citep{Zhang.1998} and the way their neurons learn, store and process information together \citep{Balkin.1997}. Although this sounds like a very complex, ambitious venture, NNs are "simply a parameterized non-linear function that can be fitted to data for prediction purposes" \citep{Nakamura.2005}. In principle, an n-dimensional input is mapped onto an m-dimensional output \citep{Rojas.1996}. The process, although very much data-driven \citep{Zhang.1998} and sensitive to the training data \citep{Adhikari.2015}, is not non-parametric \citep{Dorffner96neuralnetworks}. \\
+ Nowadays, with the advance of fast and high-performance personal computers, basically anyone can fit a neural network to their data \citep{Gao.2011}.\\
 A great strength of NNs is their ability to detect structures between variables that have not yet been discovered \citep{Zhang.1998}.\\ 
 During these different stages of popularity, ANNs have been developed further. Refined architectures allow the researcher to adapt a neural network to their problem's structure, starting from rather simple one-layer feedforward algorithms to more complex long-short-term-memory multi-layer-perceptron NNs. (QUELLE)\\
 Here, a short overview shall be given before discussing the choice of type of NN for this specific case.\\
@@ -268,11 +270,37 @@ The most common learning algorithm is backpropagation as proposed by \cite{Rumel
 
 A crucial step in modelling NNs is to define the network size and structure, i.e. define the number of layers and nodes (neurons), in order to accurately depict the complexity of the structure of the data and avoid overfitting or underfitting as well as keep computation times low \citep{Karsoliya.2012}.\\
 There is no exact way to determine the number of nodes in each layer, although a lot of previous work has been dedicated to this problem \citep{Karsoliya.2012}. Of course, it depends on the problem at hand.\\
-The number of input neurons may be equal to the number of input variables in one's problem, but in a time series, the number of input neurons is not evident \citep{Zhang.1998}.
+The number of input neurons may be equal to the number of input variables in one's problem, but in a time series, the number of input neurons is not evident \citep{Zhang.1998}. However, obviously for each exogenous variable added there has to be (at least) one input node added to the NN.\\
 It is already clear at this point that the number of output neurons is one, as we are interested in one continuous target variable and as is recommended by \cite{Karsoliya.2012}.\\
 
 However, the number of hidden layers and the number of neurons within each hidden layer still has to be determined. \\
 As the objective of this thesis is to present basic models to be contrasted with each other, one hidden layer should suffice. Now, the number of hidden neurons has to be established by trial and error - since there is no clear rule - as is done by most researchers \citep{Karsoliya.2012}. If, with an arbitrary small number of hidden neurons, the network should fail to converge even after multiple restarts, the number of hidden neurons should be increased successively. \\
+To determine a suitable number of hidden nodes, \cite{Adhikari.2015} use the BIC.\\
+
+Due to their ability to approximate any (linear or nonlinear) function underlying the data arbitrarily closely by a nonlinear function, MLPs and RBFNNs classify as universal function approximators \citep{Dorffner96neuralnetworks}. They can reduce to an AR[p]-model with an appropriate function that is estimated with a learning algorithm.\\
+Considering the vast number of different types of NNs as well as their general flexibility, it is not a trivial task to choose a suitable model, specify it, and train it \citep{Kourentzes.2014}. 
+
+In time series analysis with NNs, $Y_{t+1}$ is the output that is calculated by feeding the network lagged past obervations of $Y_{t}, \ t for 1,2,... T-1$ and possibly lagged values of exogenous variables \citep{Kourentzes.2014}.
+For this purpose, the time series is divided into equally sized chunks and fed to the network, where the the next value in the chunk is expected to be determined by the preceding elements of the same chunk \citep{Pinto}.
+
+
+\cite{Dorffner96neuralnetworks} counts feedforward ANNs, Jordan ANNs, Elman ANNs (the latter two being types of RNNs), and Multicurrent Networks as most relevant for time series analysis.
+Feed-forward NNs an Recurrent NNs shall be described in more detailed in the following subsections.
+
+\subsubsection{Feed-forward NNs}
+
+
+
+In feed-forward MLP NNs, an input is fed to the input layer and traversed through the hidden layers without cycles until it reaches the output layer \citep{Rojas.1996}. Usually, alls nodes of one layer are connected to all nodes of the next layer, as shown in Picture NUMMER (Rojas p. 134)
+Picture NUMMER (Benkachcha) shows an MLP feed-forward NN for time series forecasting where $Y_{t+1}$ is predicted by an input of its past values.\\
+
+
+\subsubsection{Recurrent NNs}
+
+According to \cite{Balkin.1997}, RNNs are better suited for time series data than FNNS; in fact, bad results in an RNN may hint that there is not time dependency in the data at all. However, a feedforward NN in its simplest form reduces to an $AR[p]$-model whereas an RNN may reduce to an $ARMA$-model, which is to be kept in mind when analyzing the data structure at hand.\\
+
+
+
 
 \subsection{Activation functions}
 Activation functions - also known as transfer functions - introduce nonlinearity by mapping the input node to the output node\citep{Zhang.1998}. They must be differentiable \citep{Rojas.1996} \\
@@ -299,30 +327,40 @@ NNs may be trained in various ways. Generally, learning algorithms - also called
 \begin{equation} E = \frac{1}{2}*\sum_{i=1}^{p}||\hat{y}_{i} - t_{i}||\end{equation}
 The derivatives of $E$, 
 \begin{equation}
-\delta E = {\frac{\partial E}{\partial w_{1}}\frac{\partial E}{\partial w_{2}},...,\frac{\partial E}{\partial w_{l}}}
+\nabla E(w) = {\frac{\partial E(w)}{\partial w_{1}}\frac{\partial E(w)}{\partial w_{2}},...,\frac{\partial E(w)}{\partial w_{l}}}
 \end{equation}
  are minimized and the weights iteratively updated:
 
 \begin{equation}
-w_{i} = -\gamma\frac{\partial E}{\partial w_{i}} for \textit{i} = 1, ...., \textit{l}
+w_{i} = -\gamma\frac{\partial E(w)}{\partial w_{i}} for \textit{i} = 1, ...., \textit{l}
 \end{equation}
 , where $\gamma$ is the step size, also called learning rate. It determines the extent to which the weights are changed in each iteration and must carefully be specified, since too steep a descent might not converge and a too shallow one might be too slow \citep{Zhang.1998}.\\
-Finally, $\delta E$ is expected to be zero.
+Finally, $\nabla E$ is expected to be zero.
 When given input data, the network is fed forward by calculating the input to each node,
 \begin{equation}
 x_j = \sum_{i}y_{i}*w_{ji}
-\end{equation}, where \textit{j} indexes output nodes, \textit{i} indexes the nodes connected to node \textit{j} $w_{ji}$ denotes the weight and $y_{i}$ denotes the antecedent's node's output; outputs in turn are calculated by their activation functions. \citep{Rumelhart.1986}
-Another type of error function may be Mean Squared Error (MSE) \citep{Zhang.1998}. Note that independently of the training algorithm, the network might get stuck at a local optimum.
+\end{equation}, where \textit{j} indexes output nodes, \textit{i} indexes the nodes connected to node \textit{j} $w_{ji}$ denotes the weight and $y_{i}$ denotes the antecedent's node's output; outputs in turn are calculated by their activation functions \citep{Rumelhart.1986}.
 
 The possible flaws of static learning rates have been tried to overcome by expanding the classic gradient descent method with a so-called momentum parameter that controls the direction of the change in weights to not diverge too far from the direction of the antecedent change in weight. (QUELLE)
 
-\subsection{An overview over types of Artificial Neural Networks} 
+Backpropagation uses the first derivative of the error function is minimized; other algorithms use the Hessian matrix and thus the second derivative \citep{Rojas.1996}:
+\begin{equation}
+h = - (\nabla^2E(w))^{-1}\nabla E(w)
+\end{equation}
+where $w_{i}$ is then updated in the following way:
+\begin{equation}
+	w_{i} = w_{i-1} + h
+\end{equation}
 
-\cite{Dorffner96neuralnetworks} counts feedforward ANNs, Jordan ANNs, Elman ANNs (the latter two being types of RNNs); and Multicurrent Networks as most relevant for time series analysis.
-According to \cite{Balkin.1997}, RNNs are better suited for time series data than FNNS; in fact, bad results in an RNN may hint that there is not time dependency in the data at all. However, a feedforward NN in its simplest form reduces to an $AR[p]$-model whereas an RNN may reduce to an $ARMA$-model.\\
+As it is an iterative algorithm and the Hessian matrix has to be computed in each iteration, Quasi-Newton methods make use of a simplification where only the diagonal elements of the Hessian matrix are used:
+\begin{equation}
+	w_{i} = w_{i-1} + \frac{\nabla_{i}E(w)}{\partial^{2}E(w)/\partial w_{i}^{2}}
+\end{equation}
+This method is based on the assumption of a quadratic error term.
 
-Due to their ability to approximate any (linear or nonlinear) function underlying the data arbitrarily closely by a nonlinear function, MLPs and RBFNNs classify as universal function approximators \citep{Dorffner96neuralnetworks}. They can reduce to an AR[p]-model with an appropriate function that is estimated with a learning algorithm.\\
-Considering the vast number of different types of NNs as well as their general flexibility, it is not a trivial task to choose a suitable model, specify it, and train it \citep{Kourentzes.2014}. 
+Another type of error function next to SSE may be Mean Squared Error (MSE) \citep{Zhang.1998}. Note that independently of the training algorithm, the network might get stuck at a local optimum.
+
+
 \section{Model Choice}
 
 There are several ways to model time series data, some of which have been well established for many decades already, while others have recently emerged in the space of popular methods as well . ARIMA models are an example of the former kind of methods, while SVM and ANN are examples of the latter kind. \citep{Adhikari.2015}\\
