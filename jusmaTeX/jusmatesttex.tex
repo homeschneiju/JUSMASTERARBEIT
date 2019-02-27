@@ -148,7 +148,7 @@ The parameters \textit{p}, \textit{d}, and \textit{q} respectively denote the or
 If there is also a seasonal component - thus a SARIMA model is to be fitted - there are additional parameters P, D, Q referring to the seasonal orders (or degrees) of AR, differencing and MA.\\
 
 \begin{equation}
-Y_{t} = + \mu_{ARMA} \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e_{t}  + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} 
+Y_{t} =  \mu_{ARMA} +  \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e_{t}  + \epsilon_{t} - \sum_{m = 1}^{q} \Theta_{m}\epsilon_{t-m} 
 \end{equation}
 where $\mu_{ARMA}$ actually equals the intercept $C$ of the aforementioned $AR(p)$ model.
 
@@ -287,23 +287,9 @@ For this purpose, the time series is divided into equally sized chunks and fed t
 \cite{Dorffner96neuralnetworks} counts feedforward ANNs, Jordan ANNs, Elman ANNs (the latter two being types of RNNs), and Multicurrent Networks as most relevant for time series analysis.
 Feed-forward NNs an Recurrent NNs shall be described in more detailed in the following subsections.
 
-\subsubsection{Feed-forward NNs}
-
-
-
-In feed-forward MLP NNs, an input is fed to the input layer and traversed through the hidden layers without cycles until it reaches the output layer \citep{Rojas.1996}. Usually, alls nodes of one layer are connected to all nodes of the next layer, as shown in Picture NUMMER (Rojas p. 134)
-Picture NUMMER (Benkachcha) shows an MLP feed-forward NN for time series forecasting where $Y_{t+1}$ is predicted by an input of its past values.\\
-
-
-\subsubsection{Recurrent NNs}
-
-According to \cite{Balkin.1997}, RNNs are better suited for time series data than FNNS; in fact, bad results in an RNN may hint that there is not time dependency in the data at all. However, a feedforward NN in its simplest form reduces to an $AR[p]$-model whereas an RNN may reduce to an $ARMA$-model, which is to be kept in mind when analyzing the data structure at hand.\\
-
-
-
 
 \subsection{Activation functions}
-Activation functions - also known as transfer functions - introduce nonlinearity by mapping the input node to the output node\citep{Zhang.1998}. They must be differentiable \citep{Rojas.1996} \\
+Activation functions - also known as transfer functions - introduce nonlinearity by mapping the input node to the output node\citep{Zhang.1998}. They must be differentiable \citep{Rojas.1996}. \\
 Generally, the activation $a$ of a neuron $n_{i}$ is given by
  \begin{equation}
 a_{i} = f(n_{i})=f(\sum{w_{ij}*x_{j}})
@@ -323,8 +309,10 @@ Since most papers reviewed for this thesis mention the use of sigmoid or logisti
 
 \subsection{Learning algorithms}
 
-NNs may be trained in various ways. Generally, learning algorithms - also called training algorithms - iteratively minimize an error function to adjust the weights on the nodes \citep{Nakamura.2005}. Backpropagation as the most widely used algorithm is based on the gradient-descent method \citep{Rojas.1996}, which is why differentiability of the activation functions and therefore of the error functions as well is necessary. After a random initialization of the network, the initial weights are adjusted according to the gradient of the error function. The Sum of Squared Errors (SSE) might be considered:
-\begin{equation} E = \frac{1}{2}*\sum_{i=1}^{p}||\hat{y}_{i} - t_{i}||\end{equation}
+NNs may be trained in various ways. Generally, learning algorithms - also called training algorithms - iteratively minimize an error function to adjust the weights on the nodes \citep{Nakamura.2005}. Backpropagation as the most widely used algorithm is based on the gradient-descent method \citep{Rojas.1996}, which is why differentiability of the activation functions and therefore of the error functions as well is necessary. After a random initialization of the network, the initial weights are adjusted according to the gradient of the error function. The Sum of Squared Errors (SSE) might be considered \citep{Rojas.1996}:
+\begin{equation} E = \frac{1}{2}\sum_{i=1}^{p}||\hat{y}_{i} - y_{i}||^{2}\end{equation}
+
+Another type of error function next to SSE may be Mean Squared Error (MSE) \citep{Zhang.1998}. \\
 The derivatives of $E$, 
 \begin{equation}
 \nabla E(w) = {\frac{\partial E(w)}{\partial w_{1}}\frac{\partial E(w)}{\partial w_{2}},...,\frac{\partial E(w)}{\partial w_{l}}}
@@ -335,14 +323,16 @@ The derivatives of $E$,
 w_{i} = -\gamma\frac{\partial E(w)}{\partial w_{i}} for \textit{i} = 1, ...., \textit{l}
 \end{equation}
 , where $\gamma$ is the step size, also called learning rate. It determines the extent to which the weights are changed in each iteration and must carefully be specified, since too steep a descent might not converge and a too shallow one might be too slow \citep{Zhang.1998}.\\
-Finally, $\nabla E$ is expected to be zero.
+In the end, $\nabla E$ is expected to be zero. 
 When given input data, the network is fed forward by calculating the input to each node,
 \begin{equation}
 x_j = \sum_{i}y_{i}*w_{ji}
-\end{equation}, where \textit{j} indexes output nodes, \textit{i} indexes the nodes connected to node \textit{j} $w_{ji}$ denotes the weight and $y_{i}$ denotes the antecedent's node's output; outputs in turn are calculated by their activation functions \citep{Rumelhart.1986}.
+\end{equation}, where \textit{j} indexes output nodes, \textit{i} indexes the nodes connected to node \textit{j}, $w_{ji}$ denotes the weight and $y_{i}$ denotes the antecedent's node's output; outputs in turn are calculated by their activation functions. Furthermore, nodes can be given bias by adding an input with constant weight of 1\citep{Rumelhart.1986}.\\
+
+Gradient-based learning algorithms can either be conducted in batches or on-line; in the former, all input-output patterns are processed parallely so that the weights are adjusted simultaneously; in the latter, the weights are updated sequentially \citep{Rojas.1996}.\\
 
 The possible flaws of static learning rates have been tried to overcome by expanding the classic gradient descent method with a so-called momentum parameter that controls the direction of the change in weights to not diverge too far from the direction of the antecedent change in weight. (QUELLE)
-
+\\
 Backpropagation uses the first derivative of the error function is minimized; other algorithms use the Hessian matrix and thus the second derivative \citep{Rojas.1996}:
 \begin{equation}
 h = - (\nabla^2E(w))^{-1}\nabla E(w)
@@ -357,8 +347,41 @@ As it is an iterative algorithm and the Hessian matrix has to be computed in eac
 	w_{i} = w_{i-1} + \frac{\nabla_{i}E(w)}{\partial^{2}E(w)/\partial w_{i}^{2}}
 \end{equation}
 This method is based on the assumption of a quadratic error term.
+\cite{Pinto.2005} use the Levenberg-Marquardt algorithm, a quasi-Newtonian learning algorithm, to improve learning speed and because it works especially well when there are only few observations; so do \cite{Benkachcha.2015}, \cite{Kourentzes.2014} and \cite{Zhou.2006}. \cite{Zhang.1998} report "faster convergence, robustness and the ability to find good local minima" as key advantages of second-order methods.\\
 
-Another type of error function next to SSE may be Mean Squared Error (MSE) \citep{Zhang.1998}. Note that independently of the training algorithm, the network might get stuck at a local optimum.
+As already mentioned, NNs are very sensitive to the data they are trained on; thus, overfitting might occur: the model fits the training data very accurately but performs poorly in predicting new (test) data \citep{Nakamura.2005}. In order to avoid this issue, so-called early stopping of the training algorithm can be applied, i.e.training is stopped as soon as the training error term (e.g. MSE) starts increasing on a pre-selected validation data set.
+The flip side of the coin is the problem of NNs being stuck on local minima - independently of the choice of learning algorithm \citep{Zhang.1998} - and therefore being biased; a method of circumvention is the running of multiple epochs, where all steps of training are passed with random initializations of parameters for each epoch.
+
+A third problem that may arise is the \textit{Vanishing Gradient Problem} \citep{Schmidhuber.2015}, which a network is more gravely affected by the deeper its architecture. With activation functions that can only take values between 0 and 1, and the cumulative backpropagated error terms that are computed by the chain rule, gradients become "vanishingly" small, as they are multiplied as many times as the network has layers, causing the weights to basically stop changing. If the activation function can take values larger than 1, the gradients may in contrast explode.\\
+As a solution to \textit{Vanishing Gradient Problem}, the Long Short-Term Memory proposed by \cite{Hochreiter.1997}, which will be introduced further below.
+
+\subsection{Network architecture}
+
+\subsubsection{Feed-forward NNs}
+
+
+
+In feed-forward MLP NNs, an input is fed to the input layer and traversed through the hidden layers without cycles until it reaches the output layer \citep{Rojas.1996}. Usually, alls nodes of one layer are connected to all nodes of the next layer, as shown in Picture NUMMER (Rojas p. 134)
+Picture NUMMER (Benkachcha) shows an MLP feed-forward NN for time series forecasting where $Y_{t+1}$ is predicted by an input of its past values.\\
+
+
+\subsubsection{Recurrent NNs}
+
+According to \cite{Balkin.1997}, RNNs are better suited for time series data than FNNS; in fact, bad results in an RNN may hint that there is not time dependency in the data at all. 
+A feedforward NN in its simplest form reduces to an $AR[p]$-model whereas an RNN may reduce to an $ARMA$-model, which is to be kept in mind when analyzing the data structure at hand.\\
+In RNNs, additional "context units" are added to the model, next to the input layer. These store information from previous training loops. This way, they provide feedback about the past. Context units can either connect (1) the input layer with itself, (2) hidden layers with the input layer or (3 )the output layer with the input layer. (2) are called \textit{Elman networks}, whereas (3) are called \textit{Jordan networks}.
+\cite{Balkin.1997} provides two Pictures illustrating the schemes of these two \textit{Simple Recurrent Networks}:
+BILDER AUS BALKIN NUMMER
+
+Long Shert-Term Memories (LSTM, \cite{Hochreiter.1997}) have evolved to become one of the most popular implementations of RNNs \citep{George.2017,Salehinejad.12292017}, as they can tackle the problem of \textit{vanishing gradients}. In LSTM, hidden units are modified to form \textit{memory cells} that have gates that control (1) input - how much new information is used - and (2) output  - or (3) the extent to which information from previous outputs is stored or "forgot". The self-connected \textit{Constant Error Carousels} within the memory cell block use the identity function as their activation function with weight 1; thus its derivative is always 1 so the gradients cannot vanish or explode \citep{Schmidhuber.2015}.
+FIGURE shows an LSTM cell block.
+\begin{align}
+g^{i}_{t} = \sigma(W_{Ig^{i}}x_{t} + W_{Hg^{i}}h_{t-1}+W_{g^{c}g^{i}}g^{c}_{t-1} + b_{g^{i}}) \\
+g^{f}_{t} = \sigma(W_{Ig^{f}}x_{t} + W_{Hg^{f}}h_{t-1}+W_{g^{c}g^{f}}g^{c}_{t-1} + b_{g^{f}}) \\
+g^{o}_{t} = \sigma(W_{Ig^{o}}x_{t} + W_{Hg^{o}}h_{t-1}+W_{g^{c}g^{o}}g^{c}_{t-1} + b_{g^{o}}) 
+\end{align}
+where the matrices $W_{Ig^{\bullet}}$ is the weight matrix form the input layer, $W_{Hg^{\bullet}}$ is the weight matrix from the hidden layer and $+W_{g^{c}g^{\bullet}}$ is the weight matrix from the cell activation to the input, forget and output gate respectively, and $b_{g^{\bullet}}$ is the bias \citep{Salehinejad.12292017}.
+
 
 
 \section{Model Choice}

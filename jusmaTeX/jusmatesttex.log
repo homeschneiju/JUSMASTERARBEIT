@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  24 FEB 2019 18:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  27 FEB 2019 22:15
 entering extended mode
 **./jusmatesttex.tex
 (jusmatesttex.tex
@@ -222,7 +222,23 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
-) (jusmatesttex.aux)
+) (jusmatesttex.aux
+
+! Package natbib Error: Bibliography not compatible with author-year citations.
+
+(natbib)                Press <return> to continue in numerical citation style.
+
+
+See the natbib package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.202 ...and\NAT@force@numbers{}\NAT@force@numbers
+                                                  
+Check the bibliography entries for non-compliant syntax,
+or select author-year BibTeX style, e.g. plainnat
+
+)
 \openout1 = `jusmatesttex.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -318,12 +334,6 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 tex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ))
-Overfull \hbox (2.2963pt too wide) in paragraph at lines 19--23
-\T1/cmr/m/n/10.95 achieve-ment is com-pen-sated by an in-crease in freight tran
-s-porta-tion (Umwelt-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 19--23
 
  []
@@ -338,14 +348,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--28
 
  []
 
-[1
-
-{C:/Users/Juliana Schneider/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
 Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
+[1
+
+{C:/Users/Juliana Schneider/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
 Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
@@ -376,7 +386,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 77--80
 LaTeX Warning: Command \ss invalid in math mode on input line 113.
 
 Missing character: There is no ÿ in font cmr10!
-[6]
+
 Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
@@ -386,7 +396,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 146--149
 
  []
 
-
+[6]
 Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
@@ -411,12 +421,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 158--171
 
  []
 
-[7]
+
 Underfull \hbox (badness 10000) in paragraph at lines 173--175
 
  []
 
-
+[7]
 Underfull \hbox (badness 10000) in paragraph at lines 177--185
 
  []
@@ -431,12 +441,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 187--188
 
  []
 
-[8]
+
 Underfull \hbox (badness 10000) in paragraph at lines 193--195
 
  []
 
-[9]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 213--216
 
  []
@@ -451,85 +461,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 225--230
 
  []
 
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 252--258
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--258
+
+ []
+
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 252--258
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 252--258
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 260--261
 
  []
 
-[11]
+
 Underfull \hbox (badness 10000) in paragraph at lines 271--275
 
  []
 
-
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 276--279
 
  []
 
-[12]
 
-Package natbib Warning: Citation `Pinto' on page 13 undefined on input line 284
+Package natbib Warning: Citation `Pinto' on page 12 undefined on input line 284
 .
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 294--296
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 305--307
 
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 319--321
-
- []
-
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 364--366
+[13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 362--364
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 367--368
+Underfull \hbox (badness 10000) in paragraph at lines 387--389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 420--421
 
  []
 
-(jusmatesttex.bbl [17] [18] [19]
-Underfull \hbox (badness 2600) in paragraph at lines 211--215
-[]\T1/cmr/m/n/10.95 Vogel, J. (2015).  \T1/cmr/m/it/10.95 Prog-nose von Zeitrei
--hen: Eine Ein-führung für
- []
-
-)
+(jusmatesttex.bbl [17] [18] [19] [20])
 
 Package natbib Warning: There were undefined citations.
 
-[20] (jusmatesttex.aux) ) 
+[21] (jusmatesttex.aux) ) 
 Here is how much of TeX's memory you used:
- 4116 strings out of 492970
- 58611 string characters out of 3121264
- 132309 words of memory out of 3000000
- 7918 multiletter control sequences out of 15000+200000
+ 4131 strings out of 492970
+ 58947 string characters out of 3121264
+ 131493 words of memory out of 3000000
+ 7933 multiletter control sequences out of 15000+200000
  17518 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,39p,974b,296s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,9n,39p,974b,312s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\
 fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\Juliana Schneider\App
 Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <C:\Users
@@ -543,15 +541,18 @@ c\dpi600\ecrm1728.pk><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX
 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Juliana Schneider/AppDa
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/User
 s/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi8.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Juliana Schneider/AppData/Loc
-al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Julian
-a Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb>
-Output written on jusmatesttex.pdf (20 pages, 250178 bytes).
+ts/cm/cmmi6.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Juliana Schneider/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Julia
+na Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mr8.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Juliana Schneider/AppData/Local/Prog
+rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Juliana Schn
+eider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b>
+Output written on jusmatesttex.pdf (21 pages, 272436 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
+ 462 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

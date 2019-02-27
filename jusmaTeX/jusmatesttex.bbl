@@ -107,6 +107,19 @@ Gao, S., Zhang, Z., and Cao, C. (2011).
   combining forecasting.
 \newblock {\em Journal of Software}, 6(9).
 
+\bibitem[George et~al., 2017]{George.2017}
+George, K., Harish, M., Rao, S., and Murali, K. (2017).
+\newblock Comparison of neural-network learning algorithms for time-series
+  prediction.
+\newblock In {\em 2017 International Conference on Advances in Computing,
+  Communications and Informatics (ICACCI): took place 13-16 September 2017 in
+  Manipal, Mangalore, India, India}, pages 7--13, Piscataway, NJ. IEEE.
+
+\bibitem[Hochreiter and Schmidhuber, 1997]{Hochreiter.1997}
+Hochreiter, S. and Schmidhuber, J. (1997).
+\newblock Long short-term memory.
+\newblock {\em Neural Computation}, 9(8):1735--1780.
+
 \bibitem[Hunt, 2003]{Hunt.2003}
 Hunt, {\"U}. (2003).
 \newblock Forecasting of railway freight volume: Approach of estonian railway
@@ -166,6 +179,12 @@ Nakamura, E. (2005).
 \newblock Inflation forecasting using a neural network.
 \newblock {\em Economics Letters}, 86(3):373--378.
 
+\bibitem[Pinto and Cavalieri, 2005]{Pinto.2005}
+Pinto, R. and Cavalieri, S. (2005).
+\newblock Seasonal time series prediction with artificial neural networks and
+  local measures.
+\newblock {\em IFAC Proceedings Volumes}, 38(1):337--342.
+
 \bibitem[Regan and Garrido, 2001]{Regan.2001}
 Regan, A. and Garrido, R. (2001).
 \newblock Modelling freight demand and shipper behaviour: state of the art,
@@ -181,6 +200,15 @@ Rojas, R. (1996).
 Rumelhart, D.~E., Hinton, G.~E., and Williams, R.~J. (1986).
 \newblock Learning representations by back-propagating errors.
 \newblock {\em Nature}, 323(6088):533--536.
+
+\bibitem[Salehinejad et~al., ]{Salehinejad.12292017}
+Salehinejad, H., Sankar, S., Barfett, J., Colak, E., and Valaee, S.
+\newblock Recent advances in recurrent neural networks.
+
+\bibitem[Schmidhuber, 2015]{Schmidhuber.2015}
+Schmidhuber, J. (2015).
+\newblock Deep learning in neural networks: An overview.
+\newblock {\em Neural Networks}, 61:85--117.
 
 \bibitem[Taghizadeh, 2017]{Taghizadeh.2017}
 Taghizadeh, E. (2017).
