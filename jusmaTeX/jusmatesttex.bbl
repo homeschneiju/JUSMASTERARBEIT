@@ -6,6 +6,11 @@ Adhikari, R. (2015).
   forecasting.
 \newblock {\em Neurocomputing}, 157:231--242.
 
+\bibitem[Akaike, 1974]{Akaike.1974}
+Akaike, H. (1974).
+\newblock A new look at the statistical model identification.
+\newblock {\em IEEE Transactions on Automatic Control}, 19(6):716--723.
+
 \bibitem[Andreoni and Postorino, 2006]{Andreoni.2006b}
 Andreoni, A. and Postorino, M.~N. (2006).
 \newblock Time meries models to forecast air transport demand: A study about a
@@ -115,6 +120,13 @@ George, K., Harish, M., Rao, S., and Murali, K. (2017).
   Communications and Informatics (ICACCI): took place 13-16 September 2017 in
   Manipal, Mangalore, India, India}, pages 7--13, Piscataway, NJ. IEEE.
 
+\bibitem[Hastie et~al., 2017]{Hastie.2017}
+Hastie, T., Tibshirani, R., and Friedman, J.~H. (2017).
+\newblock {\em The elements of statistical learning: Data mining, inference,
+  and prediction}.
+\newblock Springer series in statistics. Springer, New York, NY, second
+  edition, corrected at 12th printing 2017 edition.
+
 \bibitem[Hochreiter and Schmidhuber, 1997]{Hochreiter.1997}
 Hochreiter, S. and Schmidhuber, J. (1997).
 \newblock Long short-term memory.
@@ -131,6 +143,12 @@ Intihar, M., Kramberger, T., and Dragan, D. (2017).
 \newblock Container throughput forecasting using dynamic factor analysis and
   arimax model.
 \newblock {\em PROMET - Traffic{\&}Transportation}, 29(5):529--542.
+
+\bibitem[James et~al., 2013]{James.2013}
+James, G., Witten, D., Hastie, T., and Tibshirani, R. (2013).
+\newblock {\em An Introduction to Statistical Learning: With Applications in
+  R}, volume 103 of {\em Springer Texts in Statistics}.
+\newblock Springer, New York, NY.
 
 \bibitem[{Jo{\~a}o F. L. Oliveira} and {Teresa Bernarda Ludermir},
   2014]{JoaoF.L.Oliveira.2014}
@@ -209,6 +227,11 @@ Salehinejad, H., Sankar, S., Barfett, J., Colak, E., and Valaee, S.
 Schmidhuber, J. (2015).
 \newblock Deep learning in neural networks: An overview.
 \newblock {\em Neural Networks}, 61:85--117.
+
+\bibitem[Schwarz, 1978]{Schwarz.1978}
+Schwarz, G. (1978).
+\newblock Estimating the dimension of a model.
+\newblock {\em The Annals of Statistics}, 6(2):461--464.
 
 \bibitem[Taghizadeh, 2017]{Taghizadeh.2017}
 Taghizadeh, E. (2017).

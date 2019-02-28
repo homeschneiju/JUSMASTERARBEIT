@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  27 FEB 2019 22:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  1 MAR 2019 00:19
 entering extended mode
 **./jusmatesttex.tex
 (jusmatesttex.tex
@@ -233,7 +233,7 @@ See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.202 ...and\NAT@force@numbers{}\NAT@force@numbers
+l.214 ...and\NAT@force@numbers{}\NAT@force@numbers
                                                   
 Check the bibliography entries for non-compliant syntax,
 or select author-year BibTeX style, e.g. plainnat
@@ -334,6 +334,12 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 tex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ))
+Overfull \hbox (1.6027pt too wide) in paragraph at lines 19--23
+\T1/cmr/m/n/10.95 Between 2010 and 2030, ac-cord-ing to ([]), trans-port vol-um
+es for road haulage
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 19--23
 
  []
@@ -381,153 +387,163 @@ Underfull \hbox (badness 10000) in paragraph at lines 77--80
 
  []
 
-[4] [5]
 
-LaTeX Warning: Command \ss invalid in math mode on input line 113.
+Underfull \hbox (badness 10000) in paragraph at lines 85--87
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
+
+ []
+
+
+Package natbib Warning: Citation `Wit.2012' on page 5 undefined on input line 1
+00.
+
+[5] [6]
+
+LaTeX Warning: Command \ss invalid in math mode on input line 137.
 
 Missing character: There is no ÿ in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 146--149
-
- []
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 158--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 158--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 158--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 158--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 173--175
+Underfull \hbox (badness 10000) in paragraph at lines 170--173
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 177--185
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--185
+Underfull \hbox (badness 10000) in paragraph at lines 182--195
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--188
+Underfull \hbox (badness 10000) in paragraph at lines 182--195
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--195
+Underfull \hbox (badness 10000) in paragraph at lines 182--195
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--195
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 213--216
+Underfull \hbox (badness 10000) in paragraph at lines 206--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--224
+Underfull \hbox (badness 10000) in paragraph at lines 206--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--230
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--224
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 252--258
+Underfull \hbox (badness 10000) in paragraph at lines 242--245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--258
+Underfull \hbox (badness 10000) in paragraph at lines 248--253
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 254--259
 
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 282--288
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 271--275
+Underfull \hbox (badness 10000) in paragraph at lines 282--288
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 276--279
+Underfull \hbox (badness 10000) in paragraph at lines 290--291
 
  []
 
 
-Package natbib Warning: Citation `Pinto' on page 12 undefined on input line 284
-.
+Underfull \hbox (badness 10000) in paragraph at lines 301--305
+
+ []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 305--307
+
+Package natbib Warning: Citation `Pinto' on page 13 undefined on input line 317
+.
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 338--340
 
  []
 
-[13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 362--364
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 363--364
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 387--389
+Underfull \hbox (badness 10000) in paragraph at lines 381--384
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 390--391
+Underfull \hbox (badness 10000) in paragraph at lines 397--399
 
  []
 
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 420--421
+[16] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 444--445
 
  []
 
-(jusmatesttex.bbl [17] [18] [19] [20])
+(jusmatesttex.bbl [18] [19] [20] [21])
 
 Package natbib Warning: There were undefined citations.
 
-[21] (jusmatesttex.aux) ) 
+[22] (jusmatesttex.aux) ) 
 Here is how much of TeX's memory you used:
- 4131 strings out of 492970
- 58947 string characters out of 3121264
- 131493 words of memory out of 3000000
- 7933 multiletter control sequences out of 15000+200000
+ 4143 strings out of 492970
+ 59175 string characters out of 3121264
+ 133611 words of memory out of 3000000
+ 7945 multiletter control sequences out of 15000+200000
  17518 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,39p,974b,312s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,9n,39p,974b,316s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\
 fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\Juliana Schneider\App
 Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <C:\Users
@@ -550,9 +566,9 @@ e1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Juliana Schneider/AppData/Local/Prog
 rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Juliana Schn
 eider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pf
 b>
-Output written on jusmatesttex.pdf (21 pages, 272436 bytes).
+Output written on jusmatesttex.pdf (22 pages, 276894 bytes).
 PDF statistics:
- 462 PDF objects out of 1000 (max. 8388607)
+ 465 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

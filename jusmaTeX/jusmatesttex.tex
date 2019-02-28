@@ -78,6 +78,30 @@ As is evident, all of the papers mentioned above applied models to either measur
 Regardless of the lack of literature exactly matching the target of this thesis, the combined information gained from all of these papers provides reasonable background to be supportive of it. Furthermore, this scarcity in literature proves the necessity of a primary approach to adress the objective of the use case at hand.\\
 Hence, it is important to first retrace the reasoning behind the choice of rather basic versions of AR(I)MAX, SVR and ANN models for the prediction of freight weight demand, which the following section is dedicated to.\\
 
+
+
+\section{Model Choice and Specification}
+
+There are several ways to model time series data, some of which have been well established for many decades already, while others have recently emerged in the space of popular methods as well . ARIMA models are an example of the former kind of methods, while SVM and ANN are examples of the latter kind. \citep{Adhikari.2015}\\
+\cite{JoaoF.L.Oliveira.2014} state ARIMA, SVM and ANN as the three major methods used in time series analysis. \\
+
+ANNs are particularly useful as a data-driven method, if there are data but difficulties in describing the process behind them \citep{Zhang.1998}. In the case at hand, as there ist not much literature exactly fitting the purpose of my research question, ANNs might be a convenient approach to handle the data.\\
+
+All three of the aforementioned methods may prove suitable to forecast freight weight, as they each have advantages (see table NUMMER). Furthermore, it might prove insightful to contrast a classical statistical, a machine learning and a deep learning method with each other.
+
+
+\subsection{Model specification}
+
+As we shall see, for model specification - i.e. the modelling of the parameters - \textit{Information Criteria} are commonly used. For this reason, the most prevalent of them, the \textit{Akaike Information Criterion} \cite{Akaike.1974} and the \textit{Bayesian Information Criterion} (or \textit{Schwarz Information Criterion}, \cite{Schwarz.1978}) are shortly introduced in this section before moving on to descriptions of the specific types models.
+\begin{align}
+AIC = 2k - 2ln(\hat{L})\\
+BIC = ln(n)k - 2ln(\hat{L})
+\end{align}
+$\hat{L}$ denotes the Log-Likelihood of the model, $k$ the number of parameters and $n$ the sample size. The \textit{AIC}'s aim is to choose the model that approximates the true data generating process as closely as possible \cite{Wit.2012}. Generally, the model yielding the smallest \textit{AIC} or \textit{BIC} respectively is chosen \cite{Hastie.2017}.
+Neither one of the two criteria is superior to the other; \textit{AIC} tends to overfit the larger the sample size, whereas \textit{BIC} tends to choose overly simple models in finite sample sizes \citep{Hastie.2017}.\\
+Both of them have been used in the three models presented in this coursework.
+In the following sections, each model's theoretical framework and their associated specification techniques shall be illuminated in more detail. First, time series models are introduced as the constitutive baseline of time series modelling. Then, SVR and NNs are presented.
+
 \section{Time series}
 Forecasting of time series with (S)AR(I)MA models is a well-established concept that has been studied thoroughly for many decades and provides good forecasting accuracy \citep{Arlt.2017, Khandelwal.2015}.It has found application in many domains such as economy (MEHR QUELLEN), 
 
@@ -171,7 +195,12 @@ The orders \textit{p} and \textit{q} of the AR and MA have to be determined. Thi
 
 
 \cite{Zhou.2006} recommend settling on an order of both $p$ and $q$ in a magnitude between 0 and 10, while $d$'s most sensible magnitude is between 0 and 2.\\
-For ARMA models, simple plot checks are insufficient and commonly, candidates for \textit{p} and \textit{q} are chosen by minimizing an Information Criterion such as AIC or BIC \citep{Falk.2012}. \\
+For ARMA models, simple plot checks are insufficient and commonly, candidates for \textit{p} and \textit{q} are chosen by minimizing an Information Criterion such as 
+the AIC or BIC \citep{Falk.2012}:
+\begin{align}
+	AIC(p,q) := log(\hat{\sigma}^{2}_{p,q}) + 2 \frac{p + q}{n}\\
+	BIC(p,q) := log(\hat{\sigma}^{2}_{p,q}) +  \frac{(p + q)log(n)}{n}\\
+\end{align}
 
 \subsubsection{Estimation of parameters}
 Next, the parameters (or coefficients) of the AR and/or MA components of the model are estimated, e.g. by Ordinary Least Squares (OLS) or Maximum Likelihood Estimation (MLE) \citep{Andreoni.2006b}.  \\
@@ -246,6 +275,7 @@ where $v(B)X_{t}$ is the transfer function with backshift operator \textit{B}:
 AR(I)MAX models can be interpreted as regression problems, where one variable is explained by another; however, in time series, classical linear regression cannot be applied due to autocorrelated error terms \citep{Cools.2009}, such that the standard errors are underestimated QUELLE.
 
 
+
 \section{Artificial Neural Networks}
 
 
@@ -275,7 +305,10 @@ It is already clear at this point that the number of output neurons is one, as w
 
 However, the number of hidden layers and the number of neurons within each hidden layer still has to be determined. \\
 As the objective of this thesis is to present basic models to be contrasted with each other, one hidden layer should suffice. Now, the number of hidden neurons has to be established by trial and error - since there is no clear rule - as is done by most researchers \citep{Karsoliya.2012}. If, with an arbitrary small number of hidden neurons, the network should fail to converge even after multiple restarts, the number of hidden neurons should be increased successively. \\
-To determine a suitable number of hidden nodes, \cite{Adhikari.2015} use the BIC.\\
+To determine a suitable number of hidden nodes, \cite{Adhikari.2015} use the BIC:
+\begin{equation}
+	BIC_{p,h} := h(p+2) + 1
+\end{equation}
 
 Due to their ability to approximate any (linear or nonlinear) function underlying the data arbitrarily closely by a nonlinear function, MLPs and RBFNNs classify as universal function approximators \citep{Dorffner96neuralnetworks}. They can reduce to an AR[p]-model with an appropriate function that is estimated with a learning algorithm.\\
 Considering the vast number of different types of NNs as well as their general flexibility, it is not a trivial task to choose a suitable model, specify it, and train it \citep{Kourentzes.2014}. 
@@ -312,7 +345,7 @@ Since most papers reviewed for this thesis mention the use of sigmoid or logisti
 NNs may be trained in various ways. Generally, learning algorithms - also called training algorithms - iteratively minimize an error function to adjust the weights on the nodes \citep{Nakamura.2005}. Backpropagation as the most widely used algorithm is based on the gradient-descent method \citep{Rojas.1996}, which is why differentiability of the activation functions and therefore of the error functions as well is necessary. After a random initialization of the network, the initial weights are adjusted according to the gradient of the error function. The Sum of Squared Errors (SSE) might be considered \citep{Rojas.1996}:
 \begin{equation} E = \frac{1}{2}\sum_{i=1}^{p}||\hat{y}_{i} - y_{i}||^{2}\end{equation}
 
-Another type of error function next to SSE may be Mean Squared Error (MSE) \citep{Zhang.1998}. \\
+Another type of error function next to SSE may be Mean Squared Error (MSE) \citep{Zhang.1998}, which is defined by $ SSE/n$. Because the training set size is commonly much larger than the test set's, the training MSE will usually underestimate the test MSE \citep{James.2013}. \\
 The derivatives of $E$, 
 \begin{equation}
 \nabla E(w) = {\frac{\partial E(w)}{\partial w_{1}}\frac{\partial E(w)}{\partial w_{2}},...,\frac{\partial E(w)}{\partial w_{l}}}
@@ -350,7 +383,7 @@ This method is based on the assumption of a quadratic error term.
 \cite{Pinto.2005} use the Levenberg-Marquardt algorithm, a quasi-Newtonian learning algorithm, to improve learning speed and because it works especially well when there are only few observations; so do \cite{Benkachcha.2015}, \cite{Kourentzes.2014} and \cite{Zhou.2006}. \cite{Zhang.1998} report "faster convergence, robustness and the ability to find good local minima" as key advantages of second-order methods.\\
 
 As already mentioned, NNs are very sensitive to the data they are trained on; thus, overfitting might occur: the model fits the training data very accurately but performs poorly in predicting new (test) data \citep{Nakamura.2005}. In order to avoid this issue, so-called early stopping of the training algorithm can be applied, i.e.training is stopped as soon as the training error term (e.g. MSE) starts increasing on a pre-selected validation data set.
-The flip side of the coin is the problem of NNs being stuck on local minima - independently of the choice of learning algorithm \citep{Zhang.1998} - and therefore being biased; a method of circumvention is the running of multiple epochs, where all steps of training are passed with random initializations of parameters for each epoch.
+The flip side of the coin is the problem of NNs being stuck on local minima - independently of the choice of learning algorithm \citep{Zhang.1998} - and therefore being biased; a method of circumvention is the running of multiple epochs, where all steps of training are passed with random initializations of parameters for each epoch. It is avisable to employ a \textit{burn-in} 
 
 A third problem that may arise is the \textit{Vanishing Gradient Problem} \citep{Schmidhuber.2015}, which a network is more gravely affected by the deeper its architecture. With activation functions that can only take values between 0 and 1, and the cumulative backpropagated error terms that are computed by the chain rule, gradients become "vanishingly" small, as they are multiplied as many times as the network has layers, causing the weights to basically stop changing. If the activation function can take values larger than 1, the gradients may in contrast explode.\\
 As a solution to \textit{Vanishing Gradient Problem}, the Long Short-Term Memory proposed by \cite{Hochreiter.1997}, which will be introduced further below.
@@ -383,17 +416,6 @@ g^{o}_{t} = \sigma(W_{Ig^{o}}x_{t} + W_{Hg^{o}}h_{t-1}+W_{g^{c}g^{o}}g^{c}_{t-1}
 where the matrices $W_{Ig^{\bullet}}$ is the weight matrix form the input layer, $W_{Hg^{\bullet}}$ is the weight matrix from the hidden layer and $+W_{g^{c}g^{\bullet}}$ is the weight matrix from the cell activation to the input, forget and output gate respectively, and $b_{g^{\bullet}}$ is the bias \citep{Salehinejad.12292017}.
 
 
-
-\section{Model Choice}
-
-There are several ways to model time series data, some of which have been well established for many decades already, while others have recently emerged in the space of popular methods as well . ARIMA models are an example of the former kind of methods, while SVM and ANN are examples of the latter kind. \citep{Adhikari.2015}\\
-\cite{JoaoF.L.Oliveira.2014} state ARIMA, SVM and ANN as the three major methods used in time series analysis. \\
-
-ANNs are particularly useful as a data-driven method, if there are data but difficulties in describing the process behind them \citep{Zhang.1998}. In the case at hand, as there ist not much literature exactly fitting the purpose of my research question, ANNs might be a convenient approach to handle the data.\\
-
-All three of the aforementioned methods may prove suitable to forecast freight weight, as they each have advantages. Before going into detail about each method and specifying each model according to the data, in this section, ARIMA, SVR and ANN shall be directly contrasted in order to give a brief justification as to why these three were selected to be compared in this thesis.
-
-Later, a conceptual choice of the specific models for each method (e.g. choice of kernel, type of NN) shall be made before specifying them exactly according to the data in the application.
 
 %\begin{table}[]
 %	\resizebox{\textwidth}{!}{
