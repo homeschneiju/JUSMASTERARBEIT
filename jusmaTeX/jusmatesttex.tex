@@ -445,7 +445,13 @@ Albeit the growing number of available methods for variable selection, neither i
 
 Generally, variable selection methods, also called feature selection methods in the context of Machine Learning, can be classified into \textit{Filter}, \textit{Wrapper} and \textit{Embedded methods}. 
 
+\subsection{Model Evaluation}
 
+Generally, data sets are partitioned into training, validation and test data sets in order to estimate parameters (with the training set), fine-tune them during training (on the validation set) and evaluate the model (on the test set). While a validation set is not needed for ARIMA models, it is necessary for NNs \citep{Zhou.2006}. \
+Although usually the partitioning is random (in non-time-series data at least) to ensure a good variance of values in the partial data sets, the question arises whether a good (or bad) model performance on the test set is due to the model being well-specified or whether it is not - at least in part - due to the way the data was split. To help eliminate doubts on the accuracy of the model evaluation,  \textit{cross-validation} is used.\ QUELLE
+In \textit{k-fold cross-validation}, the data set is split into \textit{k} folds. The model is trained on $k-1$ folds and tested on the one retained fold, each fold in turn being the \textit{"test fold"} once. \
+In time series, it does not make sense to randomly split the data set into groups, since then the model would also be trained on future values attempting to predict past values. Using the idea of cross-validation sensibly, one could partition the data set in such a ways that in the training set, only values preciding the values in the test set are found. \
+A possible setting may look like the one suggested by \cite{Hyndman.2018}: The data is sorted by timestamps and then trained on the first $p$ valies. Then, the model tested on the single value $p+1$. Next, the model is trained on the first $p+1$ values and tested on the $p+2$'nd value and so on. This way, model evaluation makes use of all available observations and the results remain comparable since the test set size remains the same. Asymptotically, this technique yields the same results as minimization of the \textit{AIC}.
 \bibliographystyle{apalike}
 \bibliography{jusmabib}
 \end{document}
