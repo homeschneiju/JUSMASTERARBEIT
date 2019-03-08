@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  1 MAR 2019 00:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  8 MAR 2019 15:47
 entering extended mode
 **./jusmatesttex.tex
 (jusmatesttex.tex
@@ -233,7 +233,7 @@ See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.214 ...and\NAT@force@numbers{}\NAT@force@numbers
+l.245 ...and\NAT@force@numbers{}\NAT@force@numbers
                                                   
 Check the bibliography entries for non-compliant syntax,
 or select author-year BibTeX style, e.g. plainnat
@@ -397,10 +397,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--89
 
  []
 
-
-Package natbib Warning: Citation `Wit.2012' on page 5 undefined on input line 1
-00.
-
 [5] [6]
 
 LaTeX Warning: Command \ss invalid in math mode on input line 137.
@@ -527,48 +523,61 @@ Underfull \hbox (badness 10000) in paragraph at lines 397--399
  []
 
 [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 444--445
+Underfull \hbox (badness 10000) in paragraph at lines 445--446
 
  []
 
-(jusmatesttex.bbl [18] [19] [20] [21])
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 461--464
+
+ []
+
+[19] [20]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 487.
+
+
+("C:\Users\Juliana Schneider\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t
+1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) (jusmatesttex.bbl [21] [22] [23] [24])
 
 Package natbib Warning: There were undefined citations.
 
-[22] (jusmatesttex.aux) ) 
+[25] (jusmatesttex.aux) ) 
 Here is how much of TeX's memory you used:
- 4143 strings out of 492970
- 59175 string characters out of 3121264
- 133611 words of memory out of 3000000
- 7945 multiletter control sequences out of 15000+200000
- 17518 words of font info for 44 fonts, out of 3000000 for 9000
+ 4176 strings out of 492970
+ 60113 string characters out of 3121264
+ 132781 words of memory out of 3000000
+ 7974 multiletter control sequences out of 15000+200000
+ 17832 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,9n,39p,974b,316s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\
-fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\Juliana Schneider\App
-Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <C:\Users
+fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk> <C:\Users\Juliana Schneider\App
+Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users
 \Juliana Schneider\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecbx1200.pk> <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
-ur\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Juliana Schneider\AppData\Local\Mi
-KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Juliana Schn
-eider\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> 
+ecti1095.pk> <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+ur\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Juliana Schneider\AppData\Local\Mi
+KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Juliana Schn
+eider\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> 
 <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\e
-c\dpi600\ecrm1728.pk><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Juliana Schneider/AppDa
-ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/User
-s/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi6.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Juliana Schneider/AppData/Loc
-al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Julia
-na Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mr8.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Juliana Schneider/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Juliana Schn
-eider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pf
-b>
-Output written on jusmatesttex.pdf (22 pages, 276894 bytes).
+c\dpi600\ecrm1200.pk> <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\font
+s\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk><C:/Users/Juliana Schneider/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/J
+uliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Juliana Schneider/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Juliana
+ Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+10.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr8.pfb><C:/Users/Juliana Schneider/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Juliana Schnei
+der/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
+<C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmsy8.pfb>
+Output written on jusmatesttex.pdf (25 pages, 298737 bytes).
 PDF statistics:
- 465 PDF objects out of 1000 (max. 8388607)
+ 515 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

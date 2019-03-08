@@ -272,7 +272,7 @@ where $v(B)X_{t}$ is the transfer function with backshift operator \textit{B}:
 	v(B)X_{t} = \sum_{j = 0}^{\infty} v_{j}B^{j}X_{t}
 \end{equation}
 
-AR(I)MAX models can be interpreted as regression problems, where one variable is explained by another; however, in time series, classical linear regression cannot be applied due to autocorrelated error terms \citep{Cools.2009}, such that the standard errors are underestimated QUELLE.
+AR(I)MAX models can be interpreted as regression problems, where one variable is explained by another so that it can be considered as a linear regression with autocorrelated error terms \citep{Cools.2009}.
 
 
 
@@ -430,20 +430,49 @@ where the matrices $W_{Ig^{\bullet}}$ is the weight matrix form the input layer,
 
 \section{Variable selection}
 
-A well-defined model should include all relevant explanatory variables that contribute to the variance found in the target value and exclude irrelevant, noisy variables. This way, the data and the process constituting it can be better understood, computational time and the so-called curse of dimensionality can be reduced while maintaining a high prediction accuracy \citep{Chandrashekar.2014}. The curse of dimensionality describes the problem arising in a high dimensional (i.e. containing many variables) space, where one needs very large samples to accurately depict said space (QUELLE). Variable selection is furthermore important as irrelevant data may cause poor generalization when given new data \citep{Chandrashekar.2014}.
+A well-defined model should include all relevant explanatory variables that contribute to the variance found in the target value and exclude irrelevant, noisy variables. This way, the data and the process constituting it can be better understood, computational time and the so-called curse of dimensionality can be reduced while maintaining a high prediction accuracy \citep{Chandrashekar.2014}. The curse of dimensionality describes the problem arising in a high dimensional (i.e. containing many variables) space, where one needs very large samples to accurately depict said space (QUELLE). Variable selection is furthermore important as irrelevant data may cause poor generalization when given new data \citep{Chandrashekar.2014, BenIshak.2016}.\
+Variable selection has become an important issue as research is increasingly focussing on high dimensional data, be it in the field of genetics or Data Mining \citep{BenIshak.2016}. Fortunately, in this case $n > p$, which is why there is no need to give up on reasonable generalization ability, computational speed or model interpretability in favour of a heavily reduced variable subset.\
+
+As with many questions that arise in the process of analyzing data, the question of how to best select input variables in a time series context, and in this case, to predict freight weight, cannot be answered easily. \ 
+Directly comparing all $2^p$ possible subsets of variables is computationally unfeasible, so it is most often infeasible to compare all possible variable subsets and choose the best one. 
 \\
-A first selection of variables should be given by experts. (QUELLE)
-Next to the researchers' expertise, there exist several variable selection (also called feature selection) methods that quantify the explanatory value of each possible variable and include and / or exclude them in the final model by a prespecified selection criterion.
-Directly comparing all $2^N$ possible subsets of variables is computationally unfeasible, which is why usually metaheuristics are applied. The most common types of metaheuristic variable selection methods shall be described in the following, as well as the choice process for a variable selection method for this case.
-\\
-In their study on the influence of national, regional and local economic indices on freight volume for different segments of the truckload industry in the USA, \cite{Fite.2002} first examined correlation matrices before using stepwise multiple regression to draw a selection from the large set of initial variables collected. 
-\cite{Taghizadeh.2017} suggest using ensemble methods such as Random Forest to take advantage of several different machine learning methods.
-\cite{Feng.2018} used Spearman rank correlation to select external variables to predict railway freight volume.
+\cite{Wit.2012} argue that there is not variable that has zero contribution to the target, and therefore - philiosophically - model selection is a comparison between different sets of patterns (i.e. sets of variables) in order to choose which pattern to focus on, depending on the context in which a research question is proposed. Variable selection also takes great part in the variance-bias tradoff, or whether to seek a near-perfect  but perhaps overly complex fit of past data or a sparse, economic but perhaps overly simple model. Furthermore, minimal computation time and and a reasonably good prediction accuracy are enhanced by thorough variable selection \citep{Saeys.2007}.  Obviously, the aim should be to find a golden mean between sparsity and accuracy, too many and too few variables. 
+
+A first selection of variables should be given by experts, literature of the same field or common sense \citep{Heinze.2018}. This is an important step as is may enhance model performance and facilitate the choice of a suitable subset of variables \citep{BenIshak.2016}
+Next to the researchers' expertise, there exist several variable selection methods that quantify the explanatory value of each possible variable and include or exclude them in the final model by a prespecified selection criterion.\
 
 
 Albeit the growing number of available methods for variable selection, neither is there one gold standard that is generally useful, nor is there one method especially advisable for each kind of data \citep{Taghizadeh.2017}\\
 
-Generally, variable selection methods, also called feature selection methods in the context of Machine Learning, can be classified into \textit{Filter}, \textit{Wrapper} and \textit{Embedded methods}. 
+\subsection{Feature Selection Methods in Machine Learning}
+Feature selection methods, as variable selection methods are called in the context of Machine Learning, can be classified into \textit{Filter}, \textit{Wrapper} and \textit{Embedded methods} \citep{Chandrashekar.2014}, . \
+\subsubsection{Filter Methods}
+\textit{Filter Methods} are mainly used in text classification and include standard statistical measures such as Euclidian distance, the Chi-Squared test, the t-Test, ANOVA, correlation coefficients, Markov Blankets
+and the Fisher Score. 
+Adavantages of Filter Methods are their fast computation times, independency of the classification methods - they only make use of intrinsic properties of the variables - and that feature selection only has to be conducted once \citep{Saeys.2007}.\
+But, as they test variables seperately "against" the target variable (e.g. for correlation) to rank them, there's a risk that redundant variables are taken into the model when chosen by a Filter Method \citep{Chandrashekar.2014}. Consequently, it is possible that the model established by a Filter Method is not unique, as a different subsets of variables with similar properties w.r.t the Filter Method might have yielded an equal result.\
+
+\subsubsection{Wrapper Methods}
+\textit{Wrapper Methods} measure the predictors' performance through a search algorithm. These methods include \textit{Forward} and \textit{Backward Selection} as well as \textit{Heuristic search algorithms} such as \textit{Simulated Annealing} and \textit{Genetic Algorithms}.\
+Advantageously, \textit{Wrapper Methods} take into account the interdependence of variables, but unfortunately require high computation times and are prone to overfitting \citep{Saeys.2007}.\
+
+
+\subsubsection{Embedded Methods}              
+Both \textit{Wrapper} and \textit{Embedded Methods} are closely intertwined with the classification algorithm \citep{Saeys.2007}
+In \textit{Embedded Methods}, variable subset selection is part of the model's training \citep{Chandrashekar.2014}, and they combine the search for a variable subset and hypothesis testing \citep{Saeys.2007}. They are better able to reduce computation time than Wrapper Methods. An example for an Embedded Method are CARTs (Classification And Regression Trees).
+\\
+
+\subsection{Variable Selection in AR(I)MA, SVR and NNs}
+\cite{Chandrashekar.2014} mentions Support Vector Machines and Neural Networks as part of \textit{Embedded Methods}. Resulting from this, for these two methods, variable selection (except for a literature- and expert-driven pre-selection) and model fit could be combined in one step. As for AR(I)MA, \textit{Forward} or \textit{Backward Selection} techniques using ICs such as AIC or BIC are favourable because ????.
+
+Other approaches to variable selection in the context of freight demand and / or time series forecasting have been found:
+In their study on the influence of national, regional and local economic indices on freight volume for different segments of the truckload industry in the USA, \cite{Fite.2002} first examined correlation matrices before using stepwise multiple regression to draw a selection from the large set of initial variables collected. 
+\cite{Taghizadeh.2017} suggest using ensemble methods such as Random Forest to take advantage of several different machine learning methods.
+\cite{Feng.2018} used Spearman rank correlation to select external variables to predict railway freight volume.
+Variable selection methods for time series data have also been explored, using NNs (QUELLE), SVMs (QUELLE) and other, Filter-like techniques (QUELLE).
+
+Obviously, numerous approaches exist that use different methods and comprise of Filter, Wrapper or Embedded methods. To ensure comparability in this coursework, the results of the AR(I)MA and AR(I)MAX modelling process will be used as the baseline models for SVR and NN. This way, the performance of the AR(I)MA, SVR and NN can be directly compared without being confounded with the use of different subsets of variables for each method.
+Because the AR(I)MAX model can be specified as a linear regression with autocorrelated errors, it is possible to use a stepwise variable selection comparing AICs of the different specifications. Afterwards, the contribution of the selected variable to the forecast can be compared to the baseline AR(I)MA model using only the target variable.
 
 \subsection{Model Evaluation}
 
@@ -451,7 +480,29 @@ Generally, data sets are partitioned into training, validation and test data set
 Although usually the partitioning is random (in non-time-series data at least) to ensure a good variance of values in the partial data sets, the question arises whether a good (or bad) model performance on the test set is due to the model being well-specified or whether it is not - at least in part - due to the way the data was split. To help eliminate doubts on the accuracy of the model evaluation,  \textit{cross-validation} is used.\ QUELLE
 In \textit{k-fold cross-validation}, the data set is split into \textit{k} folds. The model is trained on $k-1$ folds and tested on the one retained fold, each fold in turn being the \textit{"test fold"} once. \
 In time series, it does not make sense to randomly split the data set into groups, since then the model would also be trained on future values attempting to predict past values. Using the idea of cross-validation sensibly, one could partition the data set in such a ways that in the training set, only values preciding the values in the test set are found. \
-A possible setting may look like the one suggested by \cite{Hyndman.2018}: The data is sorted by timestamps and then trained on the first $p$ valies. Then, the model tested on the single value $p+1$. Next, the model is trained on the first $p+1$ values and tested on the $p+2$'nd value and so on. This way, model evaluation makes use of all available observations and the results remain comparable since the test set size remains the same. Asymptotically, this technique yields the same results as minimization of the \textit{AIC}.
+A possible setting may look like the one suggested by \cite{Hyndman.2018}: The data is sorted by timestamps and then trained on the first $p$ values. Then, the model is tested on the single value $p+1$. Next, the model is trained on the first $p+1$ values and tested on the $p+2$'nd value and so on. This way, model evaluation makes use of all available observations and the results remain comparable since the test set size remains the same. Asymptotically, this technique yields the same results as minimization of the \textit{AIC}.
+
+\subsection{Software implementation}
+
+Data preparation and analyses were conducted in \texttt{R} \citep{Team.2013}. The NN was constructed in Python 3.7.2 using Keras \citep{chollet2015keras} with Tensorflow \citep{tensorflow2015-whitepaper} backend. A comprehensive list of the packages used in R and in Python can be found in Appendix (NUMMER).
+
+\subsubsection{AR(I)MA and AR(I)MAX}
+
+To specify and AR(I)MA model, the \texttt{arima()} function in \texttt{stats{}} was used.
+For ACF and PACF plots and the AR(I)MAX model, \cite{Hyndman.2008}'s  \texttt{forecast} package was chosen. Its \texttt{Arima()} function fits a linear regression with AR(I)MA errors (QUELLE).
+
+\subsubsection{SVR}
+
+\subsubsection{NN}
+
+\subsubsection{Variable Selection}
+
+As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.
+
+\subsubsection{Model evaluation}
+
+
+
 \bibliographystyle{apalike}
 \bibliography{jusmabib}
-\end{document}
+\end{document} 

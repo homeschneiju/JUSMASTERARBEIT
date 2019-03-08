@@ -34,6 +34,12 @@ Balkin, S. (1997).
 \newblock {\em Using Recurrent Neural Networks for Time Series Forecasting}.
 \newblock International Symposium on Forecasting. Barbados.
 
+\bibitem[{Ben Ishak}, 2016]{BenIshak.2016}
+{Ben Ishak}, A. (2016).
+\newblock Variable selection using support vector regression and random
+  forests: A comparative study.
+\newblock {\em Intelligent Data Analysis}, 20(1):83--104.
+
 \bibitem[Benkachcha et~al., 2015]{Benkachcha.2015}
 Benkachcha, S., Benhra, J., and {El Hassani}, H. (2015).
 \newblock Seasonal time series forecasting models based on artificial neural
@@ -127,6 +133,12 @@ Hastie, T., Tibshirani, R., and Friedman, J.~H. (2017).
 \newblock Springer series in statistics. Springer, New York, NY, second
   edition, corrected at 12th printing 2017 edition.
 
+\bibitem[Heinze et~al., 2018]{Heinze.2018}
+Heinze, G., Wallisch, C., and Dunkler, D. (2018).
+\newblock Variable selection - a review and recommendations for the practicing
+  statistician.
+\newblock {\em Biometrical journal. Biometrische Zeitschrift}, 60(3):431--449.
+
 \bibitem[Hochreiter and Schmidhuber, 1997]{Hochreiter.1997}
 Hochreiter, S. and Schmidhuber, J. (1997).
 \newblock Long short-term memory.
@@ -137,6 +149,11 @@ Hunt, {\"U}. (2003).
 \newblock Forecasting of railway freight volume: Approach of estonian railway
   to arise efficiency.
 \newblock {\em Transport}, 18.
+
+\bibitem[Hyndman and Athanasopoulos, 2018]{Hyndman.2018}
+Hyndman, R.~J. and Athanasopoulos, G. (2018).
+\newblock {\em Forecasting: Principles and practice}.
+\newblock 2. auflage edition.
 
 \bibitem[Intihar et~al., 2017]{Intihar.2017}
 Intihar, M., Kramberger, T., and Dragan, D. (2017).
@@ -219,6 +236,11 @@ Rumelhart, D.~E., Hinton, G.~E., and Williams, R.~J. (1986).
 \newblock Learning representations by back-propagating errors.
 \newblock {\em Nature}, 323(6088):533--536.
 
+\bibitem[Saeys et~al., 2007]{Saeys.2007}
+Saeys, Y., Inza, I., and Larra{\~n}aga, P. (2007).
+\newblock A review of feature selection techniques in bioinformatics.
+\newblock {\em Bioinformatics (Oxford, England)}, 23(19):2507--2517.
+
 \bibitem[Salehinejad et~al., ]{Salehinejad.12292017}
 Salehinejad, H., Sankar, S., Barfett, J., Colak, E., and Valaee, S.
 \newblock Recent advances in recurrent neural networks.
@@ -263,6 +285,11 @@ Vogel, J. (2015).
 \newblock {\em Prognose von Zeitreihen: Eine Einf{\"u}hrung f{\"u}r
   Wirtschaftswissenschaftler}.
 \newblock {Springer Gabler}, Wiesbaden.
+
+\bibitem[Wit et~al., 2012]{Wit.2012}
+Wit, E., {van den Heuvel}, E., and Romeijn, J.-W. (2012).
+\newblock `all models are wrong...': an introduction to model uncertainty.
+\newblock {\em Statistica Neerlandica}, 66(3):217--236.
 
 \bibitem[Zhang et~al., 1998]{Zhang.1998}
 Zhang, G., Patuwo, E.~B., and Hu, M.~Y. (1998).
