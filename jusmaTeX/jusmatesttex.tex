@@ -484,24 +484,22 @@ A possible setting may look like the one suggested by \cite{Hyndman.2018}: The d
 
 \subsection{Software implementation}
 
-Data preparation and analyses were conducted in \texttt{R} \citep{Team.2013}. The NN was constructed in Python 3.7.2 using Keras \citep{chollet2015keras} with Tensorflow \citep{tensorflow2015-whitepaper} backend. A comprehensive list of the packages used in R and in Python can be found in Appendix (NUMMER).
+Data preparation and analyses were conducted in \texttt{R} \citep{Team.2013}. The NN was constructed in Python 3.7.2 using Keras \citep{chollet2015keras} with Tensorflow \citep{tensorflow2015-whitepaper} backend. A comprehensive list of the packages used in R and in Python can be found in Appendix (NUMMER).\\
 
-\subsubsection{AR(I)MA and AR(I)MAX}
 
-To specify and AR(I)MA model, the \texttt{arima()} function in \texttt{stats{}} was used.
-For ACF and PACF plots and the AR(I)MAX model, \cite{Hyndman.2008}'s  \texttt{forecast} package was chosen. Its \texttt{Arima()} function fits a linear regression with AR(I)MA errors (QUELLE).
-
-\subsubsection{SVR}
-
-\subsubsection{NN}
-
-\subsubsection{Variable Selection}
+To specify the AR(I)MA model, the \texttt{arima()} function in \texttt{stats{}} was used.\
+For ACF and PACF plots and the AR(I)MAX model, \cite{Hyndman.2008}'s  \texttt{forecast} package was chosen. Its \texttt{Arima()} function fits a linear regression with AR(I)MA errors (QUELLE).\\
 
 As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.
 
-\subsubsection{Model evaluation}
+\subsection{Data analysis}
 
+\subsubsection{Expert-based variable selection}
 
+This thesis is part of a Fraunhofer institute's department for Supply Chain Services's research project, in cooperation with the University of Erlangen-Nuremberg, the University of Erlangen and NAGEL group as one of several industrial partners. 
+One goal of this research project is to elaborate whether the addition of further information is helpful to predict freight demand (in terms of weight or volume) as opposed to solely basing the forecast on past values.\\
+As the research project is funded by the Federal Ministry for Traffic and Digital Infrastructure, a precondition to which kind of information to choose was to use freely available data sets, such as data provided by the Ministry's \textit{mcloud}, an open online platform with data on mobility and related topics. \\
+When planning the research project, initial ideas were to explore different time scopes and check for seasonalities and calender-related influences on freight demand, such as weekly, monthly, quarterly, or yearly fluctuations and changes in demand due to (upcoming) holidays. \
 
 \bibliographystyle{apalike}
 \bibliography{jusmabib}
