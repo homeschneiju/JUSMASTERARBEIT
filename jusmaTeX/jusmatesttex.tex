@@ -463,18 +463,18 @@ In \textit{Embedded Methods}, variable subset selection is part of the model's t
 \\
 
 \subsection{Variable Selection in AR(I)MA, SVR and NNs}
-\cite{Chandrashekar.2014} mentions Support Vector Machines and Neural Networks as part of \textit{Embedded Methods}. Resulting from this, for these two methods, variable selection (except for a literature- and expert-driven pre-selection) and model fit could be combined in one step. As for AR(I)MA, \textit{Forward} or \textit{Backward Selection} techniques using ICs such as AIC or BIC are favourable because ????.
+\cite{Chandrashekar.2014} mentions Support Vector Machines and Neural Networks as part of \textit{Embedded Methods}. Resulting from this, for these two methods, variable selection (except for a literature- and expert-driven pre-selection) and model fit could be combined in one step. As for AR(I)MA, \textit{Forward} or \textit{Backward Selection} techniques using ICs such as AIC or BIC are favourable because ????. \\
 
 Other approaches to variable selection in the context of freight demand and / or time series forecasting have been found:
 In their study on the influence of national, regional and local economic indices on freight volume for different segments of the truckload industry in the USA, \cite{Fite.2002} first examined correlation matrices before using stepwise multiple regression to draw a selection from the large set of initial variables collected. 
 \cite{Taghizadeh.2017} suggest using ensemble methods such as Random Forest to take advantage of several different machine learning methods.
 \cite{Feng.2018} used Spearman rank correlation to select external variables to predict railway freight volume.
-Variable selection methods for time series data have also been explored, using NNs (QUELLE), SVMs (QUELLE) and other, Filter-like techniques (QUELLE).
+Variable selection methods for time series data have also been explored, using NNs (QUELLE), SVMs (QUELLE) and other, Filter-like techniques (QUELLE).\\
 
 Obviously, numerous approaches exist that use different methods and comprise of Filter, Wrapper or Embedded methods. To ensure comparability in this coursework, the results of the AR(I)MA and AR(I)MAX modelling process will be used as the baseline models for SVR and NN. This way, the performance of the AR(I)MA, SVR and NN can be directly compared without being confounded with the use of different subsets of variables for each method.
 Because the AR(I)MAX model can be specified as a linear regression with autocorrelated errors, it is possible to use a stepwise variable selection comparing AICs of the different specifications. Afterwards, the contribution of the selected variable to the forecast can be compared to the baseline AR(I)MA model using only the target variable.
 
-\subsection{Model Evaluation}
+\section{Model Evaluation}
 
 Generally, data sets are partitioned into training, validation and test data sets in order to estimate parameters (with the training set), fine-tune them during training (on the validation set) and evaluate the model (on the test set). While a validation set is not needed for ARIMA models, it is necessary for NNs \citep{Zhou.2006}. \
 Although usually the partitioning is random (in non-time-series data at least) to ensure a good variance of values in the partial data sets, the question arises whether a good (or bad) model performance on the test set is due to the model being well-specified or whether it is not - at least in part - due to the way the data was split. To help eliminate doubts on the accuracy of the model evaluation,  \textit{cross-validation} is used.\ QUELLE
@@ -482,7 +482,7 @@ In \textit{k-fold cross-validation}, the data set is split into \textit{k} folds
 In time series, it does not make sense to randomly split the data set into groups, since then the model would also be trained on future values attempting to predict past values. Using the idea of cross-validation sensibly, one could partition the data set in such a ways that in the training set, only values preciding the values in the test set are found. \
 A possible setting may look like the one suggested by \cite{Hyndman.2018}: The data is sorted by timestamps and then trained on the first $p$ values. Then, the model is tested on the single value $p+1$. Next, the model is trained on the first $p+1$ values and tested on the $p+2$'nd value and so on. This way, model evaluation makes use of all available observations and the results remain comparable since the test set size remains the same. Asymptotically, this technique yields the same results as minimization of the \textit{AIC}.
 
-\subsection{Software implementation}
+\section{Software implementation}
 
 Data preparation and analyses were conducted in \texttt{R} \citep{Team.2013}. The NN was constructed in Python 3.7.2 using Keras \citep{chollet2015keras} with Tensorflow \citep{tensorflow2015-whitepaper} backend. A comprehensive list of the packages used in R and in Python can be found in Appendix (NUMMER).\\
 
@@ -496,11 +496,22 @@ As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} 
 
 \subsubsection{Expert-based variable selection}
 
-This thesis is part of a Fraunhofer institute's department for Supply Chain Services's research project, in cooperation with the University of Erlangen-Nuremberg, the University of Erlangen and NAGEL group as one of several industrial partners. 
+This thesis is part of a Fraunhofer institute's department for Supply Chain Services (Fraunhofer SCS)'s research project, in cooperation with the University of Erlangen-Nuremberg, the University of Erlangen and NAGEL group as one of several industrial partners. 
 One goal of this research project is to elaborate whether the addition of further information is helpful to predict freight demand (in terms of weight or volume) as opposed to solely basing the forecast on past values.\\
 As the research project is funded by the Federal Ministry for Traffic and Digital Infrastructure, a precondition to which kind of information to choose was to use freely available data sets, such as data provided by the Ministry's \textit{mcloud}, an open online platform with data on mobility and related topics. \\
 When planning the research project, initial ideas were to explore different time scopes and check for seasonalities and calender-related influences on freight demand, such as weekly, monthly, quarterly, or yearly fluctuations and changes in demand due to (upcoming) holidays. \
 
+In \cite{Abate.2014}'s study on the effect of fuel prices on average length of haul, inconsistent results were found: A decrease in length of haul before 2008 and an increase after. Furthermore, an improvement of load capacity was detected for higher fuel prices, but also a decline in physical productivity, measured in tonnekilometres.
+Due to the inconsistency of the findings in this, it is unclear whether fuel price might have an impact on freight weight. Logical considerations, on the one hand, could be that higher prices would hamper demand in deliveries by truck and likely cause a shift towards e.g. rail transportation. On the other hand, infrastructure might not always allow a shift towards other means of transportation, and certain (basic) types of food are demanded regardless of price, so there might not be an influence of fuel price on freight weight (in general), or only on specific types of food, e.g. luxury goods.
+Data on fuel prices are accessible from the website of the "German General Automobile Club" (Allgemeiner Deutscher Automobilclub, ADAC) \citep{ADAC.}.\
+
+\cite{Cools.2009} accounted for holiday and daily effects on traffic counts and found weekly patterns and holiday impacts especially on the amount of commuters. Since their target was the quantity of passenger transportation on highways and not goods traffic, their results do not exactly indicate the inclusion of holiday and daily effects into the model in this coursework. However, as experts of the industrial partners of Fraunhofer SCS stated the importance of these two factors in their past experience, they are going to be included in this coursework. \cite{Cools.2009}'s paper provides a useful guidance to how to handle these two variables in time series forecasting.\
+Data on holidays and school holidays can be retrieved from the website "schulferien.org" \citep{.b}.\\
+
+According to \cite{JONG.200}, GDP has been included as an explanatory variable in other freight models before; \cite{Intihar} included GDP in their paper as well, and furthermore unemployment. Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS" \citep{StatistischesBundesamt.2019}.\
+
+
+All data retrieved were restricted to the Federal State of Bavaria between 2015 and 2017.
 \bibliographystyle{apalike}
 \bibliography{jusmabib}
 \end{document} 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  8 MAR 2019 19:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  10 MAR 2019 21:30
 entering extended mode
 **./jusmatesttex.tex
 (jusmatesttex.tex
@@ -233,7 +233,7 @@ See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.247 ...and\NAT@force@numbers{}\NAT@force@numbers
+l.255 ...and\NAT@force@numbers{}\NAT@force@numbers
                                                   
 Check the bibliography entries for non-compliant syntax,
 or select author-year BibTeX style, e.g. plainnat
@@ -532,6 +532,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 461--464
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 466--467
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 468--473
+
+ []
+
 [19] [20]
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 487.
 
@@ -566,7 +576,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 490--492
 
  []
 
-(jusmatesttex.bbl [21] [22] [23] [24] [25])
+
+Package natbib Warning: Citation `Abate.2014' on page 21 undefined on input lin
+e 504.
+
+
+Package natbib Warning: Citation `ADAC.' on page 21 undefined on input line 506
+.
+
+[21]
+
+Package natbib Warning: Citation `.b' on page 22 undefined on input line 509.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 508--510
+
+ []
+
+
+Package natbib Warning: Citation `JONG.200' on page 22 undefined on input line 
+511.
+
+
+Package natbib Warning: Citation `Intihar' on page 22 undefined on input line 5
+11.
+
+
+Package natbib Warning: Citation `StatistischesBundesamt.2019' on page 22 undef
+ined on input line 511.
+
+(jusmatesttex.bbl [22] [23] [24] [25])
 
 Package natbib Warning: There were undefined citations.
 
@@ -578,7 +617,7 @@ Here is how much of TeX's memory you used:
  7974 multiletter control sequences out of 15000+200000
  17832 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,39p,974b,338s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,9n,39p,974b,312s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\
 fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk> <C:\Users\Juliana Schneider\App
 Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users
@@ -602,9 +641,9 @@ s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Juliana Schnei
 der/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
 <C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmsy8.pfb>
-Output written on jusmatesttex.pdf (26 pages, 298606 bytes).
+Output written on jusmatesttex.pdf (26 pages, 302460 bytes).
 PDF statistics:
- 514 PDF objects out of 1000 (max. 8388607)
+ 518 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
