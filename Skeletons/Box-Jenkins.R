@@ -7,7 +7,7 @@
 ############
 ### PRELIMINARIES - LOAD
 ###############
-packs <- c("tseries", "forecast", "reshape2", "urca")
+packs <- c("tseries", "forecast", "reshape2", "caret", "urca")
 
 Install_And_Load <- function(packages) {
   k <- packages[!(packages %in% installed.packages()[,"Package"])];
@@ -19,6 +19,7 @@ Install_And_Load <- function(packages) {
 }
 
 Install_And_Load(packs)
+
 
 # load data
 data(Seatbelts)
@@ -32,7 +33,7 @@ summary(Seatbelts)
 
 #ts_freight <- ts(data[complete.cases(data),])
 flosa <- Seatbelts[,"DriversKilled"]
-
+jausa <- Seatbelts
 # GET OVERVIEW
 class(flosa)
 start(flosa); end(flosa)
@@ -67,13 +68,17 @@ abline(reg = linearModel, col="red")
 # leicht abschüssig
 
 #cycle(flosa)
-adf.test(flosa, alternative="stationary", k=4)
+adf.test(flosa, alternative="stationary")
+
+par(mfrow = c(2,1))
+acf(flosa)
+acf(difflosa)
 
 
 # adf.test(diff(flosa), alternative="stationary", k=0)
 # adf.test(diff(log(flosa)), alternative="stationary", k=0)
 
-# apply differencing
+# apply differencing - not needed tho
 difflosa = diff(flosa, differences = 12)
 windows()
 par(mfrow=c(2,2))
@@ -86,26 +91,50 @@ acf(difflosa) # 5
 pacf(difflosa, plot = T) # 3
 # -> ARIMA(3,1,5)
 difautofit <- auto.arima(difflosa, seasonal=FALSE)
-diffit <- arima(difflosa, c(4,0,0), include.mean=F)
-difautofit # SARIMA(5,0,0)
-diffit # ARIMA(3,1,5)
-# AIC diffit < autofit!
+diffit <- arima(difflosa, c(5,0,0), include.mean=F)
+difautofit # ARIMA(5,0,0)
+diffit # ARIMA(5,0,0)
+
 
 
 # look for p and q
 par(mfrow=c(2,1))
-acf(flosa) # 5
-pacf(flosa, plot = T) # 3
+acf(flosa) # 3
+pacf(flosa, plot = T) # 1
 #looks like ARMA(5,2)
 autofit <- auto.arima(flosa)
-fit <- arima(flosa,c(3,0,1), list(order = c(2,0,0)))
+fit <- arima(flosa,c(1,0,3), list(order = c(1,0,1)))
 summary(autofit)
 summary(fit)
 coef(autofit)
 #ARIMA(3,1,1)(2,0,0)[12]  
 
+splitflosa <- createTimeSlices(flosa,1) # from caret
+splitflosa[1]
 
+flosalag = lag(flosa)
 
+#############################################
+######### 3. MODEL DIAGNOSTICS ##############
+#############################################
+
+checkresiduals(fit)
+Box.test(fit$residuals,type="Ljung-Box")
+jarque.bera.test(fit$residuals)
+# residuals are  normally distributed and iid
+
+sizes <- c(1:5)
+ctrl <- rfeControl(functions = rfFuncs,
+                   method = "repeatedcv",
+                   repeats = 5,
+                   verbose = FALSE)
+
+arimarfe <- rfe(jausa[,-1], jausa[,1], sizes = sizes, rfeControl = ctrl)
+
+lm <- lm(formula = DriversKilled ~ ., data = jausa)
+step(lm)
+
+# rfe AND lm choose drivers, kms and law
 ###################
 #### DATA FOR 2016
 #### MONTHS

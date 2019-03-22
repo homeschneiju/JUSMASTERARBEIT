@@ -42,3 +42,10 @@ data_SA_90_NeuroNet_pre <- data_SA_90_NeuroNet_raw
 # missings??
 
 # correct quarterly values
+
+# save object for later use
+setwd("E:/")
+saveRDS(jausa, file = "jausa.rds")
+head(jausa)
+jausanames <- colnames(jausa)
+saveRDS(jausanames, file = "jausanames.rds")
