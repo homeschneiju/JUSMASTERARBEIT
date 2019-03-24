@@ -161,7 +161,15 @@ Y_{t} =  \mu_{ARMA} +  \sum_{i = 1}^{p}\Phi_{i}Y_{t-i} + e_{t}  + \epsilon_{t} -
 \end{equation}
 where $\mu_{ARMA}$ actually equals the intercept $C$ of the aforementioned $AR(p)$ model.
 
-\subsection{Violation of assumptions}
+\subsection{Seasonal AR(I)MA - SARIMA models}
+
+Of course, a time series may also exhibit recurrent seasonal patterns, e.g. an increase in demand in december every year. If there are recurrent fluctuations that ocurr yearly or otherwise periodically, there is a seasonal or cyclical component, respectively \citep{Vogel.2015} that has to be taken into account; the time series has to be "deseasonalized" accordingly \citep{Benkachcha.2015}.\\
+The length of the period of a cyclical component may be determined through a fourier series \citep{Vogel.2015}.
+seasonal components can be detected by visual checks of the time series plots.
+Seasonality is modeled in AR(I)MA models by an additional tuple of orders $(P,D,Q)$; the complete model is then denoted as $SARIMA(p,d,q)(P,D,Q)$, where the additional tuple of orders essentially has the same meaning as the former one, only applied to seasonal magnitude.  
+\cite{Hyndman.2008} recommends modeling larger seasonal components (such as yearly reocurrences in daily measured data) or multiple seasonalities by a fourier series.
+
+\subsection{Violation of assumptions and other issues}
 If $\mu(t) \neq \mu$, i.e. the mean is not independent of time, the assumption of stationarity is violated; there is a so-called trend. In the case of a non-stationary time series, stationarity can be obtained by differencing \citep{Andreoni.2006b, Hunt.2003}
 First-order differencing is denoted as:
 \begin{equation}
@@ -175,9 +183,7 @@ ADF tests are part of the family of unit roots tests, i.e. the null hypothesis s
 
 Another condition of time series processes is \textbf{causality}, i.e. future values only depend on current and past values and not on future values themselves \citep{Vogel.2015}.
 
-If there are recurrent fluctuations that ocurr yearly or otherwise periodically, there is a seasonal or cyclical component, respectively \citep{Vogel.2015} that has to be taken into account; the time series has to be "deseasonalized" accordingly \citep{Benkachcha.2015}.\\ The length of the period of a cyclical component may be determined through a fourier series \citep{Vogel.2015}.
-Tests for seasonal components include ??? and visual checks of the time series plots.
-
+MISSINGS
 
 \subsection{The Box-Jenkins program}
 In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps, as described in \cite{Falk.2012}: \\
@@ -204,6 +210,8 @@ the AIC or BIC \citep{Falk.2012}:
 	AIC(p,q) := log(\hat{\sigma}^{2}_{p,q}) + 2 \frac{p + q}{n}\\
 	BIC(p,q) := log(\hat{\sigma}^{2}_{p,q}) +  \frac{(p + q)log(n)}{n}\\
 \end{align}
+
+\cite{Vogel.2015} check ACF and PACF plots after regular and seasonal differencing to determine der $P$ and $D$ orders in a seasonal ARIMA model. With seasonal ARIMA however, checking ACF and PACF for the regular order $p$ and $q$ is not so easy; it is recommended to initialize the model with high orders for both and then reduce them while checking residuals. 
 
 \subsubsection{Estimation of parameters}
 Next, the parameters (or coefficients) of the AR and/or MA components of the model are estimated, e.g. by Ordinary Least Squares (OLS) or Maximum Likelihood Estimation (MLE) \citep{Andreoni.2006b}.  \\
@@ -493,12 +501,24 @@ A possible setting may look like the one suggested by \cite{Hyndman.2018}: The d
 
 Data preparation and analyses were conducted in \texttt{R} \citep{Team.2013}. The NN was constructed in Python 3.7.2 using Keras \citep{chollet2015keras} with Tensorflow \citep{tensorflow2015-whitepaper} backend. A comprehensive list of the packages used in R and in Python can be found in Appendix (NUMMER).\\
 
+For all common functions, \texttt{stats} was used whenever possible. Furthermore, , \cite{Hyndman.2008}'s  \texttt{forecast} package was chosen for most functions concerning AR(I)MA modeling. If not otherwise specified, functions mentioned in the following belong to said package.
+
+Missing values for time series were imputed by linear interpolation using the function \texttt{na.interp}, which was found to supply robust imputation compared to other functions for imputation of mmissing values in time series available in \texttt{R} QUELLE. 
 
 To specify the AR(I)MA model, the \texttt{arima()} function in \texttt{stats{}} was used.\
-For ACF and PACF plots and the AR(I)MAX model, \cite{Hyndman.2008}'s  \texttt{forecast} package was chosen. Its \texttt{Arima()} function fits a linear regression with AR(I)MA errors (QUELLE).\\
+For ACF and PACF plots and the AR(I)MAX model, the functions \texttt{acf()}, \texttt{pacf()}, and \texttt{arima()} (which is essentially a wrapper on \texttt{stats}'s \texttt{arima()}, including some extensions, e.g. exogenous variables PRÜFEN). \texttt{Arima()} actually fits a linear regression with AR(I)MA errors \citep{Hyndman.2018}; no \texttt{R} function could be found that models actual ARIMAX models.\\
 For ADF tests, the function \texttt {adf.test()} in the package \texttt{tseries} was used. In the function, the parameter \textit{k} (i.e. the lag) is determined according to the formula suggested by \cite{Vogel.2015} (see subsection NUMMER (Violation of assumptions)), although without t-testing the coefficients of equation NUMMER 4. Manually reducing \textit{k} and comparing the results yielded no differences in the outcome.\\
 
-As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.
+Subsequently, the parameters are computed bei \texttt{Arima()}; possible seasonal components can be modeled by the \texttt{fourier()} functions given as an argument to \texttt{xreg=} in \texttt{Arima()}. The order of the fourier series is determined by minimizing the AICc (AICC ERKLÄREN s oben). \
+As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.\\
+
+
+RFE
+
+RMSE
+SVR e1071
+NN IN KERAS
+
 
 \subsection{Data analysis}
 

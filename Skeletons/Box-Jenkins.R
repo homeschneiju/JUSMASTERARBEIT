@@ -62,9 +62,9 @@ plot(flosa[24:36])
 
 
 # TREND /stationarity
-linearModel = lm(flosa ~ time(flosa))
+lmtrend = lm(flosa ~ time(flosa))
 plot(flosa)
-abline(reg = linearModel, col="red")
+abline(reg = lmtrend, col="red")
 # leicht abschüssig
 
 #cycle(flosa)
@@ -109,8 +109,10 @@ summary(fit)
 coef(autofit)
 #ARIMA(3,1,1)(2,0,0)[12]  
 
-splitflosa <- createTimeSlices(flosa,1) # from caret
-splitflosa[1]
+#splitflosa <- createTimeSlices(flosa,1) # from caret
+far2 <- function(x,h) (forecast(Arima(x,c(1,0,3), list(order = c(1,0,1))), h = h))
+splitflosa <- tsCV(flosa, forecastfunction = far2, h = 1)
+splitflosa
 
 flosalag = lag(flosa)
 
@@ -124,7 +126,7 @@ jarque.bera.test(fit$residuals)
 # residuals are  normally distributed and iid
 
 sizes <- c(1:5)
-ctrl <- rfeControl(functions = rfFuncs,
+ctrl <- rfeControl(functions = caretFuncs,
                    method = "repeatedcv",
                    repeats = 5,
                    verbose = FALSE)
@@ -133,8 +135,46 @@ arimarfe <- rfe(jausa[,-1], jausa[,1], sizes = sizes, rfeControl = ctrl)
 
 lm <- lm(formula = DriversKilled ~ ., data = jausa)
 step(lm)
-
+step(arimaxfit)
 # rfe AND lm choose drivers, kms and law
+
+##############
+######## TRY CUSTOM RFE
+##############
+
+train <- jausa[1:150,]
+test <- jausa[151:192,]
+arimaxfit <- update(fit, xreg =jausa[,-1])
+arimaxfit$coef
+lowest <- rank(arimaxfit$coef)
+lowest <- which(lowest == max(lowest))
+which(colnames(jausa) == labels(lowest))
+
+jausa2 <- jausa
+head(jausa2[,-which(colnames(jausa) == labels(lowest))])
+
+featselec <- function(output, features, fit){
+  feat = features
+  if (class(fit) == "Arima") {
+    aic <- 2
+   # aic2 <- 1
+    while (aic < aic2) {
+    arimaxfit <- update(fit, features)
+    coefrank <- rank(arimaxfit$coef)
+    lowest <- which(coefrank == max(coefrank))
+    aic2 <- arimaxfit$aic
+    # feat <- feat[,-which(colnames(feat) == labels(feat))]
+    # arimaxfit2 <- update(arimaxfit, features)
+    # coefrank2 <- rank(arimaxfit2$coef)
+    # lowest2 <- which(coefrank2 == max(coefrank2))
+    # aic2 <- arimaxfit2$aic
+    # aic <- aic2
+    }
+  }
+  }
+  
+featselec(flosa, jausa[-1], arimaxfit)
+
 ###################
 #### DATA FOR 2016
 #### MONTHS
