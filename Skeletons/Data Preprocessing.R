@@ -4,7 +4,7 @@
 
 # install and load packages
 
-packs <- c("tseries", "forecast", "reshape2", "urca")
+packs <- c("tseries", "forecast", "reshape2", "urca", "e1071")
 
 Install_And_Load <- function(packages) {
   k <- packages[!(packages %in% installed.packages()[,"Package"])];
@@ -37,9 +37,25 @@ data_SA_90_NeuroNet_pre <- data_SA_90_NeuroNet_raw
 
 # plot time series
 
+plot(flosa)
+
 # min, max, usw summary
 
 # missings??
+
+flosamiss <-flosa
+flosamiss[c(3,67,39)] <- NA
+any(is.na(flosamiss))
+flosamiss <- na.interp(flosamiss, lambda="auto")
+flosamiss <- na.approx(flosamiss)
+flosamiss[c(3,67,39)]
+flosa[c(3,67,39)]
+
+difflosamiss <- difflosa
+difflosamiss[c(3,67,39)] <- NA
+difflosamiss <- na.interp(difflosamiss)
+difflosamiss[c(3,67,39)]
+difflosa[c(3,67,39)]
 
 # correct quarterly values
 

@@ -109,10 +109,6 @@ summary(fit)
 coef(autofit)
 #ARIMA(3,1,1)(2,0,0)[12]  
 
-#splitflosa <- createTimeSlices(flosa,1) # from caret
-far2 <- function(x,h) (forecast(Arima(x,c(1,0,3), list(order = c(1,0,1))), h = h))
-splitflosa <- tsCV(flosa, forecastfunction = far2, h = 1)
-splitflosa
 
 flosalag = lag(flosa)
 
