@@ -183,7 +183,7 @@ ADF tests are part of the family of unit roots tests, i.e. the null hypothesis s
 
 Another condition of time series processes is \textbf{causality}, i.e. future values only depend on current and past values and not on future values themselves \citep{Vogel.2015}.
 
-MISSINGS
+As with any kind of data, missing values may pose a problem for inference and forecast. While in real applications, the mechanism causing the missingness is unknown, at least for time series, the imputation of values for \textit{Missing At Random (MAR)} and \textit{Missing Completely At Random (MCAR)} mechanisms is nearly identical. \footnote{In MCAR, missingness in the data is completely random, whereas in MAR, missingness in one variable depends on the value of another variable. Lastly, in MNAR, missingness in one variable depends on the value of the variable itself.} Imputation for time series does not solely depend on covariates, but instead on the "hidden variable" time. \cite{Moritz2015ComparisonOD} found that linear interpolation yielded 
 
 \subsection{The Box-Jenkins program}
 In order to iteratively model time series data, \citep{Box.1976} proposed a method to identify suitable parameters - AR, MA and differencing - of an ARIMA model. It consists of the following four steps, as described in \cite{Falk.2012}: \\
@@ -495,7 +495,15 @@ Generally, data sets are partitioned into training, validation and test data set
 Although usually the partitioning is random (in non-time-series data at least) to ensure a good variance of values in the partial data sets, the question arises whether a good (or bad) model performance on the test set is due to the model being well-specified or whether it is not - at least in part - due to the way the data was split. To help eliminate doubts on the accuracy of the model evaluation,  \textit{cross-validation} is used.\ QUELLE
 In \textit{k-fold cross-validation}, the data set is split into \textit{k} folds. The model is trained on $k-1$ folds and tested on the one retained fold, each fold in turn being the \textit{"test fold"} once. \
 In time series, it does not make sense to randomly split the data set into groups, since then the model would also be trained on future values attempting to predict past values. Using the idea of cross-validation sensibly, one could partition the data set in such a ways that in the training set, only values preciding the values in the test set are found. \
-A possible setting may look like the one suggested by \cite{Hyndman.2018}: The data is sorted by timestamps and then trained on the first $p$ values. Then, the model is tested on the single value $p+1$. Next, the model is trained on the first $p+1$ values and tested on the $p+2$'nd value and so on. This way, model evaluation makes use of all available observations and the results remain comparable since the test set size remains the same. Asymptotically, this technique yields the same results as minimization of the \textit{AIC}.
+A possible setting may look like the one suggested by \cite{Hyndman.2018}: The data is sorted by timestamps and then trained on the first $p$ values. Then, the model is tested on the single value $p+1$. Next, the model is trained on the first $p+1$ values and tested on the $p+2$'nd value and so on. This way, model evaluation makes use of all available observations and the results remain comparable since the test set size remains the same. Asymptotically, this technique, called the "rolling forecast origin", yields the same results as minimization of the \textit{AIC}. \\
+Common metrics to evaluate models (and compare them) are the \textit{Root Mean Square Error (RMSE)} and the \textit{Mean Average Percentage Error (MAPE)}, the latter one of which is especially useful in time series models with a strong trend \citep{Moritz2015ComparisonOD}. 
+
+\begin{align}
+	RMSE = \sqrt{\frac{\sum_{t = 1}^{n}(\overline{y}_{t}-y_{t})^2}{n}}\\
+	\newline
+	MAPE = \sqrt{\frac{\sum_{t = 1}^{n}\frac{|\overline{y}_{t}-y_{t}|}{|y_{t}|}}{n}}\
+\end{align}
+
 
 \section{Software implementation}
 
@@ -503,21 +511,25 @@ Data preparation and analyses were conducted in \texttt{R} \citep{Team.2013}. Th
 
 For all common functions, \texttt{stats} was used whenever possible. Furthermore, , \cite{Hyndman.2008}'s  \texttt{forecast} package was chosen for most functions concerning AR(I)MA modeling. If not otherwise specified, functions mentioned in the following belong to said package.
 
-Missing values for time series were imputed by linear interpolation using the function \texttt{na.interp}, which was found to supply robust imputation compared to other functions for imputation of mmissing values in time series available in \texttt{R} QUELLE. 
+Missing values for time series were imputed by linear interpolation using the function \texttt{na.interp}, which was found to supply robust imputation compared to other functions for imputation of mmissing values in time series available in \texttt{R} \citep{Moritz2015ComparisonOD}. 
 
 To specify the AR(I)MA model, the \texttt{arima()} function in \texttt{stats{}} was used.\
 For ACF and PACF plots and the AR(I)MAX model, the functions \texttt{acf()}, \texttt{pacf()}, and \texttt{arima()} (which is essentially a wrapper on \texttt{stats}'s \texttt{arima()}, including some extensions, e.g. exogenous variables PRÜFEN). \texttt{Arima()} actually fits a linear regression with AR(I)MA errors \citep{Hyndman.2018}; no \texttt{R} function could be found that models actual ARIMAX models.\\
 For ADF tests, the function \texttt {adf.test()} in the package \texttt{tseries} was used. In the function, the parameter \textit{k} (i.e. the lag) is determined according to the formula suggested by \cite{Vogel.2015} (see subsection NUMMER (Violation of assumptions)), although without t-testing the coefficients of equation NUMMER 4. Manually reducing \textit{k} and comparing the results yielded no differences in the outcome.\\
 
 Subsequently, the parameters are computed bei \texttt{Arima()}; possible seasonal components can be modeled by the \texttt{fourier()} functions given as an argument to \texttt{xreg=} in \texttt{Arima()}. The order of the fourier series is determined by minimizing the AICc (AICC ERKLÄREN s oben). \
-As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.\\
+%As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.\\
 
+Functions to model Support Vector Machines and Regression are contained in the package \texttt{e1071}.\\
+
+NN IN KERAS
 
 RFE
 
-RMSE
-SVR e1071
-NN IN KERAS
+The error metrics RMSE and MAPE were customly computed.\\
+
+
+
 
 
 \subsection{Data analysis}
