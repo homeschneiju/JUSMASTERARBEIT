@@ -3,8 +3,8 @@ far1 <- function(x,h) (forecast(Arima(x,c(1,0,3), list(order = c(1,0,1))), h = h
 splitflosa <- tsCV(flosa, forecastfunction = far1, h = 1)
 splitflosa
 
-far2 <- function(x,h) (forecast(svr(x,c(1,0,3), list(order = c(1,0,1))), h = h))
-splitflosa <- tsCV(flosa, forecastfunction = far1, h = 1)
+far2 <- function(x,h) (forecast(flosasvm, h = h))
+splitflosa <- tsCV(flosa, forecastfunction = far2, h = 1)
 splitflosa
 
 # compare RMSE of tsCV with regular residuals on complete data set

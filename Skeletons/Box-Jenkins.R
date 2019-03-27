@@ -7,18 +7,6 @@
 ############
 ### PRELIMINARIES - LOAD
 ###############
-packs <- c("tseries", "forecast", "reshape2", "caret", "urca")
-
-Install_And_Load <- function(packages) {
-  k <- packages[!(packages %in% installed.packages()[,"Package"])];
-  if(length(k))
-  {install.packages(k, repos='https://cran.rstudio.com/');}
-  
-  for(package_name in packages)
-  {library(package_name,character.only=TRUE, quietly = TRUE);}
-}
-
-Install_And_Load(packs)
 
 
 # load data
@@ -109,8 +97,19 @@ summary(fit)
 coef(autofit)
 #ARIMA(3,1,1)(2,0,0)[12]  
 
+# for complex seasonality: alternative fitting approach
+bestfit <- list(aicc=Inf)
+for(i in 1:25)
+{
+  fitfour <- auto.arima(flosa, xreg=fourier(flosa, K=i), seasonal=FALSE)
+  if(fitfour$aicc < bestfit$aicc)
+    bestfit <- fitfour
+  else break;
+}
 
-flosalag = lag(flosa)
+
+
+#flosalag = lag(flosa)
 
 #############################################
 ######### 3. MODEL DIAGNOSTICS ##############
@@ -120,6 +119,28 @@ checkresiduals(fit)
 Box.test(fit$residuals,type="Ljung-Box")
 jarque.bera.test(fit$residuals)
 # residuals are  normally distributed and iid
+
+#############################################
+############## 4. FORECASTS #################
+#############################################
+
+fc <- forecast(bestfit, xreg=fourier(flosa, K=5, h=60))
+
+fc2 <- forecast(fit,h=60)
+fc3 <- forecast(autofit,h=60)
+fc4 <- forecast(diffit,h=60)
+fc5 <- forecast(difautofit,h=60)
+
+par(mfrow=c(3,2))
+plot(fc)
+plot(fc2)
+plot(fc3)
+plot(fc4)
+plot(fc5)
+
+#############################################
+########### VARIABLE SELECTION ##############
+#############################################
 
 sizes <- c(1:5)
 ctrl <- rfeControl(functions = caretFuncs,

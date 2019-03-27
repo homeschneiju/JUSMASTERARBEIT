@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  24 MAR 2019 22:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2019.1.29)  27 MAR 2019 23:16
 entering extended mode
 **./jusmatesttex.tex
 (jusmatesttex.tex
@@ -233,7 +233,7 @@ See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.264 ...and\NAT@force@numbers{}\NAT@force@numbers
+l.269 ...and\NAT@force@numbers{}\NAT@force@numbers
                                                   
 Check the bibliography entries for non-compliant syntax,
 or select author-year BibTeX style, e.g. plainnat
@@ -605,34 +605,58 @@ Underfull \hbox (badness 10000) in paragraph at lines 529--530
 
 
 Package natbib Warning: Citation `Abate.2014' on page 23 undefined on input lin
-e 544.
+e 543.
 
 
-Package natbib Warning: Citation `ADAC.' on page 23 undefined on input line 546
+Package natbib Warning: Citation `ADAC.' on page 23 undefined on input line 545
 .
 
 [23]
 
-Package natbib Warning: Citation `.b' on page 24 undefined on input line 549.
+Package natbib Warning: Citation `.b' on page 24 undefined on input line 548.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 548--550
+Underfull \hbox (badness 10000) in paragraph at lines 547--549
 
  []
 
 
 Package natbib Warning: Citation `Intihar' on page 24 undefined on input line 5
-51.
+50.
 
 
 Package natbib Warning: Citation `StatistischesBundesamt.2019' on page 24 undef
-ined on input line 551.
+ined on input line 550.
 
-(jusmatesttex.bbl [24] [25] [26] [27])
+
+Underfull \hbox (badness 10000) in paragraph at lines 550--551
+
+ []
+
+
+Package natbib Warning: Citation `StatistischesBundesamt.' on page 24 undefined
+ on input line 554.
+
+
+Package natbib Warning: Citation `Bundesregierung.' on page 24 undefined on inp
+ut line 554.
+
+
+Overfull \hbox (7.61108pt too wide) in paragraph at lines 559--572
+\T1/cmr/m/n/10.95 format and in-cluded 472,137 ob-ser-va-tions be-tween 17/09/2
+015 and 31/12/2016
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 559--572
+
+ []
+
+[24] (jusmatesttex.bbl [25] [26] [27] [28])
 
 Package natbib Warning: There were undefined citations.
 
-[28] (jusmatesttex.aux) ) 
+[29] (jusmatesttex.aux) ) 
 Here is how much of TeX's memory you used:
  4186 strings out of 492970
  60207 string characters out of 3121264
@@ -640,7 +664,7 @@ Here is how much of TeX's memory you used:
  7979 multiletter control sequences out of 15000+200000
  19734 words of font info for 50 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,39p,974b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,11n,39p,974b,310s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Juliana Schneider\AppData\Local\MiKTeX\2.9\
 fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk> <C:\Users\Juliana Schneider\App
 Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users
@@ -669,9 +693,9 @@ al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Juli
 ana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmsy6.pfb><C:/Users/Juliana Schneider/AppData/Local/Programs/MiKTeX 2.9/fonts/t
 ype1/public/amsfonts/cm/cmsy8.pfb>
-Output written on jusmatesttex.pdf (28 pages, 332976 bytes).
+Output written on jusmatesttex.pdf (29 pages, 336019 bytes).
 PDF statistics:
- 583 PDF objects out of 1000 (max. 8388607)
+ 587 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

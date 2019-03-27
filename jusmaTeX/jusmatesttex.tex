@@ -532,9 +532,8 @@ The error metrics RMSE and MAPE were customly computed.\\
 
 
 
-\subsection{Data analysis}
-
-\subsubsection{Expert-based variable selection}
+\section{Data analysis}
+\subsection{Expert-based variable selection}
 
 This thesis is part of a Fraunhofer institute's department for Supply Chain Services (Fraunhofer SCS)'s research project, in cooperation with the University of Erlangen-Nuremberg, the University of Erlangen and NAGEL group as one of several industrial partners. 
 One goal of this research project is to elaborate whether the addition of further information is helpful to predict freight demand (in terms of weight or volume) as opposed to solely basing the forecast on past values.\\
@@ -548,8 +547,43 @@ Data on fuel prices are accessible from the website of the "German General Autom
 \cite{Cools.2009} accounted for holiday and daily effects on traffic counts and found weekly patterns and holiday impacts especially on the amount of commuters. Since their target was the quantity of passenger transportation on highways and not goods traffic, their results do not exactly indicate the inclusion of holiday and daily effects into the model in this coursework. However, as experts of the industrial partners of Fraunhofer SCS stated the importance of these two factors in their past experience, they are going to be included in this coursework. \cite{Cools.2009}'s paper provides a useful guidance to how to handle these two variables in time series forecasting.\
 Data on holidays and school holidays can be retrieved from the website "schulferien.org" \citep{.b}.\\
 
-According to \cite{JONG.2004}, GDP has been included as an explanatory variable in other freight models before; \cite{Intihar} included GDP in their paper as well, and furthermore unemployment. Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS" \citep{StatistischesBundesamt.2019}.\
+According to \cite{JONG.2004}, GDP has been included as an explanatory variable in other freight models before; \cite{Intihar} included GDP in their paper as well, and furthermore unemployment. Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS" \citep{StatistischesBundesamt.2019}.\\
 
+A precondition to time series modelling is causality, which is logical and obvious for holidays and daily effects determining freight demand (freight demand cannot influence the ocurrence of holidays); not exactly as much for fuel price and GDP.\\
+It might make sense to think that the demand for food haulage impacts fuel prices (as prices are a matter of demand and supply), or that it influences the GDP in some indirect way (and \cite{JONG.2004} admit to this two-way point of view). 
+In fact, the GDP (in this case: the German BIP) is a measure of the value of all inland produced goods and services in a certain time period \cite{StatistischesBundesamt.} and is influenced by demand \cite{Bundesregierung.}. Still, in the case at hand, for the prediction of daily freight demand, knowing the current GDP might be a useful tool - as e.g. \cite{Intihar.2017} have found (and they name further studies with similar results as theirs). Another reason why GDP might not be a good indicator for daily freight demand is that is is more of a long-term measure. \\
+Considering fuel prices, the counter-argument to fuel prices hampering demand for truck haulage would be that an increasing demand in truck haulage may lead to higher fuel prices. However, it is not very likely that an increase in truck haulage for food deliveries in Germany significantly raises prices that are determined on a world-wide level. \
+
+\subsection{Data Preprocessing}
+
+The data received by NAGEL for use in this coursework was supplied in .csv-format and included 472,137 observations between 17/09/2015 and 31/12/2016 for the following 30 variables:
+(TABELLE SPALTENBESCHREIBUNG)
+\\
+A first glance at the raw data revealed that the variable "gewicht" (weight) had 49 missing values, there are 5,525 different senders and there are 15,576 different recipients.\\
+Some variables ( "ABS$\_$REL", "Ziel$\_$REL", and "WetterStationID") had to be redefined as factor. Furthermore, the variable quarter incorrectly labeled dates in the fourth quarter of the year as being in the third quarter, which had to be corrected. \\
+The missing values in gewicht ocurred mostly on holidays:\\
+2015-12-25 - Boxing Day\\
+2016-01-01 - New Year\\
+2016-03-27 - Easter Sunday\\
+2016-05-15 - Whitsunday (Pfingstsonntag)\\
+2016-10-02 - Thanksgiving\\
+2016-12-10 - a regular Saturday; no known holiday\\
+2016-12-25 - Boxing Day \\
+
+Lastly, the raw data set was transformed into a data.frame aggregated by date. It contains the following variables: \\
+"Date"\\
+"Weekday"\\
+"Weekday$\_$No" \ (numeric representation of the weekday)\\
+"Month"\\
+"Weekend" \ (boolean; 1 if date was on a weekend)\\
+"Quarter"\\
+"Holiday" \ (boolean; 1 if date was on a holiday)\\
+"HolidayWeek" \ (boolean; 1 if date was in a week in which a holiday ocurred) \\ "Quantity" \ (number of shipments on a given date)\\ 
+"Weight"\\
+"Size" \\
+"Temp"  \ (average temperature measured on a given date)\\
+"ferien"  \ (boolean; 1 if date was within school holidays)\\ 
+MEHR
 
 All data retrieved were restricted to the Federal State of Bavaria between 2015 and 2017.
 \bibliographystyle{apalike}
