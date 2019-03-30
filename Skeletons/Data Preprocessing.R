@@ -13,7 +13,7 @@
 
 # install and load packages
 
-packs <- c("tseries", "forecast", "reshape2", "zoo", "lubridate", "tidyverse","urca", "e1071")
+packs <- c("tseries", "forecast", "reshape2", "zoo", "lubridate", "tidyverse", "e1071", "openxlsx")
 
 Install_And_Load <- function(packages) {
   k <- packages[!(packages %in% installed.packages()[,"Package"])];
@@ -36,7 +36,7 @@ getwd()
 setwd("E:/KIVAS/Daten")
 
 # Save current workspace
-save.image()
+#save.image()
 
 # Load current workspace
 # load(paste(getwd(),"/.RData",sep = ""))
@@ -66,8 +66,6 @@ summary(data_SA_90_NeuroNet_raw)
 # missings??
 
 colnames(data_SA_90_NeuroNet_raw[ sapply(data_SA_90_NeuroNet_raw, function(x) any(is.na(x)))])
-plot(table( data_SA_90_NeuroNet_raw[[8]][Weight_NA_Number] )) # calenderweek
-# NAs started ocurring in kw 40 which is the beginning of october
 
 table(is.na(data_SA_90_NeuroNet_raw))
 # Conclusion:
@@ -106,6 +104,10 @@ table( data_SA_90_NeuroNet_raw[[4]][Weight_NA_Number] )
 #   - 90-94 (3)
 #   - 90-97 (2)
 
+plot(table( data_SA_90_NeuroNet_raw[[8]][Weight_NA_Number] )) # calenderweek
+# NAs started ocurring in kw 40 which is the beginning of october
+
+
 
 # Calender Information
 table( data_SA_90_NeuroNet_raw[[8]][Weight_NA_Number] )    # calenderweek
@@ -124,21 +126,6 @@ table( data_SA_90_NeuroNet_raw[[10]][Weight_NA_Number] )
 ########### CORRECTIONS ############
 ####################################
 
-# interpolate missing values
-
-flosamiss <-flosa
-flosamiss[c(3,67,39)] <- NA
-any(is.na(flosamiss))
-flosamiss <- na.interp(flosamiss, lambda="auto")
-flosamiss <- na.approx(flosamiss)
-flosamiss[c(3,67,39)]
-flosa[c(3,67,39)]
-
-difflosamiss <- difflosa
-difflosamiss[c(3,67,39)] <- NA
-difflosamiss <- na.interp(difflosamiss)
-difflosamiss[c(3,67,39)]
-difflosa[c(3,67,39)]
 
 # correct quarterly values
 
@@ -153,26 +140,23 @@ data_SA_90_NeuroNet_qtr$date <- as.Date(as.character(data_SA_90_NeuroNet_qtr$dat
 
 yq <- as.yearqtr(data_SA_90_NeuroNet_qtr$date,format="%d.%m.%Y")
 splityq <- colsplit(yq," ",names=c("yr","qtr"))
-splityq <- gsub("Q", "",splityq)
+splityq <- gsub("Q", "",splityq$qtr)
 range(splityq)
 
-data_SA_90_NeuroNet_qtr <- cbind(data_SA_90_NeuroNet_qtr,splityq)
+data_SA_90_NeuroNet_pre$quartal <- splityq
 # corrected for quartals 
-table( data_SA_90_NeuroNet_qtr[[33]][Weight_NA_Number] )
 
-########################################
-############# PART TWO: ################
-####### PREPARING DATAFRAME ############
-########## FOR ANALYSIS ################
-########################################
 
-# Copy raw data to pre
-data_SA_90_NeuroNet_pre <- data_SA_90_NeuroNet_raw
 
-# Transform series according to conclusion above
+# Transform series to correct class
 data_SA_90_NeuroNet_pre[[1]] <- as.factor(data_SA_90_NeuroNet_pre[[1]])
 data_SA_90_NeuroNet_pre[[4]] <- as.factor(data_SA_90_NeuroNet_pre[[4]])
 data_SA_90_NeuroNet_pre[[29]] <- as.factor(data_SA_90_NeuroNet_pre[[29]])
+
+############################
+############################
+# check for missings once more:
+table( data_SA_90_NeuroNet_pre[[13]][Weight_NA_Number] ) # most missings in 4th quarter
 
 str(data_SA_90_NeuroNet_pre)
 # Conclusion:
@@ -180,26 +164,30 @@ str(data_SA_90_NeuroNet_pre)
 # - There are 26 different weather stations.
 # - Why are there fewer weather stations than destinations?
 
+# Earliest Date in the data set
+min(data_SA_90_NeuroNet_pre$Date)
+max(data_SA_90_NeuroNet_pre$Date)
+# -> 2015 is incomplete.
+
+########################################
+############# PART TWO: ################
+####### PREPARING DATAFRAME ############
+########## FOR ANALYSIS ################
+########################################
+
+
+
 # Store variables names
 data_names <- names(data_SA_90_NeuroNet_pre)
 
 # Create Date column in correct date format
 data_SA_90_NeuroNet_pre$Date <- as.Date(data_SA_90_NeuroNet_pre$LST_D, "%d.%m.%Y")
 
-# Earliest Date in the data set
-min(data_SA_90_NeuroNet_pre$Date)
-max(data_SA_90_NeuroNet_pre$Date)
-# -> 2015 is incomplete.
-# -> In the following we will only consider 2016
+splitdate <- colsplit(data_SA_90_NeuroNet_pre$LST_D," ",names=c("date","time"))
+#data_2016 <- cbind(data_2016, splitdate)
 
-# Create new data set containing only the values of 2016
-data_2016 <- data_SA_90_NeuroNet_pre[data_SA_90_NeuroNet_pre$jahr == 2016, ]
-str(data_2016)
-
-
-
-# Create Calender File for 2016
-cal <- data.frame(Date = seq(as.Date("2016-01-02"), as.Date("2016-12-31"), "day" ))
+#library(lubridate)
+cal <- data.frame(Date = seq(as.Date("2015-09-17"), as.Date("2016-12-31"), "day" ))
 cal$Weekday <- weekdays(cal$Date)
 cal$Weekday_No <- wday(cal$Date)
 cal$Month <- month(cal$Date)
@@ -212,14 +200,15 @@ cal$Holiday <- 0
 cal$HolidayWeek <- 0
 for (i in seq(dim(cal)[1])) {
   # browser()
-  if (any(which(cal$Date[i] == data_2016$Date))) {
-    cal$HolidayWeek[i] <- data_2016$FeiertagsWoche[
-      which(cal$Date[i] == data_2016$Date)[1]
+  if (any(which(cal$Date[i] == data_SA_90_NeuroNet_pre$Date))) {
+    cal$HolidayWeek[i] <- data_SA_90_NeuroNet_pre$FeiertagsWoche[
+      which(cal$Date[i] == data_SA_90_NeuroNet_pre$Date)[1]
       ]
   } else {
     cal$HolidayWeek[i] <- NA
   } # Stop if-else
 }
+
 
 cal$Month <- as.factor(cal$Month)
 cal$Quarter <- as.factor(cal$Quarter)
@@ -227,15 +216,11 @@ cal$Weekday <- as.factor(cal$Weekday)
 cal$Weekend <- as.factor(cal$Weekend)
 # cal$Holiday <- as.factor(cal$Holiday)
 cal$HolidayWeek <- as.factor(cal$HolidayWeek)
-head(cal)
-str(cal)
 
-# Fill in calender file with aggregated values
-
-# Compute and store number of shippings for each day (= Quantity)
 cal$Quantity <- 0
-Quantity <- as.data.frame( table( sort(data_2016$Date) ) )
-Quantity$Var1 <- as.Date(Quantity$Var1)
+Quantity <- as.data.frame( table( sort(data_SA_90_NeuroNet_pre$Date) ) )
+
+Quantity$Var1 <- as.Date(as.character(Quantity$Var1))
 for (i in seq(dim(Quantity)[1])) {
   cal$Quantity[ which(  cal$Date == Quantity[[1]][i] ) ] <- Quantity[[2]][i]
 }
@@ -243,7 +228,7 @@ for (i in seq(dim(Quantity)[1])) {
 
 # Compute and store sum of shipped weights (= Weight)
 cal$Weight <- 0
-Weight <- aggregate( gewicht ~ Date, data_2016, sum )
+Weight <- aggregate( gewicht ~ Date, data_SA_90_NeuroNet_pre, sum )
 for (i in seq(dim(Weight)[1])) {
   cal$Weight[ which(  cal$Date == Weight[[1]][i] ) ] <- Weight[[2]][i]
 }
@@ -251,20 +236,14 @@ for (i in seq(dim(Weight)[1])) {
 # Compute and store average size of shipping as Weight/Quantity
 cal$Size <- cal$Weight / cal$Quantity
 
-# Compute and store the average temperatur for each day
-Temperature <- aggregate( Temp ~ Date, data_2016, mean )
+# Compute and store the average temperature for each day
+Temperature <- aggregate( Temp ~ Date, data_SA_90_NeuroNet_pre, mean )
 cal$Temp <- NA
 for (i in seq(dim(Temperature)[1])) {
   cal$Temp[ which(  cal$Date == Temperature[[1]][i] ) ] <- Temperature[[2]][i]
 }
 
-################################### -
-# 2.6. Holiday Detection -------------
-################################### -
-
-
-# Which are the dates where shipments drop sharply, i.e. below 500 (holidays)? 
-holidays <- cal$Date[cal$Quantity < 500 & cal$Weekend == 0]; holidays
+holidays <- cal$Date[cal$Quantity < 500 & cal$Weekend == 0];holidays
 # Conlusion:
 # - 2016-01-06 Heilige Drei Koenige
 # - 2016-03-25 Karfreitag 
@@ -275,8 +254,6 @@ holidays <- cal$Date[cal$Quantity < 500 & cal$Weekend == 0]; holidays
 # - 2016-10-03 Tag der Deutschen Einheit
 # - 2016-11-01 Allerheiligen
 # - 2016-12-26 Weihnachten
-
-# Fill these into the calender frame in the column "Holiday"
 cal$Holiday[ cal$Date %in% holidays ] <- 1
 cal$Holiday <- as.factor(cal$Holiday)
 
@@ -284,7 +261,7 @@ cal$Holiday <- as.factor(cal$Holiday)
 
 # save object for later use
 setwd("E:/")
-saveRDS(jausa, file = "jausa.rds")
-head(jausa)
-jausanames <- colnames(jausa)
-saveRDS(jausanames, file = "jausanames.rds")
+saveRDS(cal, file = "cal.rds")
+head(cal)
+# calnames <- colnames(cal)
+# saveRDS(calnames, file = "calnames.rds")

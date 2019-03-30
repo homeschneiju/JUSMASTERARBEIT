@@ -2,8 +2,15 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: jusmatesttex.aux
 The style file: apalike.bst
 Database file #1: jusmabib.bib
 Warning--I didn't find a database entry for "Pinto"
+Warning--I didn't find a database entry for "Intihar"
+Warning--to sort, need author or key in .b
+Warning--empty year in .b
+Warning--empty year in Abate.2014
+Warning--empty year in ADAC.
 Warning--empty publisher in Balkin.1997
+Warning--empty year in Bundesregierung.
 Warning--empty publisher in Hyndman.2018
 Warning--empty year in Salehinejad.12292017
+Warning--empty year in StatistischesBundesamt.
 Warning--empty publisher in Taghizadeh.2017
-(There were 5 warnings)
+(There were 12 warnings)

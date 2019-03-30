@@ -39,6 +39,11 @@ After a brief description of the use case at hand, an overview of existing appro
 \section{Use Case: Short-term forecasting of freight weight for road haulage - on the example of NAGEL group}
 \subsection{NAGEL group}
 \subsection{The data}
+
+The data supplied by NAGEL and the University of Regensburg (a research partner of Fraunhofer's) for use in this coursework was supplied in .csv-format and included 472,137 observations between 17/09/2015 and 31/12/2016 for the following 30 variables:
+(TABELLE SPALTENBESCHREIBUNG)
+\\
+
 \subsection{External data}
 hier nur kurz beschreiben, dass es externe Daten geben wird.
 
@@ -533,33 +538,76 @@ The error metrics RMSE and MAPE were customly computed.\\
 
 
 \section{Data analysis}
-\subsection{Expert-based variable selection}
+\subsection{Literature-based variable selection}
 
 This thesis is part of a Fraunhofer institute's department for Supply Chain Services (Fraunhofer SCS)'s research project, in cooperation with the University of Erlangen-Nuremberg, the University of Erlangen and NAGEL group as one of several industrial partners. 
 One goal of this research project is to elaborate whether the addition of further information is helpful to predict freight demand (in terms of weight or volume) as opposed to solely basing the forecast on past values.\\
 As the research project is funded by the Federal Ministry for Traffic and Digital Infrastructure, a precondition to which kind of information to choose was to use freely available data sets, such as data provided by the Ministry's \textit{mcloud}, an open online platform with data on mobility and related topics. \\
 When planning the research project, initial ideas were to explore different time scopes and check for seasonalities and calender-related influences on freight demand, such as weekly, monthly, quarterly, or yearly fluctuations and changes in demand due to (upcoming) holidays. \
 
-In \cite{Abate.2014}'s study on the effect of fuel prices on average length of haul, inconsistent results were found: A decrease in length of haul before 2008 and an increase after. Furthermore, an improvement of load capacity was detected for higher fuel prices, but also a decline in physical productivity, measured in tonnekilometres.
-Due to the inconsistency of the findings in this, it is unclear whether fuel price might have an impact on freight weight. Logical considerations, on the one hand, could be that higher prices would hamper demand in deliveries by truck and likely cause a shift towards e.g. rail transportation. On the other hand, infrastructure might not always allow a shift towards other means of transportation, and certain (basic) types of food are demanded regardless of price, so there might not be an influence of fuel price on freight weight (in general), or only on specific types of food, e.g. luxury goods.
-Data on fuel prices are accessible from the website of the "German General Automobile Club" (Allgemeiner Deutscher Automobilclub, ADAC) \citep{ADAC.}.\
+Additional variables found in literature can be partitioned into the following major sections: Calendar, meterological, sociodemographical, economic and specific effects.
 
+
+
+
+\subsubsection{Calendar effects}
+
+Calender effects can be divided into two subgroups: periodic and non-periodic effects. While weekdays, the number of days in a month and certain holidays such as Christmas form part of the former group, holidays such as Easter, that do not occur at the same time every year, belong to the latter group.\\ QUELLEN
 \cite{Cools.2009} accounted for holiday and daily effects on traffic counts and found weekly patterns and holiday impacts especially on the amount of commuters. Since their target was the quantity of passenger transportation on highways and not goods traffic, their results do not exactly indicate the inclusion of holiday and daily effects into the model in this coursework. However, as experts of the industrial partners of Fraunhofer SCS stated the importance of these two factors in their past experience, they are going to be included in this coursework. \cite{Cools.2009}'s paper provides a useful guidance to how to handle these two variables in time series forecasting.\
-Data on holidays and school holidays can be retrieved from the website "schulferien.org" \citep{.b}.\\
 
-According to \cite{JONG.2004}, GDP has been included as an explanatory variable in other freight models before; \cite{Intihar} included GDP in their paper as well, and furthermore unemployment. Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS" \citep{StatistischesBundesamt.2019}.\\
+
+\subsubsection{Meteorological effects}
+
+\cite{Bahng.2012} found an effect of temperature on the sales of seasonal garments.\cite{Murray.2010} find similar effects of sunshine duration and and increase in consumer spending, which they explain with a psychological phenomenon. \cite{Bertrand.2015} similarly found that unexpected fluctuations in temperature have an impact on retail sales. 
+
+\subsubsection{Sociodemographical effects}
+
+Population may help in forecasting freight transportation demand, according to \cite{Saidi.2017}.
+
+
+\subsubsection{Economic effects}
+According to \cite{JONG.2004}, GDP has been included as an explanatory variable in other freight models before; \cite{Intihar} included GDP in their paper as well, and furthermore unemployment. GDP as an index to forecast retail sales and freight demand was furthermore used in \cite{Guo.2013} and \cite{Fite.2002}. \cite{Saidi.2017} provide causal linkage modeling of economic growth on transport.\\
+More economic effects named in studies are key interest rate \citep{Lahiri.2006}, exchange rate \cite{Kim.2011}, and financial market return \cite{Osadchiy.2013}.
+
+
+\subsubsection{Specific effects}
+In \cite{Abate.2014}'s study on the effect of fuel prices on average length of haul, inconsistent results were found: A decrease in length of haul before 2008 and an increase after. Furthermore, an improvement of load capacity was detected for higher fuel prices, but also a decline in physical productivity, measured in tonnekilometres.
+Due to the inconsistency of the findings in this, it is unclear whether fuel price might have an impact on freight weight. Logical considerations, on the one hand, could be that higher prices would hamper demand in deliveries by truck and likely cause a shift towards e.g. rail transportation. On the other hand, infrastructure might not always allow a shift towards other means of transportation, and certain (basic) types of food are demanded regardless of price, so there might not be an influence of fuel price on freight weight (in general), or only on specific types of food, e.g. luxury goods.\\
+\cite{Lahiri.2006}, however, were able to show an impact of fuel prices on transportation volume. \\
+Moreover, a predictive effect of problems in railway traffic could be found (QUELLE)
+
+\subsection{Critical acclaim of literature-based variables}
+
+In total, 16 additional variables were found in literature.\\ 
 
 A precondition to time series modelling is causality, which is logical and obvious for holidays and daily effects determining freight demand (freight demand cannot influence the ocurrence of holidays); not exactly as much for fuel price and GDP.\\
 It might make sense to think that the demand for food haulage impacts fuel prices (as prices are a matter of demand and supply), or that it influences the GDP in some indirect way (and \cite{JONG.2004} admit to this two-way point of view). 
 In fact, the GDP (in this case: the German BIP) is a measure of the value of all inland produced goods and services in a certain time period \cite{StatistischesBundesamt.} and is influenced by demand \cite{Bundesregierung.}. Still, in the case at hand, for the prediction of daily freight demand, knowing the current GDP might be a useful tool - as e.g. \cite{Intihar.2017} have found (and they name further studies with similar results as theirs). Another reason why GDP might not be a good indicator for daily freight demand is that is is more of a long-term measure. \\
-Considering fuel prices, the counter-argument to fuel prices hampering demand for truck haulage would be that an increasing demand in truck haulage may lead to higher fuel prices. However, it is not very likely that an increase in truck haulage for food deliveries in Germany significantly raises prices that are determined on a world-wide level. \
+Considering fuel prices, the counter-argument to fuel prices hampering demand for truck haulage would be that an increasing demand in truck haulage may lead to higher fuel prices. However, it is not very likely that an increase in truck haulage for food deliveries in Germany significantly raises prices that are determined on a world-wide level. \\
 
+A very practical consideration to whether or not include a variable in a dataset is the goal of the research project to use data that are openly available.
+For the following variables, data was obtainable from open sources such as GENESIS \citep{StatistischesBundesamt.2019} or \textit{mcloud}: Holidays, school holidays, temperature, rainfall, GDP, population, fuel prices, key interest rate, railway traffic (though sparse).\\
+For the following variables, this was not the case (March 2019), which is why they were not taken into further consideration: , exchange rate, financial market return. 
+
+\subsection{Sources for external data}
+
+All data retrieved were restricted to the Federal State of Bavaria between 2015 and 2017.
+
+Encoding of weekdays and holidays was manually computed, as well as the number of days in a month.
+Data on holidays and school holidays can be retrieved from the website "schulferien.org" \citep{.b}.\\
+
+Data on temperature was provided in the initial data set received from University of Regensburg.\\
+Data on sunshine duration was found on \textit{mcloud}.
+
+Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS".\\
+Data on key interest rates was found on the homepage of the European Central Bank: http://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=143.FM.D.U2.EUR.4F.KR.DFR.LEV&start=01-01-2015&end=31-12-2016&submitOptions.x=0&submitOptions.y=0&trans=N (30th March 2019).
+
+Data on fuel prices are accessible from the website of the "German General Automobile Club" (Allgemeiner Deutscher Automobilclub, ADAC) \citep{ADAC.}.\\
+
+Data on railway delays was obtained from an API of \textit{Deutsche Bahn}. QUELLE
 \subsection{Data Preprocessing}
 
-The data received by NAGEL for use in this coursework was supplied in .csv-format and included 472,137 observations between 17/09/2015 and 31/12/2016 for the following 30 variables:
-(TABELLE SPALTENBESCHREIBUNG)
-\\
-A first glance at the raw data revealed that the variable "gewicht" (weight) had 49 missing values, there are 5,525 different senders and there are 15,576 different recipients.\\
+A first glance at the raw data revealed that the variable "gewicht" (weight) had 49 missing values, there are 5,525 different senders and there are 15,576 different recipients. Furthermore, there are 28 different origin-destination relations; note that there is only one origin in the data set which is Nuremberg (code number 90). There are only 26 weather stations which is 2 fewer than destinations; probably because there are no weather stations near two of the destinations.
 Some variables ( "ABS$\_$REL", "Ziel$\_$REL", and "WetterStationID") had to be redefined as factor. Furthermore, the variable quarter incorrectly labeled dates in the fourth quarter of the year as being in the third quarter, which had to be corrected. \\
 The missing values in gewicht ocurred mostly on holidays:\\
 2015-12-25 - Boxing Day\\
@@ -585,7 +633,7 @@ Lastly, the raw data set was transformed into a data.frame aggregated by date. I
 "ferien"  \ (boolean; 1 if date was within school holidays)\\ 
 MEHR
 
-All data retrieved were restricted to the Federal State of Bavaria between 2015 and 2017.
+
 \bibliographystyle{apalike}
 \bibliography{jusmabib}
 \end{document} 

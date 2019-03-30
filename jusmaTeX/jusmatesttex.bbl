@@ -1,5 +1,17 @@
 \begin{thebibliography}{}
 
+\bibitem[.b, ]{.b}
+Schulferien 2015-2017.
+
+\bibitem[Abate, ]{Abate.2014}
+Abate, M.
+\newblock Does fuel price affect trucking industry's network characteristics? :
+  evidence from denmark.
+
+\bibitem[ADAC, ]{ADAC.}
+ADAC.
+\newblock Kraftstoff-durchschnittspreise.
+
 \bibitem[Adhikari, 2015]{Adhikari.2015}
 Adhikari, R. (2015).
 \newblock A neural network based linear ensemble framework for time series
@@ -63,10 +75,18 @@ Box, G. E.~P. and Jenkins, G.~M. (1976).
 {Bundesministerium f{\"u}r Verkehr und Infrastruktur} (2014).
 \newblock Verkehrsverflechtungsprognose 2030.
 
+\bibitem[Bundesregierung, ]{Bundesregierung.}
+Bundesregierung.
+\newblock Indikator 10: Wirtschaftliche leistungsf{\"a}higkeit.
+
 \bibitem[Chandrashekar and Sahin, 2014]{Chandrashekar.2014}
 Chandrashekar, G. and Sahin, F. (2014).
 \newblock A survey on feature selection methods.
 \newblock {\em Computers {\&} Electrical Engineering}, 40(1):16--28.
+
+\bibitem[Chollet et~al., 2015]{chollet2015keras}
+Chollet, F. et~al. (2015).
+\newblock Keras.
 
 \bibitem[Cools et~al., 2009]{Cools.2009}
 Cools, M., Moons, E., and Wets, G. (2009).
@@ -155,6 +175,11 @@ Hyndman, R.~J. and Athanasopoulos, G. (2018).
 \newblock {\em Forecasting: Principles and practice}.
 \newblock 2. auflage edition.
 
+\bibitem[Hyndman and Khandakar, 2008]{Hyndman.2008}
+Hyndman, R.~J. and Khandakar, Y. (2008).
+\newblock Automatic time series forecasting: The forecast package for r.
+\newblock {\em Journal of Statistical Software}, 27(3).
+
 \bibitem[Intihar et~al., 2017]{Intihar.2017}
 Intihar, M., Kramberger, T., and Dragan, D. (2017).
 \newblock Container throughput forecasting using dynamic factor analysis and
@@ -198,6 +223,19 @@ Lee, M.~H. and Hamzah, N. (2010).
   with ramadhan effect.
 \newblock {\em Proceedings of the Regional Conference on Statistical Sciences}.
 
+\bibitem[{Martin Abadi} et~al., 2015]{tensorflow2015-whitepaper}
+{Martin Abadi}, {Ashish Agarwal}, {Paul Barham}, {Eugene Brevdo}, {Zhifeng
+  Chen}, {Craig Citro}, Corrado, G.~S., {Andy Davis}, {Jeffrey Dean}, {Matthieu
+  Devin}, {Sanjay Ghemawat}, {Ian Goodfellow}, {Andrew Harp}, {Geoffrey
+  Irving}, {Michael Isard}, Jia, Y., {Rafal Jozefowicz}, {Lukasz Kaiser},
+  {Manjunath Kudlur}, {Josh Levenberg}, {Dan Man{\'e}}, {Rajat Monga}, {Sherry
+  Moore}, {Derek Murray}, {Chris Olah}, {Mike Schuster}, {Jonathon Shlens},
+  {Benoit Steiner}, {Ilya Sutskever}, {Kunal Talwar}, {Paul Tucker}, {Vincent
+  Vanhoucke}, {Vijay Vasudevan}, {Fernanda Vi{\'e}gas}, {Oriol Vinyals}, {Pete
+  Warden}, {Martin Wattenberg}, {Martin Wicke}, {Yuan Yu}, and {Xiaoqiang
+  Zheng} (2015).
+\newblock Tensorflow: Large-scale machine learning on heterogeneous systems.
+
 \bibitem[Miller, 2018]{Miller.2018}
 Miller, J. (2018).
 \newblock Arima time series models for full truckload transportation prices.
@@ -208,6 +246,13 @@ Mircetic, D., Nikolicic, S., Maslaric, M., Ralevic, N., and Debelic, B. (2016).
 \newblock Development of s-arima model for forecasting demand in a beverage
   supply chain.
 \newblock {\em Open Engineering}, 6(1):14.
+
+\bibitem[Moritz et~al., 2015]{Moritz2015ComparisonOD}
+Moritz, S., Sard{\'a}, A., Bartz-Beielstein, T., Zaefferer, M., and Stork, J.
+  (2015).
+\newblock Comparison of different methods for univariate time series imputation
+  in r.
+\newblock {\em CoRR}, abs/1510.03924.
 
 \bibitem[Nakamura, 2005]{Nakamura.2005}
 Nakamura, E. (2005).
@@ -255,11 +300,23 @@ Schwarz, G. (1978).
 \newblock Estimating the dimension of a model.
 \newblock {\em The Annals of Statistics}, 6(2):461--464.
 
+\bibitem[{Statistisches Bundesamt}, ]{StatistischesBundesamt.}
+{Statistisches Bundesamt}.
+\newblock Bruttoinlandsprodukt (bip).
+
+\bibitem[{Statistisches Bundesamt}, 2019]{StatistischesBundesamt.2019}
+{Statistisches Bundesamt} (2019).
+\newblock Genesis-online.
+
 \bibitem[Taghizadeh, 2017]{Taghizadeh.2017}
 Taghizadeh, E. (2017).
 \newblock {\em Utilizing Artificial Neural Networks to Predict Demand for
   Weather-Sensitive Products at Retail Stores}.
 \newblock Detroit, Michigan, USA.
+
+\bibitem[Team, 2013]{Team.2013}
+Team, R.~C. (2013).
+\newblock R: A language and environment for statistical computing.
 
 \bibitem[{Transport and Infrastructure Council},
   2016]{TransportandInfrastructureCouncil.2016}

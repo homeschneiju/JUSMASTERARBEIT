@@ -13,6 +13,13 @@
 data(Seatbelts)
 summary(Seatbelts)
 
+# interpolate missing values
+
+data_interp <- data_SA_90_NeuroNet_pre
+data_interp <- na.interp(data_interp, lambda="auto")
+
+
+
 ###################
 #### Convert Data to TS object
 #### DAILY BASIS
