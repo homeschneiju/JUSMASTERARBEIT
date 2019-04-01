@@ -6,6 +6,7 @@
  \usepackage[T1]{fontenc}
 %\useunder{\uline}{\ul}{}
 \usepackage{amsmath}
+\usepackage{hyperref}
 
 \title{Comparison of ARIMA, SVR and ANN models including exogenous variables for short-term freight demand forecasting at a large national food distributor}
 \author{Juliana Schneider}
@@ -169,10 +170,12 @@ where $\mu_{ARMA}$ actually equals the intercept $C$ of the aforementioned $AR(p
 \subsection{Seasonal AR(I)MA - SARIMA models}
 
 Of course, a time series may also exhibit recurrent seasonal patterns, e.g. an increase in demand in december every year. If there are recurrent fluctuations that ocurr yearly or otherwise periodically, there is a seasonal or cyclical component, respectively \citep{Vogel.2015} that has to be taken into account; the time series has to be "deseasonalized" accordingly \citep{Benkachcha.2015}.\\
-The length of the period of a cyclical component may be determined through a fourier series \citep{Vogel.2015}.
-seasonal components can be detected by visual checks of the time series plots.
+
+Seasonal components can be detected by visual checks of the time series plots.
 Seasonality is modeled in AR(I)MA models by an additional tuple of orders $(P,D,Q)$; the complete model is then denoted as $SARIMA(p,d,q)(P,D,Q)$, where the additional tuple of orders essentially has the same meaning as the former one, only applied to seasonal magnitude.  
-\cite{Hyndman.2008} recommends modeling larger seasonal components (such as yearly reocurrences in daily measured data) or multiple seasonalities by a fourier series.
+\\The length of the period of a cyclical component may furthermore be determined through a fourier series \citep{Vogel.2015}.
+\cite{Hyndman.2008} also recommends modeling larger seasonal components (such as yearly reocurrences in daily measured data) or multiple seasonalities by a fourier series.
+A time series $y_{t}$ can be expressed as a set of orthogonal trigonometric functions - actually as a linear combination of cosine and sine functions -  reduced to only the terms up to a certain lag $k$, so fitting it is less tedious (especially for large sample sizes) \cite{Iwok.2016}. 
 
 \subsection{Violation of assumptions and other issues}
 If $\mu(t) \neq \mu$, i.e. the mean is not independent of time, the assumption of stationarity is violated; there is a so-called trend. In the case of a non-stationary time series, stationarity can be obtained by differencing \citep{Andreoni.2006b, Hunt.2003}
@@ -518,11 +521,16 @@ For all common functions, \texttt{stats} was used whenever possible. Furthermore
 
 Missing values for time series were imputed by linear interpolation using the function \texttt{na.interp}, which was found to supply robust imputation compared to other functions for imputation of mmissing values in time series available in \texttt{R} \citep{Moritz2015ComparisonOD}. 
 
-To specify the AR(I)MA model, the \texttt{arima()} function in \texttt{stats{}} was used.\
-For ACF and PACF plots and the AR(I)MAX model, the functions \texttt{acf()}, \texttt{pacf()}, and \texttt{arima()} (which is essentially a wrapper on \texttt{stats}'s \texttt{arima()}, including some extensions, e.g. exogenous variables PRÜFEN). \texttt{Arima()} actually fits a linear regression with AR(I)MA errors \citep{Hyndman.2018}; no \texttt{R} function could be found that models actual ARIMAX models.\\
+To specify the AR(I)MA model, the \texttt{arima()} function in \texttt{forecast} was used.\
+\texttt{forecast} furthermore provides the functions \texttt{acf()}, \texttt{pacf()} for ACF and PACF plots. \\
 For ADF tests, the function \texttt {adf.test()} in the package \texttt{tseries} was used. In the function, the parameter \textit{k} (i.e. the lag) is determined according to the formula suggested by \cite{Vogel.2015} (see subsection NUMMER (Violation of assumptions)), although without t-testing the coefficients of equation NUMMER 4. Manually reducing \textit{k} and comparing the results yielded no differences in the outcome.\\
 
-Subsequently, the parameters are computed bei \texttt{Arima()}; possible seasonal components can be modeled by the \texttt{fourier()} functions given as an argument to \texttt{xreg=} in \texttt{Arima()}. The order of the fourier series is determined by minimizing the AICc (AICC ERKLÄREN s oben). \
+Subsequently, the models' parameters are computed by \texttt{arima()} (which is essentially a wrapper on \texttt{stats}'s \texttt{arima()}, including some extensions, e.g. exogenous variables PRÜFEN); possible seasonal components can be modeled by the \texttt{fourier()} function given as an argument to \texttt{xreg=} in \texttt{Arima()}. The order of the fourier series is determined by minimizing the AICc, which is the "corrected AIC" that corrects for the AIC's tendency to favour larger models \citep{Wit.2012}. \\
+\begin{equation}
+AICc = -2ln(\hat{L})+\frac{2k}{n/n-k-1}
+\end{equation}
+with the denominator being a bias correction of first order \citep{Wit.2012}.\\
+For AR(I)MAX, \texttt{arima()} actually fits a linear regression with AR(I)MA errors \citep{Hyndman.2018}; no \texttt{R} function could be found that models actual ARIMAX models. Because we are dealing with daily forecasts, again, seasonality in the data is captured by passing the additional variables in the \texttt{xreg=} argument as a fourier series.
 %As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.\\
 
 Functions to model Support Vector Machines and Regression are contained in the package \texttt{e1071}.\\
@@ -545,14 +553,14 @@ One goal of this research project is to elaborate whether the addition of furthe
 As the research project is funded by the Federal Ministry for Traffic and Digital Infrastructure, a precondition to which kind of information to choose was to use freely available data sets, such as data provided by the Ministry's \textit{mcloud}, an open online platform with data on mobility and related topics. \\
 When planning the research project, initial ideas were to explore different time scopes and check for seasonalities and calender-related influences on freight demand, such as weekly, monthly, quarterly, or yearly fluctuations and changes in demand due to (upcoming) holidays. \
 
-Additional variables found in literature can be partitioned into the following major sections: Calendar, meterological, sociodemographical, economic and specific effects.
+Additional variables found in literature can be partitioned into the following major sections: Calendaric, meterological, sociodemographical, economic and specific effects.
 
 
 
 
-\subsubsection{Calendar effects}
+\subsubsection{Calendaric effects}
 
-Calender effects can be divided into two subgroups: periodic and non-periodic effects. While weekdays, the number of days in a month and certain holidays such as Christmas form part of the former group, holidays such as Easter, that do not occur at the same time every year, belong to the latter group.\\ QUELLEN
+Calendaric effects can be divided into two subgroups: periodic and non-periodic effects \citep{Godfrey.2000}. While weekdays, the number of days in a month and certain holidays such as Christmas form part of the former group, holidays such as Easter, that do not occur at the same time every year, belong to the latter group.\\ 
 \cite{Cools.2009} accounted for holiday and daily effects on traffic counts and found weekly patterns and holiday impacts especially on the amount of commuters. Since their target was the quantity of passenger transportation on highways and not goods traffic, their results do not exactly indicate the inclusion of holiday and daily effects into the model in this coursework. However, as experts of the industrial partners of Fraunhofer SCS stated the importance of these two factors in their past experience, they are going to be included in this coursework. \cite{Cools.2009}'s paper provides a useful guidance to how to handle these two variables in time series forecasting.\
 
 
@@ -585,22 +593,24 @@ It might make sense to think that the demand for food haulage impacts fuel price
 In fact, the GDP (in this case: the German BIP) is a measure of the value of all inland produced goods and services in a certain time period \cite{StatistischesBundesamt.} and is influenced by demand \cite{Bundesregierung.}. Still, in the case at hand, for the prediction of daily freight demand, knowing the current GDP might be a useful tool - as e.g. \cite{Intihar.2017} have found (and they name further studies with similar results as theirs). Another reason why GDP might not be a good indicator for daily freight demand is that is is more of a long-term measure. \\
 Considering fuel prices, the counter-argument to fuel prices hampering demand for truck haulage would be that an increasing demand in truck haulage may lead to higher fuel prices. However, it is not very likely that an increase in truck haulage for food deliveries in Germany significantly raises prices that are determined on a world-wide level. \\
 
+Some of the variables considered to be included in the data set are less granular than the target variable - i.e., they are not measured or measurable on a day-to-day basis. These variables include the days in a month, population, key interest rate.\\
+
 A very practical consideration to whether or not include a variable in a dataset is the goal of the research project to use data that are openly available.
 For the following variables, data was obtainable from open sources such as GENESIS \citep{StatistischesBundesamt.2019} or \textit{mcloud}: Holidays, school holidays, temperature, rainfall, GDP, population, fuel prices, key interest rate, railway traffic (though sparse).\\
-For the following variables, this was not the case (March 2019), which is why they were not taken into further consideration: , exchange rate, financial market return. 
+For the following variables, this was not the case (March 2019), which is why they were not taken into further consideration: Exchange rate, and financial market return. 
 
 \subsection{Sources for external data}
 
 All data retrieved were restricted to the Federal State of Bavaria between 2015 and 2017.
 
-Encoding of weekdays and holidays was manually computed, as well as the number of days in a month.
+Encoding of weekdays, holidays and the sum of days in a month was manually computed, as well as the number of days in a month.
 Data on holidays and school holidays can be retrieved from the website "schulferien.org" \citep{.b}.\\
 
 Data on temperature was provided in the initial data set received from University of Regensburg.\\
 Data on sunshine duration was found on \textit{mcloud}.
 
 Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS".\\
-Data on key interest rates was found on the homepage of the European Central Bank: http://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=143.FM.D.U2.EUR.4F.KR.DFR.LEV&start=01-01-2015&end=31-12-2016&submitOptions.x=0&submitOptions.y=0&trans=N (30th March 2019).
+Data on key interest rates was found on the homepage of the European Central Bank: \href{http://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=143.FM.D.U2.EUR.4F.KR.DFR.LEV&start=01-01-2015&end=31-12-2016&submitOptions.x=0&submitOptions.y=0&trans=N} (30th March 2019).
 
 Data on fuel prices are accessible from the website of the "German General Automobile Club" (Allgemeiner Deutscher Automobilclub, ADAC) \citep{ADAC.}.\\
 

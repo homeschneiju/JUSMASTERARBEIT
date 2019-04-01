@@ -1,0 +1,46 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Use Case: Short-term forecasting of freight weight for road haulage - on the example of NAGEL group}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{NAGEL group}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{The data}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{External data}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{State of th Art in the Modeling of Freight Transportation Demand}{}% 6
+\BOOKMARK [1][-]{section.4}{Model Choice and Specification}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Model specification}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Time series}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{AR models}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{MA models}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.3}{AR\(I\)MA models}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.4}{Seasonal AR\(I\)MA - SARIMA models}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.5}{Violation of assumptions and other issues}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.6}{The Box-Jenkins program}{section.5}% 15
+\BOOKMARK [3][-]{subsubsection.5.6.1}{Order selection}{subsection.5.6}% 16
+\BOOKMARK [3][-]{subsubsection.5.6.2}{Estimation of parameters}{subsection.5.6}% 17
+\BOOKMARK [3][-]{subsubsection.5.6.3}{Model diagnostics}{subsection.5.6}% 18
+\BOOKMARK [3][-]{subsubsection.5.6.4}{Forecasting}{subsection.5.6}% 19
+\BOOKMARK [2][-]{subsection.5.7}{AR\(I\)MAX}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Artificial Neural Networks}{}% 21
+\BOOKMARK [2][-]{subsection.6.1}{The general structure of NNs}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.2}{Network size and structure}{section.6}% 23
+\BOOKMARK [2][-]{subsection.6.3}{Activation functions}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.4}{Learning algorithms}{section.6}% 25
+\BOOKMARK [2][-]{subsection.6.5}{Network architecture}{section.6}% 26
+\BOOKMARK [3][-]{subsubsection.6.5.1}{Feed-forward NNs}{subsection.6.5}% 27
+\BOOKMARK [3][-]{subsubsection.6.5.2}{Recurrent NNs}{subsection.6.5}% 28
+\BOOKMARK [1][-]{section.7}{Variable selection}{}% 29
+\BOOKMARK [2][-]{subsection.7.1}{Feature Selection Methods in Machine Learning}{section.7}% 30
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Filter Methods}{subsection.7.1}% 31
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Wrapper Methods}{subsection.7.1}% 32
+\BOOKMARK [3][-]{subsubsection.7.1.3}{Embedded Methods}{subsection.7.1}% 33
+\BOOKMARK [2][-]{subsection.7.2}{Variable Selection in AR\(I\)MA, SVR and NNs}{section.7}% 34
+\BOOKMARK [1][-]{section.8}{Model Evaluation}{}% 35
+\BOOKMARK [1][-]{section.9}{Software implementation}{}% 36
+\BOOKMARK [1][-]{section.10}{Data analysis}{}% 37
+\BOOKMARK [2][-]{subsection.10.1}{Literature-based variable selection}{section.10}% 38
+\BOOKMARK [3][-]{subsubsection.10.1.1}{Calendaric effects}{subsection.10.1}% 39
+\BOOKMARK [3][-]{subsubsection.10.1.2}{Meteorological effects}{subsection.10.1}% 40
+\BOOKMARK [3][-]{subsubsection.10.1.3}{Sociodemographical effects}{subsection.10.1}% 41
+\BOOKMARK [3][-]{subsubsection.10.1.4}{Economic effects}{subsection.10.1}% 42
+\BOOKMARK [3][-]{subsubsection.10.1.5}{Specific effects}{subsection.10.1}% 43
+\BOOKMARK [2][-]{subsection.10.2}{Critical acclaim of literature-based variables}{section.10}% 44
+\BOOKMARK [2][-]{subsection.10.3}{Sources for external data}{section.10}% 45
+\BOOKMARK [2][-]{subsection.10.4}{Data Preprocessing}{section.10}% 46

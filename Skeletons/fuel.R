@@ -23,10 +23,9 @@ fuel1$Diesel <- as.numeric(fuel$Diesel) # call again
 
 fuelyear <- which(fuel1$Jahr == 2015 | fuel1$Jahr == 2016)
 fuel2 <- fuel1[fuelyear,]
-fuelmonth
 fuel3 <- fuel2[c(which(fuel2$Jahr == 2015 & fuel2$Monat == c(9:12)), which(fuel2$Jahr == 2016)),]
 
 cal$year <- year(cal$Date)
 cal2 <- merge(cal, fuel3, by.x=c("year","Month"), by.y=c("Jahr","Monat"))
-
-saveRDS(cal, file = "calferiensun.rds")
+head(cal2)
+saveRDS(cal2, file = "calferiensunfuel.rds")
