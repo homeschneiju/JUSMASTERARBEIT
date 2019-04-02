@@ -601,20 +601,30 @@ For the following variables, this was not the case (March 2019), which is why th
 
 \subsection{Sources for external data}
 
-All data retrieved were restricted to the Federal State of Bavaria between 2015 and 2017.
+All data retrieved were restricted to the Federal State of Bavaria between 2015-09-17 and 2016-12-31,as this was the time period of the data provided by NAGEL.\\
 
-Encoding of weekdays, holidays and the sum of days in a month was manually computed, as well as the number of days in a month.
-Data on holidays and school holidays can be retrieved from the website "schulferien.org" \citep{.b}.\\
+Encoding of weekdays, holidays and the sum of days in a month was manually computed, as well as the number of days in a month.\\
+Data on holidays and school holidays can be retrieved from the website \href{schulferien.org} \citep{.b}.\\
 
 Data on temperature was provided in the initial data set received from University of Regensburg.\\
-Data on sunshine duration was found on \textit{mcloud}.
+Data on sunshine duration, rainfall and type of rainfall was found on \textit{mcloud} for a weather station located in Nuremberg (the origin of all transports in the dataset at hand). The type of rainfall was categorized as the following:\\
+0 - no rainfall\\
+4 - rainfall reported, but type of rain unknown\\
+6 - only rainfall \\
+7 - only snow\\
+8 - rain and snow\\
+9 - missing value\\
+The type of rainfall was re-coded to "0" for no rainfall and "1" for all other types; there were no missing values in the time period of interest.\\
 
-Both GDP (in German: BIP) and unemployment rate are data accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS".\\
-Data on key interest rates was found on the homepage of the European Central Bank: \href{http://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=143.FM.D.U2.EUR.4F.KR.DFR.LEV&start=01-01-2015&end=31-12-2016&submitOptions.x=0&submitOptions.y=0&trans=N} (30th March 2019).
+Data on GDP (in German: BIP), population and consumer price index are accessible from the German Federal Statistical Office (Destatis)'s database "GENESIS".\\
+Data on key interest rates was found on the homepage of the European Central Bank: \href{http://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=143.FM.D.U2.EUR.4F.KR.DFR.LEV&start=01-01-2015&end=31-12-2016&submitOptions.x=0&submitOptions.y=0&trans=N}{on this URL} (30th March 2019).
 
 Data on fuel prices are accessible from the website of the "German General Automobile Club" (Allgemeiner Deutscher Automobilclub, ADAC) \citep{ADAC.}.\\
 
-Data on railway delays was obtained from an API of \textit{Deutsche Bahn}. QUELLE
+Data on railway delays was obtained from an API of \textit{Deutsche Bahn}, (\href{http://data.deutschebahn.com/dataset/ist-verkehrsdaten-der-db-cargo-auf-bst8-ebene}{on this URL}). Unfortunately, data was only available for the time period between 2016-01-15 and 2016-11-30.\\
+
+Data on exchange rates were taken from \href{https://www.finanzen.net/devisen/dollarkurs/historisch}{this website}.
+
 \subsection{Data Preprocessing}
 
 A first glance at the raw data revealed that the variable "gewicht" (weight) had 49 missing values, there are 5,525 different senders and there are 15,576 different recipients. Furthermore, there are 28 different origin-destination relations; note that there is only one origin in the data set which is Nuremberg (code number 90). There are only 26 weather stations which is 2 fewer than destinations; probably because there are no weather stations near two of the destinations.
@@ -628,20 +638,41 @@ The missing values in gewicht ocurred mostly on holidays:\\
 2016-12-10 - a regular Saturday; no known holiday\\
 2016-12-25 - Boxing Day \\
 
-Lastly, the raw data set was transformed into a data.frame aggregated by date. It contains the following variables: \\
+Lastly, the raw data set was transformed into a data.frame aggregated by date and all additional variables were added. It contains the following variables: \\
 "Date"\\
-"Weekday"\\
+"Weekday"\\ 
 "Weekday$\_$No" \ (numeric representation of the weekday)\\
 "Month"\\
 "Weekend" \ (boolean; 1 if date was on a weekend)\\
 "Quarter"\\
 "Holiday" \ (boolean; 1 if date was on a holiday)\\
 "HolidayWeek" \ (boolean; 1 if date was in a week in which a holiday ocurred) \\ "Quantity" \ (number of shipments on a given date)\\ 
-"Weight"\\
-"Size" \\
+"Weight"\\ \ (daily weight of freight shipment)
+"Size" \\ \ (Weight / Quantity)
 "Temp"  \ (average temperature measured on a given date)\\
-"ferien"  \ (boolean; 1 if date was within school holidays)\\ 
-MEHR
+"msum" \ (number of days in a month) \\
+"schoolhol"  \ (boolean; 1 if date was within school holidays)\\ 
+"sun" \ (sunshine duration) \\
+"rain" \ (daily precipitation height in mm) \\
+"raintype" \ (type of precipitation) \\
+"humid" \ (mean daily relative humidity in \%) \\
+"Super.E10" \ (fuel prices for Super E10) \\
+"Diesel"  \ (fuel prices for Diesel)  \\
+"leitzins1" \ (ECB deposit facility - change in \% p.a.) \\
+"leitzins2" \ (ECB marginal lending facility - change in \% p.a.) \\
+"leitzins3" \ (ECB main refinancing operations - change in \% p.a.) \\
+"trainrides" \ (number of train rides of railway cargo per day) \\
+"raildelay" \ (number of minutes of delay in railway cargo per day) \\
+"meanraildelay" \ (mean railway delay per day in minutes) \\
+"GDP" \\
+"X" \ (classification of the GDP: Raw value, x12-arima, BV4) \\
+"VPIby" \ (consumer price index in Bavaria, for all cateogries) \\
+"VPInahr" \ (consumer prices index in Germany, for food) \\
+"pop"  \ (population in Bavaria) \\
+"endexrate" \ (exchange rate Dollar-Euro at the end of the day) \\
+"openexrate" \ (exchange rate Dollar-Euro at the opening of the day) \\
+"exratehigh" \ (highest exchange rate Dollar-Euro during a given day) \\
+"exratelow" \ (lowest exchange rate Dollar-Euro during a given day) \\
 
 
 \bibliographystyle{apalike}

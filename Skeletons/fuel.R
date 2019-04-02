@@ -1,5 +1,5 @@
 # setwd("E:/")
-cal <- readRDS("calferien.rds")
+cal <- readRDS("calferienmeteo.rds")
 head(cal)
 
 fuel <- read.xlsx("E:/KIVAS/Daten/Kraftstoffpreise Cent je Liter 2015-2018.xlsx",
@@ -28,4 +28,4 @@ fuel3 <- fuel2[c(which(fuel2$Jahr == 2015 & fuel2$Monat == c(9:12)), which(fuel2
 cal$year <- year(cal$Date)
 cal2 <- merge(cal, fuel3, by.x=c("year","Month"), by.y=c("Jahr","Monat"))
 head(cal2)
-saveRDS(cal2, file = "calferiensunfuel.rds")
+saveRDS(cal2, file = "calferienmeteofuel.rds")
