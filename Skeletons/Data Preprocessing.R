@@ -13,7 +13,7 @@
 
 # install and load packages
 
-packs <- c("tseries", "forecast", "reshape2", "zoo", "lubridate", "tidyverse", "e1071", "openxlsx")
+packs <- c("tseries", "forecast", "reshape2", "zoo", "lubridate", "tidyverse", "e1071", "openxlsx", "caret")
 
 Install_And_Load <- function(packages) {
   k <- packages[!(packages %in% installed.packages()[,"Package"])];
@@ -33,7 +33,7 @@ set.seed(123)
 # set working directory
 getwd()
 
-setwd("E:/KIVAS/Daten")
+setwd("D:/KIVAS/Daten")
 
 # Save current workspace
 #save.image()
@@ -189,11 +189,11 @@ splitdate <- colsplit(data_SA_90_NeuroNet_pre$LST_D," ",names=c("date","time"))
 #library(lubridate)
 cal <- data.frame(Date = seq(as.Date("2015-09-17"), as.Date("2016-12-31"), "day" ))
 cal$Weekday <- weekdays(cal$Date)
-cal$Weekday_No <- wday(cal$Date)
+cal$Weekday_No <- wday(cal$Date, week_start=1)
 cal$Month <- month(cal$Date)
 cal$Quarter <- quarter(cal$Date)
 cal$Weekend <- 0
-cal$Weekend[ cal$Weekday_No %in% c(1,7) ] <- 1
+cal$Weekend[ cal$Weekday_No %in% c(6,7) ] <- 1
 cal$Weekend <- as.factor(cal$Weekend)
 cal$Holiday <- 0
 # This variable will be filled in later
@@ -210,12 +210,7 @@ for (i in seq(dim(cal)[1])) {
 }
 
 
-cal$Month <- as.factor(cal$Month)
-cal$Quarter <- as.factor(cal$Quarter)
-cal$Weekday <- as.factor(cal$Weekday)
-cal$Weekend <- as.factor(cal$Weekend)
-# cal$Holiday <- as.factor(cal$Holiday)
-cal$HolidayWeek <- as.factor(cal$HolidayWeek)
+
 
 cal$Quantity <- 0
 Quantity <- as.data.frame( table( sort(data_SA_90_NeuroNet_pre$Date) ) )
@@ -235,16 +230,17 @@ for (i in seq(dim(Weight)[1])) {
 
 # Compute and store average size of shipping as Weight/Quantity
 cal$Size <- cal$Weight / cal$Quantity
-
-# Compute and store the average temperature for each day
-Temperature <- aggregate( Temp ~ Date, data_SA_90_NeuroNet_pre, mean )
-cal$Temp <- NA
-for (i in seq(dim(Temperature)[1])) {
-  cal$Temp[ which(  cal$Date == Temperature[[1]][i] ) ] <- Temperature[[2]][i]
-}
+cal$Size[which(cal$Size == "NaN")] <- 0
+# # Compute and store the average temperature for each day
+# Temperature <- aggregate( Temp ~ Date, data_SA_90_NeuroNet_pre, mean )
+# cal$Temp <- NA
+# for (i in seq(dim(Temperature)[1])) {
+#   cal$Temp[ which(  cal$Date == Temperature[[1]][i] ) ] <- Temperature[[2]][i]
+# }
 
 holidays <- cal$Date[cal$Quantity < 500 & cal$Weekend == 0];holidays
 # Conlusion:
+# dunno what's with 2015-09-17??
 # - 2016-01-06 Heilige Drei Koenige
 # - 2016-03-25 Karfreitag 
 # - 2016-03-28 Ostermontag
@@ -256,11 +252,30 @@ holidays <- cal$Date[cal$Quantity < 500 & cal$Weekend == 0];holidays
 # - 2016-12-26 Weihnachten
 cal$Holiday[ cal$Date %in% holidays ] <- 1
 cal$Holiday <- as.factor(cal$Holiday)
+cal$Holiday[1] <- 0 # 2015-09-17 was not a holiday
+
+cal[which(is.na(cal$HolidayWeek)),]
+for(j in 1:length(cal$Holiday)){
+  if (cal$Holiday[j] == 1 ){
+    cal$HolidayWeek[j] <- 1
+  } 
+}
+cal$HolidayWeek[c(193,466)] <- 1
+cal$HolidayWeek[c(242,382,451)] <- 0
+
+cal[c(193,242,382,451,466),]
 
 
+cal$Month <- as.factor(cal$Month)
+cal$Quarter <- as.factor(cal$Quarter)
+cal$Weekday_No <- as.factor(cal$Weekday_No)
+cal$Weekend <- as.factor(cal$Weekend)
+# cal$Holiday <- as.factor(cal$Holiday)
+cal$HolidayWeek <- as.factor(cal$HolidayWeek)
+levels(cal$Weekday_No)
 
 # save object for later use
-setwd("E:/")
+setwd("D:/")
 saveRDS(cal, file = "cal.rds")
 head(cal)
 # calnames <- colnames(cal)

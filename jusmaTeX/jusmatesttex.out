@@ -18,29 +18,32 @@
 \BOOKMARK [3][-]{subsubsection.5.6.3}{Model diagnostics}{subsection.5.6}% 18
 \BOOKMARK [3][-]{subsubsection.5.6.4}{Forecasting}{subsection.5.6}% 19
 \BOOKMARK [2][-]{subsection.5.7}{AR\(I\)MAX}{section.5}% 20
-\BOOKMARK [1][-]{section.6}{Artificial Neural Networks}{}% 21
-\BOOKMARK [2][-]{subsection.6.1}{The general structure of NNs}{section.6}% 22
-\BOOKMARK [2][-]{subsection.6.2}{Network size and structure}{section.6}% 23
-\BOOKMARK [2][-]{subsection.6.3}{Activation functions}{section.6}% 24
-\BOOKMARK [2][-]{subsection.6.4}{Learning algorithms}{section.6}% 25
-\BOOKMARK [2][-]{subsection.6.5}{Network architecture}{section.6}% 26
-\BOOKMARK [3][-]{subsubsection.6.5.1}{Feed-forward NNs}{subsection.6.5}% 27
-\BOOKMARK [3][-]{subsubsection.6.5.2}{Recurrent NNs}{subsection.6.5}% 28
-\BOOKMARK [1][-]{section.7}{Variable selection}{}% 29
-\BOOKMARK [2][-]{subsection.7.1}{Feature Selection Methods in Machine Learning}{section.7}% 30
-\BOOKMARK [3][-]{subsubsection.7.1.1}{Filter Methods}{subsection.7.1}% 31
-\BOOKMARK [3][-]{subsubsection.7.1.2}{Wrapper Methods}{subsection.7.1}% 32
-\BOOKMARK [3][-]{subsubsection.7.1.3}{Embedded Methods}{subsection.7.1}% 33
-\BOOKMARK [2][-]{subsection.7.2}{Variable Selection in AR\(I\)MA, SVR and NNs}{section.7}% 34
-\BOOKMARK [1][-]{section.8}{Model Evaluation}{}% 35
-\BOOKMARK [1][-]{section.9}{Software implementation}{}% 36
-\BOOKMARK [1][-]{section.10}{Data analysis}{}% 37
-\BOOKMARK [2][-]{subsection.10.1}{Literature-based variable selection}{section.10}% 38
-\BOOKMARK [3][-]{subsubsection.10.1.1}{Calendaric effects}{subsection.10.1}% 39
-\BOOKMARK [3][-]{subsubsection.10.1.2}{Meteorological effects}{subsection.10.1}% 40
-\BOOKMARK [3][-]{subsubsection.10.1.3}{Sociodemographical effects}{subsection.10.1}% 41
-\BOOKMARK [3][-]{subsubsection.10.1.4}{Economic effects}{subsection.10.1}% 42
-\BOOKMARK [3][-]{subsubsection.10.1.5}{Specific effects}{subsection.10.1}% 43
-\BOOKMARK [2][-]{subsection.10.2}{Critical acclaim of literature-based variables}{section.10}% 44
-\BOOKMARK [2][-]{subsection.10.3}{Sources for external data}{section.10}% 45
-\BOOKMARK [2][-]{subsection.10.4}{Data Preprocessing}{section.10}% 46
+\BOOKMARK [1][-]{section.6}{Support Vector Machines: Support Vector Regression}{}% 21
+\BOOKMARK [2][-]{subsection.6.1}{The tuning parameter C}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.2}{Kernel functions}{section.6}% 23
+\BOOKMARK [1][-]{section.7}{Artificial Neural Networks}{}% 24
+\BOOKMARK [2][-]{subsection.7.1}{The general structure of NNs}{section.7}% 25
+\BOOKMARK [2][-]{subsection.7.2}{Network size and structure}{section.7}% 26
+\BOOKMARK [2][-]{subsection.7.3}{Activation functions}{section.7}% 27
+\BOOKMARK [2][-]{subsection.7.4}{Learning algorithms}{section.7}% 28
+\BOOKMARK [2][-]{subsection.7.5}{Network architecture}{section.7}% 29
+\BOOKMARK [3][-]{subsubsection.7.5.1}{Feed-forward NNs}{subsection.7.5}% 30
+\BOOKMARK [3][-]{subsubsection.7.5.2}{Recurrent NNs}{subsection.7.5}% 31
+\BOOKMARK [1][-]{section.8}{Variable selection}{}% 32
+\BOOKMARK [2][-]{subsection.8.1}{Feature Selection Methods in Machine Learning}{section.8}% 33
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Filter Methods}{subsection.8.1}% 34
+\BOOKMARK [3][-]{subsubsection.8.1.2}{Wrapper Methods}{subsection.8.1}% 35
+\BOOKMARK [3][-]{subsubsection.8.1.3}{Embedded Methods}{subsection.8.1}% 36
+\BOOKMARK [2][-]{subsection.8.2}{Variable Selection in AR\(I\)MA, SVR and NNs}{section.8}% 37
+\BOOKMARK [1][-]{section.9}{Model Evaluation}{}% 38
+\BOOKMARK [1][-]{section.10}{Software implementation}{}% 39
+\BOOKMARK [1][-]{section.11}{Data analysis}{}% 40
+\BOOKMARK [2][-]{subsection.11.1}{Literature-based variable selection}{section.11}% 41
+\BOOKMARK [3][-]{subsubsection.11.1.1}{Calendaric effects}{subsection.11.1}% 42
+\BOOKMARK [3][-]{subsubsection.11.1.2}{Meteorological effects}{subsection.11.1}% 43
+\BOOKMARK [3][-]{subsubsection.11.1.3}{Sociodemographical effects}{subsection.11.1}% 44
+\BOOKMARK [3][-]{subsubsection.11.1.4}{Economic effects}{subsection.11.1}% 45
+\BOOKMARK [3][-]{subsubsection.11.1.5}{Specific effects}{subsection.11.1}% 46
+\BOOKMARK [2][-]{subsection.11.2}{Critical acclaim of literature-based variables}{section.11}% 47
+\BOOKMARK [2][-]{subsection.11.3}{Sources for external data}{section.11}% 48
+\BOOKMARK [2][-]{subsection.11.4}{Data Preprocessing}{section.11}% 49

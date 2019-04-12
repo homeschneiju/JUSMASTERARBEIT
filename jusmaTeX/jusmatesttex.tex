@@ -293,7 +293,27 @@ where $v(B)X_{t}$ is the transfer function with backshift operator \textit{B}:
 
 AR(I)MAX models can be interpreted as regression problems, where one variable is explained by another so that it can be considered as a linear regression with autocorrelated error terms \citep{Cools.2009}.
 
+\section{Support Vector Machines: Support Vector Regression}
 
+Support Vector Machines were first developed by (QUELLE) for classification problems. In their simplest application - a linearly separable binary classification (but keep in mind that the following explanations also hold for multiple classes) - given a training set $X$, the SVM puts a line (or for multiple classes, a hyperplane) between the observations of the two classes that has a maximum distance to each of them \cite{Maldonado.2009}. Then, given a test set, it can classify the observations into either the one or the other class, using this separating line. \\
+The separating line is chosen to have a maximal distance to the x-vectors (i.e. the observations) of both classes while neatly separating them; it is called maximal margin. Note that it depends solely on its support vectors; observations at a farther distance than the ones closest to the line are not taken into account \citep{James.2013}. A problem arises when the classes are not exactly separable. Then, a so-called soft-margin is chosen that separates the classes as well as possible with as few as possible observations being wrongly classified in the training set (and subsequently the test set).  Another problem of maximal margin classifiers is that they are very sensitive to the training data initially provided to create the separating hyperplane, as it uses the support vectors to compute the maximum distance for the hyperplane and discards all other observations. Now, if a new observation is added in the test set that would have shifted the maximal margin had it been provided in the training set, it will be missclassified. Again, a soft margin classifier might solve this problem by generally allowing some (but as few as possible) observations to be missclassified - even in training. It allows for observations to be within the boundaries of the margin, or even on the wrong side of the hyperplane.
+Formally, the classifier is denoted as this:\\
+\begin{align}
+	\underset{\beta_{0}, \beta_[1], ..., \beta_{p}, \epsilon_{o}, \epsilon_{1}, ... \epsilon_{n}}{maximize} M\\
+	\text{subject to} \sum_{j=1}^{p}\beta^{2}_{j} = 1,\\
+	y_{i}(\beta_{0} + \beta_{1}x_{i1} + \beta_{2}x_{i2} +...+\beta_{p}x_{ip}) \geq M(1 - \epsilon_{i}),\\
+	\epsilon_{i} \geq 0; \sum_{i=1}^{n} \epsilon_{i} \leq C,
+\end{align}
+with M as the margin's width, the $\epsilon$s \textit{slack variables} to allow observations to be on the wrong side of the margin or the hyperplane \citep{James.2013} with $\epsilon_{i} = 0$ indicating that it is on the correct side; $\epsilon_{i} > 0$ indicating that it is on the wrong side of the margin and  $\epsilon_{i} > 1$ indicating that it is on the wrong side of the hyperplane; C as a nonnegative tuning parameter indicating the total number of $\epsilon$s and therefore wrongly classified observations; the rest being a "classic" linear function of x on y.\\
+In non-linear problems, a separating linear hyperplane is constructed by mapping the input to a higher-dimensional space \citep{Adhikari.2015}.
+
+\subsection{The tuning parameter C}
+
+\subsection{Kernel functions}
+The non-linear mapping of the hyperplane into a higher-dimensional space can be conducted by using a \textit{kernel function}. Common kernels are:\\
+
+
+Most authors such as \cite{Adhikari.2015} and \cite{MoscosoLopez.2016} choose the Radial Basis Function as kernel.
 
 \section{Artificial Neural Networks}
 
@@ -452,13 +472,13 @@ where the matrices $W_{Ig^{\bullet}}$ is the weight matrix form the input layer,
 A well-defined model should include all relevant explanatory variables that contribute to the variance found in the target value and exclude irrelevant, noisy variables. This way, the data and the process constituting it can be better understood, computational time and the so-called curse of dimensionality can be reduced while maintaining a high prediction accuracy \citep{Chandrashekar.2014}. The curse of dimensionality describes the problem arising in a high dimensional (i.e. containing many variables) space, where one needs very large samples to accurately depict said space (QUELLE). Variable selection is furthermore important as irrelevant data may cause poor generalization when given new data \citep{Chandrashekar.2014, BenIshak.2016}.\
 Variable selection has become an important issue as research is increasingly focussing on high dimensional data, be it in the field of genetics or Data Mining \citep{BenIshak.2016}. Fortunately, in this case $n > p$, which is why there is no need to give up on reasonable generalization ability, computational speed or model interpretability in favour of a heavily reduced variable subset.\
 
-As with many questions that arise in the process of analyzing data, the question of how to best select input variables in a time series context, and in this case, to predict freight weight, cannot be answered easily. \ 
+As with many questions that arise in the process of analysing data, the question of how to best select input variables in a time series context, and in this case, to predict freight weight, cannot be answered easily. \ 
 Directly comparing all $2^p$ possible subsets of variables is computationally unfeasible, so it is most often infeasible to compare all possible variable subsets and choose the best one. 
 \\
-\cite{Wit.2012} argue that there is not variable that has zero contribution to the target, and therefore - philiosophically - model selection is a comparison between different sets of patterns (i.e. sets of variables) in order to choose which pattern to focus on, depending on the context in which a research question is proposed. Variable selection also takes great part in the variance-bias tradoff, or whether to seek a near-perfect  but perhaps overly complex fit of past data or a sparse, economic but perhaps overly simple model. Furthermore, minimal computation time and and a reasonably good prediction accuracy are enhanced by thorough variable selection \citep{Saeys.2007}.  Obviously, the aim should be to find a golden mean between sparsity and accuracy, too many and too few variables. 
+\cite{Wit.2012} argue that there is no variable that has zero contribution to the target, and therefore - philiosophically - model selection is a comparison between different sets of patterns (i.e. sets of variables) in order to choose which pattern to focus on, depending on the context in which a research question is proposed. Variable selection also makes a great part in the variance-bias tradeoff, or whether to seek a near-perfect  but perhaps overly complex fit of data of the past or a sparse, economic but perhaps overly simple model. Furthermore, minimal computation time and and a reasonably good prediction accuracy are enhanced by thorough variable selection \citep{Saeys.2007}.  Obviously, the aim should be to find a golden mean between sparsity and accuracy, too many and too few variables. 
 
 A first selection of variables should be given by experts, literature of the same field or common sense \citep{Heinze.2018}. This is an important step as is may enhance model performance and facilitate the choice of a suitable subset of variables \citep{BenIshak.2016}
-Next to the researchers' expertise, there exist several variable selection methods that quantify the explanatory value of each possible variable and include or exclude them in the final model by a prespecified selection criterion.\
+Next to the researchers' expertise, there are several variable selection methods that quantify the explanatory value of all possible variables and include or exclude them in the final model by a prespecified selection criterion.\
 
 
 Albeit the growing number of available methods for variable selection, neither is there one gold standard that is generally useful, nor is there one method especially advisable for each kind of data \citep{Taghizadeh.2017}\\
@@ -483,18 +503,36 @@ In \textit{Embedded Methods}, variable subset selection is part of the model's t
 
 \subsection{Variable Selection in AR(I)MA, SVR and NNs}
 \cite{Chandrashekar.2014} mentions Support Vector Machines and Neural Networks as part of \textit{Embedded Methods}. Resulting from this, for these two methods, variable selection (except for a literature- and expert-driven pre-selection) and model fit could be combined in one step. 
-Because the AR(I)MAX model can be specified as a linear regression with autocorrelated errors, it is possible to use a stepwise variable selection comparing AICs of the different specifications. Afterwards, the contribution of the selected variable to the forecast can be compared to the baseline AR(I)MA model using only the target variable. %As for AR(I)MA, \textit{Forward} or \textit{Backward Selection} techniques using ICs such as AIC or BIC are favourable because ????. \\
+Similarly, as the AR(I)MAX model can be specified as a linear regression with autocorrelated errors, it is possible to use some kind of stepwise variable selection comparing AICs of the different specifications. As \cite{Stone.1977} showed, AIC minimization and minimization by cross validation are asymptotically equivalent; furthermore,  they can be used even when the models being compared are not hierarchically nested \citep{Heinze.2018}. \\
+Afterwards, the contribution of the selected variables to the forecast can be compared to the baseline models using only the target variable's time series. 
 
 Other approaches to variable selection in the context of freight demand and / or time series forecasting have been found:
 In their study on the influence of national, regional and local economic indices on freight volume for different segments of the truckload industry in the USA, \cite{Fite.2002} first examined correlation matrices before using stepwise multiple regression to draw a selection from the large set of initial variables collected. 
 \cite{Taghizadeh.2017} suggest using ensemble methods such as Random Forest to take advantage of several different machine learning methods.
 \cite{Feng.2018} used Spearman rank correlation to select external variables to predict railway freight volume.
-Variable selection methods for time series data have also been explored, using NNs (QUELLE), SVMs (QUELLE) and other, Filter-like techniques (QUELLE).\\
+Variable selection methodsfor time series data have also been explored, using NNs \citep{Crone.2010}, SVMs (QUELLE) and other, Filter-like techniques (QUELLE).\\
 
-Obviously, numerous approaches exist that use different methods and comprise of Filter, Wrapper or Embedded methods. \
-In this coursework, to ensure comparability between methods, the results of the AR(I)MA and AR(I)MAX modelling process could  be used as the baseline models for SVR and NN. This way, the performance of the AR(I)MA, SVR and NN can be directly compared without being confounded with the use of different subsets of variables for each method. \
-Having said that, the goal of this coursework is to compare the \textit{performance} of different methods as well as models using additional explanatory variables versus the baseline time series. As AR(I)MA assumes a linear relationship between variables, using this approach to create a subset of additional variables might hamper the performance of SVR and NN. SVR and NN are able to map nonlinear relationships, but being given a subset of variables that was found using a linear assumption might turn out counterproductive. \
-One could consolidate these two arguments by tayloring a variable selection process for each inidivdual method and then compare the subsets retrieved by the AR(I)MA, SVR and NN models respectively. Variables included in each subset are chosen for the final model, whereas others. One way to ensure some kind of equal conditions could be to use a \textit{Wrapper Method} like e.g. stepwise selection for each method; the procedure would be the same, but adapted to ("wrapped around") the method.
+Obviously, numerous approaches exist that use different methods and comprise of \textit{Filter}, \textit{Wrapper} or \textit{Embedded methods}. \
+In this coursework, to ensure comparability between methods, every model - AR(I)MA, SVM and NN - should initially be fed the same (complete) set of variable. This way, the performance of the AR(I)MA, SVR and NN can be directly compared without being confounded with the use of different subsets of variables for each method. 
+Having said that, the goal of this coursework is to compare the \textit{performance} of different methods as well as models using additional explanatory variables versus the baseline time series. SVM and NN user their own, internal (and rather opaque) feature selection methods. Eventually, they present the variables actually used for estimation, whereas others are more or less discarded by having weights close to zero. These variables could subsequently be excluded from the input.\\
+This is not the case for AR(I)MAX, which needs either a primary \textit{Filter Method} or a \textit{Wrapper} to choose a variable subset that yields the best performance.  
+As AR(I)MA assumes a linear relationship between variables, using  a subset of additional variables specifically selected for it might hamper the performance of SVR and NN when provided to them instead of letting them select their own subset. SVR and NN are able to map nonlinear relationships, but being given a subset of variables that was found using a linear assumption might turn out counterproductive. Of course, the same problem might arise when vice versa feeding a variable subset chosen by SVM or an NN to an AR(I)MA model. Thus, including a variable selection process for each method individually and possibly receiving three different "optimal" subsets does not mean that they cannot be compared; instead, this way, the three methods' ability to use additional variables may be compared and overall the ability of additional variables to enhance forecasting performance for freight weight in general.\
+So the variable selection approach chosen for this coursework is to taylor a variable selection process for each inidivdual method and then compare the subsets retrieved by the AR(I)MA, SVR and NN models respectively. One way to ensure some kind of equal conditions could be to use a \textit{Wrapper Method} like e.g. \textit{Backward Elimination} for each model, so as to taylor the subset of chosen variables as closely to the model as possible.\\
+Recursive Feature Elimination, an approach using SVM to backward-eliminate variables from a subset by excluding the variable(s) with the lowest ranking criterion (e.g. the lowest weight), was first introduced by \cite{Guyon.2002}. An approach very alike to this one but using NNs was proposed by \cite{Castellano.2000}. This same approach could be adapted to AR(I)MA modeling, but instead of excluding the variables with the highest p-value, comparing subsets of k-1 variables (with k being the number of overall variables) and the resulting AIC, choosing the model with the lowest AIC, and so on. Use the AIC because choosing variable subsets based on p-values will render the p-value invalid (see \cite{Heinze.2018} for a detailed explanation).\\
+The steps of the suggested approach for SVM and NN are generally designed like this:\\
+1. Train a model using the complete set of variables.\\
+2. Compute the ranking criterion (here: weight). \\
+3. Remove the variable that has the lowest rank. \\
+
+In order to make the algorithm comparable with the one used for model selection in AR(I)MA, instead of ranking the variables, a measure of accuracy is computed for each subset of variables: \\
+1. Train a model using the complete set of variables.\\
+2. Compute an error criterion (e.g. RMSE). \\
+4. Iteratively remove one variable at a time and recompute the error criterion with the obtained subsets. \\
+5. Compare the criterion with the criterion of step 2.
+6. Choose the model with higher accuracy. Its subset of variables is now the new "complete" set of variables.\\
+6. Start again at step 1 until no further improvement in the error criterion is achieved.
+
+Of course, this requires a split of the data into training and test sets, which is explained in the following section.
 
 
 \section{Model Evaluation}
@@ -512,6 +550,7 @@ Common metrics to evaluate models (and compare them) are the \textit{Root Mean S
 	MAPE = \sqrt{\frac{\sum_{t = 1}^{n}\frac{|\overline{y}_{t}-y_{t}|}{|y_{t}|}}{n}}\
 \end{align}
 
+As the AIC is based on models fit by a likelihood function, it may be used for AR(I)MA model selection; it is not as applicable to SVR, although e.g. \cite{Demyanov.2012} suggest an approach - its implementation is out of the scope of this coursework. Besides, as already mentioned, it is asymptotically equivalent to cross validation, which is, in combination with RMSE and / or MAPE, applicaple to all methods in this coursework. \\
 
 \section{Software implementation}
 
@@ -525,21 +564,24 @@ To specify the AR(I)MA model, the \texttt{arima()} function in \texttt{forecast}
 \texttt{forecast} furthermore provides the functions \texttt{acf()}, \texttt{pacf()} for ACF and PACF plots. \\
 For ADF tests, the function \texttt {adf.test()} in the package \texttt{tseries} was used. In the function, the parameter \textit{k} (i.e. the lag) is determined according to the formula suggested by \cite{Vogel.2015} (see subsection NUMMER (Violation of assumptions)), although without t-testing the coefficients of equation NUMMER 4. Manually reducing \textit{k} and comparing the results yielded no differences in the outcome.\\
 
-Subsequently, the models' parameters are computed by \texttt{arima()} (which is essentially a wrapper on \texttt{stats}'s \texttt{arima()}, including some extensions, e.g. exogenous variables PRÜFEN); possible seasonal components can be modeled by the \texttt{fourier()} function given as an argument to \texttt{xreg=} in \texttt{Arima()}. The order of the fourier series is determined by minimizing the AICc, which is the "corrected AIC" that corrects for the AIC's tendency to favour larger models \citep{Wit.2012}. \\
+Subsequently, the models' parameters are computed by \texttt{arima()} (which is essentially a wrapper on \texttt{stats}'s \texttt{arima()}, including some extensions, e.g. exogenous variables; possible seasonal components can be modeled by the \texttt{fourier()} function given as an argument to \texttt{xreg=} in \texttt{Arima()}. The order of the fourier series is determined by minimizing the AICc, which is the "corrected AIC" that corrects for the AIC's tendency to favour larger models \citep{Wit.2012}. \\
 \begin{equation}
 AICc = -2ln(\hat{L})+\frac{2k}{n/n-k-1}
 \end{equation}
 with the denominator being a bias correction of first order \citep{Wit.2012}.\\
 For AR(I)MAX, \texttt{arima()} actually fits a linear regression with AR(I)MA errors \citep{Hyndman.2018}; no \texttt{R} function could be found that models actual ARIMAX models. Because we are dealing with daily forecasts, again, seasonality in the data is captured by passing the additional variables in the \texttt{xreg=} argument as a fourier series.
+Moreover, the \texttt{forecast} package provides a function \texttt{auto.arima()} which chooses the orders of the AR(I)MA model automatically by minimising the AIC. It can also be given exogenous variables through the \texttt{xreg=} argument.\\
 %As the \texttt{Arima()} function in the \texttt{forecast} package in \texttt{R} uses a linear regression with AR(I)MA errors, variable selection for the exogenous variables in the time series model was conducted using the \texttt{step()} function comparing the AIC in the models.\\
 
-Functions to model Support Vector Machines and Regression are contained in the package \texttt{e1071}.\\
+Functions to model Support Vector Regression are contained in the package \texttt{e1071} and \texttt{kernlab}.\\
 
 NN IN KERAS
 
-RFE
+The implementation of the cumstomized recursive feature elimination algortihm was computed manually, but while making use of several functions and packages:
+The \texttt{forecast} package was very useful for cross validation in time series, providing the function \texttt{tsCV()}, which was used in combination with \texttt{auto.arima()}. In objects of class \texttt{ts}, the AIC can be given as an output. \\ 
+A package that revealed itself to be very useful is the \texttt{caret} package that allows to combine SVR-modelling with time series CV by combining the two functions \texttt{trainControl()} and \texttt{train()} and specifying within them the arguments \texttt{method = "timeslice"} (in \texttt{trainControl()}) and \texttt{method = "svmRadial"} (in \texttt{train()} - note that it uses the function provided by the package \texttt{kernlab}).
 
-The error metrics RMSE and MAPE were customly computed.\\
+The accuracy metrics RMSE and MAPE were manually computed.\\
 
 
 
@@ -590,10 +632,13 @@ In total, 16 additional variables were found in literature.\\
 
 A precondition to time series modelling is causality, which is logical and obvious for holidays and daily effects determining freight demand (freight demand cannot influence the ocurrence of holidays); not exactly as much for fuel price and GDP.\\
 It might make sense to think that the demand for food haulage impacts fuel prices (as prices are a matter of demand and supply), or that it influences the GDP in some indirect way (and \cite{JONG.2004} admit to this two-way point of view). 
-In fact, the GDP (in this case: the German BIP) is a measure of the value of all inland produced goods and services in a certain time period \cite{StatistischesBundesamt.} and is influenced by demand \cite{Bundesregierung.}. Still, in the case at hand, for the prediction of daily freight demand, knowing the current GDP might be a useful tool - as e.g. \cite{Intihar.2017} have found (and they name further studies with similar results as theirs). Another reason why GDP might not be a good indicator for daily freight demand is that is is more of a long-term measure. \\
-Considering fuel prices, the counter-argument to fuel prices hampering demand for truck haulage would be that an increasing demand in truck haulage may lead to higher fuel prices. However, it is not very likely that an increase in truck haulage for food deliveries in Germany significantly raises prices that are determined on a world-wide level. \\
+In fact, the GDP (in this case: the German BIP) is a measure of the value of all inland produced goods and services in a certain time period \cite{StatistischesBundesamt.} and is influenced by demand \cite{Bundesregierung.}. Still, in the case at hand, for the prediction of daily freight demand, knowing the current GDP might be a useful tool - as e.g. \cite{Fite.2002}, \cite{Saidi.2017}, \cite{Guo.2013} and \cite{Intihar.2017} have found (and they name further studies with similar results as theirs). \\
+Data on GDP was found as raw data, and adjusted data of two varieties; the so-called x12-arima adjustment and the bv4.1 adjustment. Unfortunately, literature on GDP as an indicator does not specify which kind of values were used, which is why initially, all three varieties of GDP data were included in the variable set.\\
+Considering fuel prices, the counter-argument to higher fuel prices dampening demand for truck haulage would be that an increasing demand in truck haulage may lead to higher fuel prices. However, it is not very likely that an increase in truck haulage for food deliveries in Germany significantly raises prices that are determined on a world-wide level. \\
 
-Some of the variables considered to be included in the data set are less granular than the target variable - i.e., they are not measured or measurable on a day-to-day basis. These variables include the days in a month, population, key interest rate.\\
+Data on key interest rates includes three different kinds: the rate on deposit facility "which banks may use to make overnight deposits with the Eurosystem", ECB main refinancing operations "which provide the bulk of liquidity to the banking system" and marginal lending facility " which offers overnight credit to banks from the Eurosystem" \citep{Bank.}, all of which were included in the initial set of additional variables, as again, literature did not specify the type of key interest constituting a valid indicator.\\
+The type of exchange rate mentioned by \cite{Kim.2011} was not exactly specific, as it only mentioned the South Korean Won (the researchers are based in South Korea); therefore, for this coursework, the exchange rate between US-Dollar and Euro was chosen, als Euro is the currency in Germany and the US-Dollar the most accepted currency worldwide. One issue arises with stock market data that has to be kept in mind: stock markets are closed on weekends (classically). The data found for exchange rates was thus missing values for all Saturdays.\\
+Some of the variables considered to be included in the data set are less granular than the target variable - i.e., they are not measured or measurable on a day-to-day basis. These variables include the days in a month, population, key interest rate, GDP, consumer price index.\\
 
 A very practical consideration to whether or not include a variable in a dataset is the goal of the research project to use data that are openly available.
 For the following variables, data was obtainable from open sources such as GENESIS \citep{StatistischesBundesamt.2019} or \textit{mcloud}: Holidays, school holidays, temperature, rainfall, GDP, population, fuel prices, key interest rate, railway traffic (though sparse).\\
@@ -603,11 +648,11 @@ For the following variables, this was not the case (March 2019), which is why th
 
 All data retrieved were restricted to the Federal State of Bavaria between 2015-09-17 and 2016-12-31,as this was the time period of the data provided by NAGEL.\\
 
-Encoding of weekdays, holidays and the sum of days in a month was manually computed, as well as the number of days in a month.\\
+Encoding of weekdays, holidays, holiday weeks and the sum of days in a month was manually computed, as well as the number of days in a month.\\
 Data on holidays and school holidays can be retrieved from the website \href{schulferien.org} \citep{.b}.\\
 
-Data on temperature was provided in the initial data set received from University of Regensburg.\\
-Data on sunshine duration, rainfall and type of rainfall was found on \textit{mcloud} for a weather station located in Nuremberg (the origin of all transports in the dataset at hand). The type of rainfall was categorized as the following:\\
+Data on temperature was provided in the initial data set received from University of Regensburg. Furthermore, data on average temperature per day at a weather station located in Nuremberg (the origin of all transports in the dataset at hand) was found on the website of the \textit{Deutscher Wetterdienst (DWD)} on \textit{mcloud}.\\
+This data set also provides data on sunshine duration, rainfall and type of rainfall. The type of rainfall was categorized as the following:\\
 0 - no rainfall\\
 4 - rainfall reported, but type of rain unknown\\
 6 - only rainfall \\
@@ -661,20 +706,21 @@ Lastly, the raw data set was transformed into a data.frame aggregated by date an
 "leitzins1" \ (ECB deposit facility - change in \% p.a.) \\
 "leitzins2" \ (ECB marginal lending facility - change in \% p.a.) \\
 "leitzins3" \ (ECB main refinancing operations - change in \% p.a.) \\
-"trainrides" \ (number of train rides of railway cargo per day) \\
-"raildelay" \ (number of minutes of delay in railway cargo per day) \\
-"meanraildelay" \ (mean railway delay per day in minutes) \\
-"GDP" \\
-"X" \ (classification of the GDP: Raw value, x12-arima, BV4) \\
-"VPIby" \ (consumer price index in Bavaria, for all cateogries) \\
-"VPInahr" \ (consumer prices index in Germany, for food) \\
+%"trainrides" \ (number of train rides of railway cargo per day) \\
+%"raildelay" \ (number of minutes of delay in railway cargo per day) \\
+%"meanraildelay" \ (mean railway delay per day in minutes) \\
+"GDPoriginal" \ (raw GDP)\\
+"GDPx12" \ (x12-arima adjusted GDP) \\
+"GDPbv4" \ (bv4.1 adjusted GDP) \\
+"CPIby" \ (consumer price index in Bavaria, for all cateogries) \\
+"CPIfood" \ (consumer prices index in Germany, for food) \\
 "pop"  \ (population in Bavaria) \\
 "endexrate" \ (exchange rate Dollar-Euro at the end of the day) \\
 "openexrate" \ (exchange rate Dollar-Euro at the opening of the day) \\
 "exratehigh" \ (highest exchange rate Dollar-Euro during a given day) \\
 "exratelow" \ (lowest exchange rate Dollar-Euro during a given day) \\
 
-
+The missing values for all Saturdays of the exchange rate data was dealt with by applying na.locf() ("last observation carried forward), essentially adopting a simplified view of stock markets as more or less just falling asleep on Saturday before coming back to life again as if nothing happened. \\
 \bibliographystyle{apalike}
 \bibliography{jusmabib}
 \end{document} 

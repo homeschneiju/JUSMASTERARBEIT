@@ -17,3 +17,12 @@ rmse(splitflosa)
 rmse(residuals(far2(flosa, h=1)))
 #As expected, the RMSE from the residuals is smaller, as the corresponding "forecasts" are based on a model fitted to the entire 
 # data set, rather than being true forecasts. (Rob Hyndman)
+
+AIC(logLik(calsvm))
+rmsesvm <- rmse(calsvm$residuals)
+rmsearima <- rmse(autofit$residuals)
+rmsenet <- rmse(netfit$residuals)
+
+min(c(rmsenet, rmsesvm, rmsearima))
+colnames(cal)
+auto.arima(calts,xreg=cal[,c(2,3,4,6,7,8,9,13:24,28,30:36)])

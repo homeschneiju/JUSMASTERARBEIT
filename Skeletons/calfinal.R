@@ -1,6 +1,6 @@
-# setwd("E:/")
-cal <- readRDS("cal.rds")
-
+# setwd("D:/")
+cal <- readRDS("E:/cal.rds")
+sapply(cal, function(x) any(is.na(x)))
 cal$msum <- days_in_month(cal$Date)
 
 schulferien <- read.xlsx("E:/KIVAS/Daten/schulferien bayern.xlsx",
@@ -9,27 +9,28 @@ schulferien$Start <- as.Date(schulferien$Start,origin="1899-12-30")
 schulferien$Stop <- as.Date(schulferien$Stop,origin="1899-12-30")
 int <- interval(ymd(schulferien$Start),ymd(schulferien$Stop))
 
-cal$ferien <- 0
+cal$schoolhol <- 0
 for (i in 1:nrow(cal)){
   for(j in 1:length(int)){
     if (cal$Date[[i]] %within% int[j])
-      cal$ferien[i] <- 1
+      cal$schoolhol[i] <- 1
   }
 }
 
 sunshine <- read.csv("E:/KIVAS/Daten/produkt_klima_tag_19490101_20181231_03668.csv",
                      header=T, sep=";",na.strings = c("-999"))
-sunshine1 <- sunshine[,c("MESS_DATUM","SDK", "RSK", "RSKF", "UPM")]
+head(sunshine1)
+sunshine1 <- sunshine[,c("MESS_DATUM","TMK","SDK", "RSK", "RSKF", "UPM")]
 sunshine1$MESS_DATUM <- ymd(sunshine$MESS_DATUM)
-sunshinestart <- which(sunshine1$MESS_DATUM == "2015-09-17")
-sunshinestop <- which(sunshine1$MESS_DATUM == "2016-12-31")
+sunshinestart <- which(sunshine1$MESS_DATUM == "2015-09-17") # CHANGE HERE
+sunshinestop <- which(sunshine1$MESS_DATUM == "2016-12-31") # CHANGE HERE
 int <- sunshinestart:sunshinestop
 sunshine2 <- sunshine1[int,] # only store sunshine duration for time frame of our data
 
+colnames(sunshine2) <- c("Date", "TempN", "Sun", "Rain", "Raintype", "Humid")
+cal <- merge(cal, sunshine2, by="Date")
 
-cal <- merge(cal, sunshine2, by.x="Date", by.y="MESS_DATUM")
-
-fuel <- read.xlsx("E:/KIVAS/Daten/Kraftstoffpreise Cent je Liter 2015-2018.xlsx",
+fuel <- read.xlsx("E:/KIVAS/Daten/Kraftstoffpreise Cent je Liter.xlsx",
                   colNames=T)
 fuel1 <- fuel
 sapply(fuel1, class)
@@ -48,12 +49,12 @@ fuel1$Diesel[which(is.na(fuel1$Diesel))]; fuel$Diesel[which(is.na(fuel1$Diesel))
 fuel$Diesel[which(is.na(fuel1$Diesel))] <- 115.6
 fuel1$Diesel <- as.numeric(fuel$Diesel) # call again
 
-fuelyear <- which(fuel1$Jahr == 2015 | fuel1$Jahr == 2016)
+fuelyear <- which(fuel1$Jahr == 2015 | fuel1$Jahr == 2016) # CHANGE HERE
 fuel2 <- fuel1[fuelyear,]
-fuel3 <- fuel2[c(which(fuel2$Jahr == 2015 & fuel2$Monat == c(9:12)), which(fuel2$Jahr == 2016)),]
+fuel3 <- fuel2[c(which(fuel2$Jahr == 2015 & fuel2$Monat == c(9:12)), which(fuel2$Jahr == 2016)),] # CHANGE HERE
 
-cal$year <- year(cal$Date)
-cal <- merge(cal, fuel3, by.x=c("year","Month"), by.y=c("Jahr","Monat"))
+cal$Year <- year(cal$Date)
+cal <- merge(cal, fuel3, by.x=c("Year","Month"), by.y=c("Jahr","Monat"))
 
 leitzins1 <- read.csv("E:/KIVAS/Daten/key interest rates mod.csv",
                       header=F, sep=",")
@@ -100,8 +101,8 @@ head(db3)
 
 db3$Zugfahrten[db3$Group.1 == "2016-01-15"]
 sum(db2$Zugfahrten[db2$Date == "2016-01-15"])
-colnames(db3) <- c("Date", "zugfahrten", "Verspätungsminuten")
-db3$meandelay <- round(db3$Verspätungsminuten/db3$zugfahrten, 2)
+colnames(db3) <- c("Date", "trainrides", "raildelay")
+db3$meanraildelay <- round(db3$raildelay/db3$trainrides,2)
 
 min(db3$Date)
 max(db3$Date)
@@ -109,18 +110,27 @@ max(db3$Date)
 cal <- merge(cal, db3, by="Date", all.x=T)
 
 bip <- read.csv("E:/KIVAS/Daten/bip quartale 14-18 arima.csv", header=T, sep=";")
-head(bip2)
-bip2 <- bip[bip$Jahr == 2015 | bip$Jahr == 2016,]
+head(bip)
+bip2 <- bip[bip$Jahr == 2015 | bip$Jahr == 2016,] # CHANGE HERE
 range(bip2$Jahr)
-bip3 <- bip2[(bip2$Jahr == 2015 & bip2$Quartal == c(3,4)) | (bip2$Jahr == 2016),]
+bip3 <- bip2[(bip2$Jahr == 2015 & bip2$Quartal == c(3,4)) | (bip2$Jahr == 2016),] # CHANGE HERE
 range(bip3$Quartal[bip3$Jahr == 2015])
 
 colnames(bip3)
 
-bip4 <- bip3[c(1,2,3,14)]
-bip4
+bip4 <- bip3[,c(1,2,3,14)]
 
-cal <- merge(cal, bip4, by.x=c("year", "Quarter"), by.y=c("Jahr", "Quartal"))
+
+bip5 <- bip4[1:6,]
+colnames(bip5) <- c("Year", "Quarter", "GDPoriginal")
+bip6 <- bip4[7:12,]
+colnames(bip6) <- c("Year", "Quarter", "GDPx12")
+bip7 <- bip4[13:18,]
+colnames(bip7) <- c("Year", "Quarter", "GDPbv4")
+
+bip8 <- merge(bip5[,c(1:3)],c(bip6[,c(1:3)],bip7[,c(1:3)]))
+bip8 <- bip8[,c(1:4,7)]
+cal <- merge(cal, bip8, by=c("Year", "Quarter"))
 
 verpreisby <- read.csv("E:/KIVAS/Daten/verbraucherpreisindex bayern mod.csv", header=F, ,sep=";" )
 verpreisnahr <- read.csv("E:/KIVAS/Daten/verbraucherpreisindex nahrung mod.csv", header=F, sep=";")
@@ -129,21 +139,21 @@ tail(verpreisnahr)
 verpreisby <- verpreisby[c(1:24),]
 verpreisby$V2 <- rep(c(1:12),2)
 
-colnames(verpreisby) <- c("year", "Month", "VPIby")
-colnames(verpreisnahr) <- c("year", "Month", "VPInahr")
+colnames(verpreisby) <- c("Year", "Month", "CPIby")
+colnames(verpreisnahr) <- c("Year", "Month", "CPIfood")
 
-cal <- merge(cal, verpreisby, by=c("year", "Month"))
+cal <- merge(cal, verpreisby, by=c("Year", "Month"))
 head(cal)
 any(is.na(cal$VPIby))
 
-cal <- merge(cal, verpreisnahr, by=c("year", "Month"))
+cal <- merge(cal, verpreisnahr, by=c("Year", "Month"))
 head(cal)
 any(is.na(cal$VPIby))
 
-bev <- read.csv("E:/KIVAS/Daten/bev bayern mod.csv", header=T, sep=";")
+bev <- read.xlsx("E:/KIVAS/Daten/bev bayern mod.xlsx", colNames=T)
 bev
 
-cal <- merge(cal, bev, by.x="year", by.y="Jahr", all.x=T)
+cal <- merge(cal, bev, by.x="Year", by.y="Jahr", all.x=T)
 head(cal)
 tail(cal)
 
@@ -152,12 +162,21 @@ head(change)
 class(change$Datum)
 
 change2 <- change
-change2$Datum <- as.integer(change2$Datum)
-change2$Datum <- as.Date(change2$Datum, origin="1899-12-30")
+change2$Date <- as.integer(change2$Datum)
+change2$Date <- as.Date(change2$Date, origin="1899-12-30")
+change2 <- change2[,c(2:6)]
 head(change2)
+colnames(change2) <- c("ClosingRate", "OpeningRate", "DailyHigh", "DailyLow", "Date")
+cal <- merge(cal, change2, by="Date", all.x=T)
+head(cal,15)
+cal[,c("ClosingRate","OpeningRate","DailyHigh","DailyLow")] <- na.locf(cal[,c("ClosingRate","OpeningRate","DailyHigh","DailyLow")])
+head(cal,15)
 
-cal <- merge(cal, change2, by.x="Date", by.y="Datum")
+cal$CPIby <- as.numeric(gsub(",",".",cal$CPIby))
+cal$CPIfood <- as.numeric(gsub(",",".",cal$CPIfood))
+cal$GDPoriginal <- as.numeric(gsub(",",".",cal$GDPoriginal))
+cal$GDPx12 <- as.numeric(gsub(",",".",cal$GDPx12))
+cal$GDPbv4 <- as.numeric(gsub(",",".",cal$GDPbv4))
 head(cal)
-
-saveRDS(cal, "E:/KIVAS/Daten/calfinal.rds")
+saveRDS(cal, "E:/calfinal.rds")
 
