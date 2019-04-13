@@ -295,8 +295,8 @@ AR(I)MAX models can be interpreted as regression problems, where one variable is
 
 \section{Support Vector Machines: Support Vector Regression}
 
-Support Vector Machines were first developed by (QUELLE) for classification problems. In their simplest application - a linearly separable binary classification (but keep in mind that the following explanations also hold for multiple classes) - given a training set $X$, the SVM puts a line (or for multiple classes, a hyperplane) between the observations of the two classes that has a maximum distance to each of them \cite{Maldonado.2009}. Then, given a test set, it can classify the observations into either the one or the other class, using this separating line. \\
-The separating line is chosen to have a maximal distance to the x-vectors (i.e. the observations) of both classes while neatly separating them; it is called maximal margin. Note that it depends solely on its support vectors; observations at a farther distance than the ones closest to the line are not taken into account \citep{James.2013}. A problem arises when the classes are not exactly separable. Then, a so-called soft-margin is chosen that separates the classes as well as possible with as few as possible observations being wrongly classified in the training set (and subsequently the test set).  Another problem of maximal margin classifiers is that they are very sensitive to the training data initially provided to create the separating hyperplane, as it uses the support vectors to compute the maximum distance for the hyperplane and discards all other observations. Now, if a new observation is added in the test set that would have shifted the maximal margin had it been provided in the training set, it will be missclassified. Again, a soft margin classifier might solve this problem by generally allowing some (but as few as possible) observations to be missclassified - even in training. It allows for observations to be within the boundaries of the margin, or even on the wrong side of the hyperplane.
+Support Vector Machines were first developed by (QUELLE) in the 1990s  for classification problems. Back then, they became popular quickly because of their high performance and impressive new strategy to solve higher-dimensional classification problems \citep{James.2013}. In their simplest application - a linearly separable binary classification - given a training set $X$, the SVM puts a line (or for multiple classes, a hyperplane) between the observations of the two classes that has a maximum distance to each of them \cite{Maldonado.2009}. Then, given a test set, it can classify the observations into either the one or the other class, using this separating line. \\
+The separating line is chosen to have a maximal distance to the x-vectors (i.e. the observations) of both classes while neatly separating them; it is called maximal margin. Note that it depends solely on its support vectors (these are the vectors directly on margin); observations at a farther distance than the ones closest to the line are not taken into account \citep{James.2013}. A problem arises when the classes are not exactly separable. Then, a so-called soft-margin is chosen that separates the classes as well as possible with as few as possible observations being wrongly classified in the training set (and subsequently the test set).  Another problem of maximal margin classifiers is that they are very sensitive to the training data initially provided to create the separating hyperplane, as it uses the support vectors to compute the maximum distance for the hyperplane and discards all other observations. Now, if a new observation is added in the test set that would have shifted the maximal margin had it been provided in the training set, it will be missclassified. Again, a soft margin classifier might solve this problem by generally allowing some (but as few as possible) observations to be missclassified - even in training. It allows for observations to be within the boundaries of the margin, or even on the wrong side of the hyperplane.
 Formally, the classifier is denoted as this:\\
 \begin{align}
 	\underset{\beta_{0}, \beta_[1], ..., \beta_{p}, \epsilon_{o}, \epsilon_{1}, ... \epsilon_{n}}{maximize} M\\
@@ -305,17 +305,46 @@ Formally, the classifier is denoted as this:\\
 	\epsilon_{i} \geq 0; \sum_{i=1}^{n} \epsilon_{i} \leq C,
 \end{align}
 with M as the margin's width, the $\epsilon$s \textit{slack variables} to allow observations to be on the wrong side of the margin or the hyperplane \citep{James.2013} with $\epsilon_{i} = 0$ indicating that it is on the correct side; $\epsilon_{i} > 0$ indicating that it is on the wrong side of the margin and  $\epsilon_{i} > 1$ indicating that it is on the wrong side of the hyperplane; C as a nonnegative tuning parameter indicating the total number of $\epsilon$s and therefore wrongly classified observations; the rest being a "classic" linear function of x on y.\\
-In non-linear problems, a separating linear hyperplane is constructed by mapping the input to a higher-dimensional space \citep{Adhikari.2015}.
+
 
 \subsection{The tuning parameter C}
 
+The tuning parameter C indicates the tolerance for violations of the side of the margin on which an observation lies. Here $C=0$ equals the maximal margin, where no observations past within the margin are allowed \citep{James.2013}. A smaller C indicates a narrower margin with a higher risk of overfitting to the training data, whereas a larger C might result in a biased classifier. Moreover, the larger C, the more observations are tolerated on the wrong side of the margin and the more support vectors there are.\\
+Generally, cross validation is used to determine C.
+
 \subsection{Kernel functions}
-The non-linear mapping of the hyperplane into a higher-dimensional space can be conducted by using a \textit{kernel function}. Common kernels are:\\
+In non-linear problems, a separating linear hyperplane is constructed by mapping the input to a higher-dimensional space \citep{Adhikari.2015}.
+The non-linear mapping of the hyperplane into a higher-dimensional space can be conducted by using a \textit{kernel function}. \\
+According to \cite{James.2013}, the support vector classifier can be represented using only the inner products of the observations, and these suffice also to estimate its parameters $\alpha_{i}$:
+\begin{equation}
+	f(x) = \beta_{0} + \sum_{i \in \mathcal{S}}\alpha_{i}\langle x,x_{i}\rangle
+\end{equation}
+and $\alpha_{i}$ is zero if a training observation is not a support vector.
+Now, for non-linear problems, the inner product $\langle x,x_{i}\rangle$ is replaced by a more generalized term, a kernel:
+\begin{equation}
+	K(x_{i},x_{i'})
+\end{equation}
 
+ Common kernels are:\\
+\begin{align}
+	K(x_{i},x_{i'}) = \sum_{j=1}^{p}(x_{ij},x_{i'j}) \qquad \text{linear kernel}\\
+	K(x_{i},x_{i'}) = (1 + \sum_{j=1}^{p}(x_{ij},x_{i'j}))^{d} \qquad \text{polynomial kernel}\\
+	K(x_{i},x_{i'}) = exp(-\gamma\sum_{j=1}^{p}(x_{ij}-x_{i'j})^{2}) \qquad \text{radial kernel}
+\end{align}
 
-Most authors such as \cite{Adhikari.2015} and \cite{MoscosoLopez.2016} choose the Radial Basis Function as kernel.
+Kernels provide advantages such as savings in terms of computation time, as they only require the computation of the kernel function for all distinct pairs of observations and do not need to make use of the enlarged feature space (which can be enormously large).\\
+Most authors such as \cite{Adhikari.2015} and \cite{MoscosoLopez.2016} choose the Radial Basis Function as kernel. 
 
-\section{Artificial Neural Networks}
+\subsection{Parameter estimation in SVR}
+
+\cite{Hsu.2003} propose choosing first which kernel to use before finding the best parameters C and $\gamma$ by using cross-validation. They also suggest scaling of the data in order to avoid having larger scaled variables dominate variables of smaller scale.
+The choice of kernel depends on which ones have already been used in related literature (as mentioned above: radial basis function), but also on recommendations by other authors. Again \cite{Hsu.2003} provide a hint by suggesting the radial basis function for a start, as it can map non-linear relationships and needs less hyperparameters than other kernels, which renders model selection simpler. Furthermore, it is a useful kernel when the number of features is not too large, which is assumed to be true in this case.\\
+Moving on to finding C and $\gamma$ by cross validation next, a "simple" grid-search is suggested to be favoured over approximate search algorithms, because of two reasons: one being the psychological phenomenon of feeling safer when having tested all possibilites, and the second being that the grid-searches for C and $\gamma$ can be parallelized since they are independent from each other. 
+
+\subsection{Extension to regression problems}
+
+So far, Support Vector Machines were introduced for binary classification problems. Of course, in for the data at hand, a method for regression is required instead. (QUELLE) presented an extension to Support Vector Machines: Support Vector Regression, where the coefficients $\beta_{0}, \beta_{1}, ..., \beta_{p}$ are sought to be minimized by a loss function that only takes into account residuals larger than some positive constant.
+\section{Artificial Neural Networs}
 
 
 Although seemingly new in the world of statistical tools, Artificial Neural Networks have been invented many decades ago and the enthusiasm for them HAS experienced several revivals throughout the years \citep{Gao.2011}. The idea stems from human brains \citep{Zhang.1998} and the way their neurons learn, store and process information together \citep{Balkin.1997}. Although this sounds like a very complex, ambitious venture, NNs are "simply a parameterized non-linear function that can be fitted to data for prediction purposes" \citep{Nakamura.2005}. In principle, an n-dimensional input is mapped onto an m-dimensional output \citep{Rojas.1996}. The process, although very much data-driven \citep{Zhang.1998} and sensitive to the training data \citep{Adhikari.2015}, is not non-parametric \citep{Dorffner96neuralnetworks}. \\
@@ -331,9 +360,9 @@ An NN typically consists of (at least) three layers: One input, one hidden and o
 Layers - and neurons - are connected by activation, also called transfer functions, which multiply the output received by the preceding neuron by a weight and pass this new output on to the next layer and so on.\\
 Lastly, a learning algorithm is applied to estimate the parameters in the network. When fed some training data, the network's output is compared to the actual output value of the target variable through a loss function. This error is then passed backwards through the layers to adjust the transfer functions' weights.
 
-Multilayer perceptrons are the most popular type of (feedforward) NN \citep{Balkin.1997, Benkachcha.2015}
+Multilayer perceptrons are the most popular type of (feedforward) NN \citep{Balkin.1997, Benkachcha.2015}.
 
-The most common learning algorithm is backpropagation as proposed by \cite{Rumelhart.1986}; others are e.g. Levenberg-Marquardt or 
+The most common learning algorithm is backpropagation as proposed by \cite{Rumelhart.1986}.
 
 \subsection{Network size and structure}
 
