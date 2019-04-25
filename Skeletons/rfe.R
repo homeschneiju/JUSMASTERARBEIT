@@ -6,18 +6,17 @@ sapply(cal,function(x) any(is.na(x)))
 
 
 # reorder columns of cal to set target variables first
-cal2 <- cal[,c(10:12,1:4,6:9,14:28,30:33)]
-sapply(cal2,function(x) any(is.na(x)))
+sapply(cal,function(x) any(is.na(x)))
 
-colnames(cal2)
+colnames(cal)
 
 # choose numeric X-variables
-calx <- colnames(cal2)[c(6:30)]
+calx <- colnames(cal)[c(3:30)]
 set.seed(7)
 
-num <- as.vector(which(sapply(cal2[,c(calx)],class)=="numeric"))
+num <- as.vector(which(sapply(cal[,c(calx)],class)=="numeric"))
 # calculate correlation matrix
-correlationMatrix <- cor(as.matrix(cal2[,calx[num]]), method = "pearson")
+correlationMatrix <- cor(as.matrix(cal[,calx[num]]), method = "pearson")
 # summarize the correlation matrix
 #print(correlationMatrix)
 # find attributes that are highly corrected (ideally >0.75)
@@ -28,17 +27,17 @@ sort(highlyCorrelated)
 calfilter <- calx[num][-highlyCorrelated]
 calgone <- calx[num][highlyCorrelated]
 
-fac <- as.vector(which(sapply(cal2[,c(calx)],class)=="factor"))
-calfac <- colnames(cal2[,calx])[fac]
-chisq.test(table(cal2[,"Month"], cal2[,"Quarter"]))
-chisq.test(table(cal2[,"Weekday_No"], cal2[,"Weekend"]))
-chisq.test(table(cal2[,"Holiday"], cal2[,"HolidayWeek"]), simulate.p.value = T)
+fac <- as.vector(which(sapply(cal[,c(calx)],class)=="factor"))
+calfac <- colnames(cal[,calx])[fac]
+chisq.test(table(cal[,"Month"], cal[,"Quarter"]))
+chisq.test(table(cal[,"Weekday_No"], cal[,"Weekend"]))
+chisq.test(table(cal[,"Holiday"], cal[,"HolidayWeek"]), simulate.p.value = T)
 
 chis = list()
 twofac <- combn(calfac,2)
 for (i in 1:ncol(twofac)){
   
-  chis[i] <- chisq.test(table(cal2[,twofac[1,i]], cal2[,twofac[2,i]]), simulate.p.value = T)$p.value
+  chis[i] <- chisq.test(table(cal[,twofac[1,i]], cal[,twofac[2,i]]), simulate.p.value = T)$p.value
 }
 sigchis <- which(chis < 0.05)
 twofac[,sigchis]
@@ -55,10 +54,10 @@ print(importance)
 # plot importance
 plot(importance)
 
-
-controlrfe <- rfeControl(functions=caretFuncs, method="cv")
+set.seed(84)
+controlrfe <- rfeControl(functions=caretFuncs, method="timeslice")
 # run the RFE algorithm
-results <- rfe(cal3[,1:25], cal3[,26], rfeControl=controlrfe)
+results <- rfe(x=cal3[,nonerr], y=cal3[,26], rfeControl=controlrfe, preProc = c("center", "scale"),method="svmRadial", initialWindow=1)
 # summarize the results
 print(results)
 # list the chosen features
@@ -67,12 +66,24 @@ predictors(results)
 plot(results, type=c("g", "o"))
 
 
+myTimeControl <- trainControl(method = "timeslice",
+                              initialWindow = 7,
+                              horizon = 1,
+                              fixedWindow = F)
+
+plsFitTime <- train(Weight ~ .,
+                    data = cal3[,c(nonerr,"Weight")],
+                    method = "svmRadial",
+                    preProc = c("center", "scale"),
+                    trControl = myTimeControl)
+
+
 # leave out one variable:
 
 
-cal3 <- cal2[,c(calx,"Weight")]
+cal3 <- cal[,c(calx,"Weight")]
 saveRDS(cal3, "E:/cal3.rds")
-fac <- as.vector(which(sapply(cal3[,c(calx)],class)=="factor"))
+fac <- as.vector(which(sapply(cal3,class)=="factor"))
 
 cal3[,c(fac)] <- sapply(cal3[,c(fac)], as.numeric)
 num <- as.vector(which(sapply(cal3[,c(calx)],class)=="numeric"))
@@ -89,7 +100,7 @@ loo <- function(xvars) {
 foo <- loo(calx)
 calts <- ts(cal3)
 
-nonerr <- calx[num][c(1:13,15:18)]
+nonerr <- colnames(cal3[,c(1:14,16:25)])
 
 iteratevars <- function(target, cal3, nonerr) {
   firstmod <- auto.arima(target, xreg=as.matrix(cal3[,nonerr ]))
@@ -126,8 +137,8 @@ itvars <- function(target, cal3, nonerr) {
   far1 <- function(target1,h) {forecast(auto.arima(target1, xreg=as.matrix(cal3[,nonerr1]), h = h))}
   firstmod <- tsCV(target, forecastfunction = far1, h = 1, window=1)
   nonerr2 <- loo(nonerr)
-  for (j in 1:length(nonerr)) {
-    nonerr1 <- nonerr[[j]]
+  for (j in 1:length(nonerr2)) {
+    nonerr1 <- nonerr2[[j]]
     model <- tsCV(target, forecastfunction = far1, h = 1, window=1)
     if (rmse(model) < rmse(firstmod)) {
       firstmod <- model
@@ -166,10 +177,10 @@ nonerr1 <- nonerr[[1]]
 # #print(any(is.na(cal[complete.cases(cal[,j]),j])))
 # 
 # 
-# model <- auto.arima(calts, xreg=as.matrix(cal2[complete.cases(cal2[,foo[[1]]]),foo[[1]]]))
+# model <- auto.arima(calts, xreg=as.matrix(cal[complete.cases(cal[,foo[[1]]]),foo[[1]]]))
 # 
 # 
-# calts <- ts(cal2$Weight)
+# calts <- ts(cal$Weight)
 # sapply(cal[complete.cases(cal[,foo[[1]]]),foo[[1]]], class)
 # sapply(foo, class)
 # # computationally intense:

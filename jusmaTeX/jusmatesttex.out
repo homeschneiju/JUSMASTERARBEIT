@@ -21,7 +21,7 @@
 \BOOKMARK [1][-]{section.6}{Support Vector Machines: Support Vector Regression}{}% 21
 \BOOKMARK [2][-]{subsection.6.1}{The tuning parameter C}{section.6}% 22
 \BOOKMARK [2][-]{subsection.6.2}{Kernel functions}{section.6}% 23
-\BOOKMARK [2][-]{subsection.6.3}{Parameter estimation in SVR}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.3}{Parameter estimation in Support Vector Machines}{section.6}% 24
 \BOOKMARK [2][-]{subsection.6.4}{Extension to regression problems}{section.6}% 25
 \BOOKMARK [1][-]{section.7}{Artificial Neural Networs}{}% 26
 \BOOKMARK [2][-]{subsection.7.1}{The general structure of NNs}{section.7}% 27

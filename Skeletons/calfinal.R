@@ -178,5 +178,7 @@ cal$GDPoriginal <- as.numeric(gsub(",",".",cal$GDPoriginal))
 cal$GDPx12 <- as.numeric(gsub(",",".",cal$GDPx12))
 cal$GDPbv4 <- as.numeric(gsub(",",".",cal$GDPbv4))
 head(cal)
+
+cal <- cal[,c(11,1,3,4,6:9,14:28,30:33)]
 saveRDS(cal, "E:/calfinal.rds")
 
